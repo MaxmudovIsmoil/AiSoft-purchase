@@ -1,70 +1,67 @@
 
-const html = $('html');
-const body = $('body');
-const headerNavbar = $('.header-navbar');
-const mainMenu = $('.main-menu');
-const icon = $('.ficon');
+const html = document.querySelector('html');
+const body = document.querySelector('body');
+const headerNavbar = document.querySelector('.header-navbar');
+const mainMenu = document.querySelector('.main-menu');
+const icon = document.querySelector('#theme-icon');
 
+document.getElementById("theme-toggle").addEventListener("click", function() {
 
-$("#theme-toggle").click(function () {
+    if (html.getAttribute("data-theme") === "dark") {
 
-    if (html.data("theme") === "dark") {
-
-        html.data("theme", "light");
+        html.dataset.theme = "light";
         localStorage.setItem('dark', 'false');
 
-        html.removeClass('dark-layout')
-        html.addClass('light-layout')
+        html.classList.remove('dark-layout')
+        html.classList.add('light-layout')
 
-        headerNavbar.addClass('navbar-light');
-        headerNavbar.removeClass('navbar-dark');
-        mainMenu.addClass('menu-light')
-        mainMenu.removeClass('menu-dark')
-        icon.removeClass('fa-sun')
-        icon.addClass('fa-moon')
+        headerNavbar.classList.add('navbar-light');
+        headerNavbar.classList.remove('navbar-dark');
+        mainMenu.classList.add('menu-light')
+        mainMenu.classList.remove('menu-dark')
+        icon.classList.remove('fa-sun')
+        icon.classList.add('fa-moon')
     }
     else {
         localStorage.setItem('dark', 'true');
-        html.data("theme", "dark");
+        html.dataset.theme = "dark";
 
-        html.removeClass('light-layout')
-        html.addClass('dark-layout')
+        html.classList.remove('light-layout')
+        html.classList.add('dark-layout')
 
-        headerNavbar.removeClass('navbar-light');
-        headerNavbar.addClass('navbar-dark');
-        mainMenu.removeClass('menu-light')
-        mainMenu.addClass('menu-dark')
-        icon.removeClass('fa-moon')
-        icon.addClass('fa-sun')
+        headerNavbar.classList.remove('navbar-light');
+        headerNavbar.classList.add('navbar-dark');
+        mainMenu.classList.remove('menu-light')
+        mainMenu.classList.add('menu-dark')
+        icon.classList.remove('fa-moon')
+        icon.classList.add('fa-sun')
     }
 });
 
 
 if (localStorage.getItem('dark') === "true") {
-    if (html.hasClass('light-layout')) {
-        html.removeClass('light-layout')
+    if (html.classList.contains('light-layout')) {
+        html.classList.remove('light-layout')
+        html.classList.add('dark-layout')
     }
-    html.addClass('dark-layout')
-
-    headerNavbar.removeClass('navbar-light');
-    headerNavbar.addClass('navbar-dark');
-    mainMenu.removeClass('menu-light')
-    mainMenu.addClass('menu-dark')
-    icon.removeClass('fa-moon')
-    icon.addClass('fa-sun')
+    headerNavbar.classList.remove('navbar-light');
+    headerNavbar.classList.add('navbar-dark');
+    mainMenu.classList.remove('menu-light')
+    mainMenu.classList.add('menu-dark')
+    icon.classList.remove('fa-moon')
+    icon.classList.add('fa-sun')
 }
 else {
-    if (html.hasClass('dark-layout')) {
-        html.removeClass('dark-layout')
+    if (html.classList.contains('dark-layout')) {
+        html.classList.remove('dark-layout')
+        html.classList.add('light-layout')
     }
-    html.addClass('light-layout')
-
-    headerNavbar.addClass('navbar-light');
-    headerNavbar.removeClass('navbar-dark');
-    mainMenu.addClass('menu-light')
-    mainMenu.removeClass('menu-dark')
-    icon.removeClass('fa-sun')
-    icon.addClass('fa-moon')
-
+    headerNavbar.classList.add('navbar-light');
+    headerNavbar.classList.remove('navbar-dark');
+    mainMenu.classList.add('menu-light')
+    mainMenu.classList.remove('menu-dark')
+    icon.classList.remove('fa-sun')
+    icon.classList.add('fa-moon')
 }
+
 

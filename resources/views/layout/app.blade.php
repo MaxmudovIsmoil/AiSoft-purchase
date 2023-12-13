@@ -16,14 +16,14 @@
           type="text/css" href="{{ asset("assets/vendors/css/vendors.min.css")}}">
     <link rel="stylesheet" type="text/css"
           href="{{ asset("assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css")}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset("assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css")}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset("assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css")}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css')}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset("assets/vendors/css/pickers/flatpickr/flatpickr.min.css")}}">
+{{--    <link rel="stylesheet" type="text/css"--}}
+{{--          href="{{ asset("assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css")}}">--}}
+{{--    <link rel="stylesheet" type="text/css"--}}
+{{--          href="{{ asset("assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css")}}">--}}
+{{--    <link rel="stylesheet" type="text/css"--}}
+{{--          href="{{ asset('assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css')}}">--}}
+{{--    <link rel="stylesheet" type="text/css"--}}
+{{--          href="{{ asset("assets/vendors/css/pickers/flatpickr/flatpickr.min.css")}}">--}}
     <link rel="stylesheet" type="text/css"
           href="{{ asset('assets/vendors/css/forms/select/select2.min.css') }}">
     <!-- END: Vendor CSS-->
@@ -66,23 +66,20 @@
 <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
 <!-- END: Footer-->
 
-<!-- BEGIN: Vendor JS-->
+<script src="{{ asset('assets/js/locale_storage.js') }}"></script>
 <script src="{{ asset("assets/vendors/js/vendors.min.js")}}"></script>
-<!-- BEGIN Vendor JS-->
-<!-- BEGIN: Page Vendor JS-->
-<script src="{{ asset("assets/vendors/js/tables/datatable/jquery.dataTables.min.js")}}"></script>
-<script src="{{ asset("assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js")}}"></script>
-<script src="{{ asset("assets/vendors/js/tables/datatable/dataTables.responsive.min.js")}}"></script>
-<script src="{{ asset("assets/vendors/js/tables/datatable/responsive.bootstrap4.js")}}"></script>
-<script src="{{ asset("assets/vendors/js/tables/datatable/datatables.buttons.min.js")}}"></script>
-<script src="{{ asset("assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js")}}"></script>
-<script src="{{ asset("assets/vendors/js/tables/datatable/vfs_fonts.js")}}"></script>
-<script src="{{ asset("assets/vendors/js/forms/validation/jquery.validate.min.js")}}"></script>
-<script src="{{ asset('assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js')}}"></script>
-<script src="{{ asset('assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
-<script src="{{ asset('assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
 
-<!-- END: Page Vendor JS-->
+<script src="{{ asset("assets/vendors/js/tables/datatable/jquery.dataTables.min.js")}}"></script>
+{{--<script src="{{ asset("assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js")}}"></script>--}}
+{{--<script src="{{ asset("assets/vendors/js/tables/datatable/dataTables.responsive.min.js")}}"></script>--}}
+{{--<script src="{{ asset("assets/vendors/js/tables/datatable/responsive.bootstrap4.js")}}"></script>--}}
+{{--<script src="{{ asset("assets/vendors/js/tables/datatable/datatables.buttons.min.js")}}"></script>--}}
+{{--<script src="{{ asset("assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js")}}"></script>--}}
+{{--<script src="{{ asset("assets/vendors/js/tables/datatable/vfs_fonts.js")}}"></script>--}}
+<script src="{{ asset("assets/vendors/js/forms/validation/jquery.validate.min.js")}}"></script>
+{{--<script src="{{ asset('assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js')}}"></script>--}}
+{{--<script src="{{ asset('assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>--}}
+<script src="{{ asset('assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
 
 <!-- BEGIN: Theme JS-->
 <script src="{{ asset("assets/js/core/app-menu.js")}}"></script>
@@ -95,7 +92,6 @@
 <script src="{{ asset('assets/js/scripts/tables/table-datatables-basic.js') }}"></script>
 
 
-<script src="{{ asset('assets/js/locale_storage.js') }}"></script>
 <script src="{{ asset('assets/js/validation.js') }}"></script>
 <script src="{{ asset('assets/js/delete_function.js') }}"></script>
 <script src="{{ asset('assets/js/profile.js') }}"></script>

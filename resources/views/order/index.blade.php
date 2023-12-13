@@ -30,8 +30,7 @@
                                                 <img src="{{ asset("assets/images/avatars/2-small.png")}}"
                                                      data-toggle="popover" data-placement="top"
                                                      data-container="body" data-original-title="Popover on top"
-                                                     data-content="Macaroon chocolate candy. I love carrot cake gingerbread cake lemon drops.
-                                                        Muffin sugar plum marzipan pie."
+                                                     data-content="Macaroon chocolate candy."
                                                      alt="Avatar" height="32" width="32">
                                             </div>
                                         </div>

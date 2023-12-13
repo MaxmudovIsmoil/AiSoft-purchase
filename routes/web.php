@@ -23,7 +23,7 @@ Route::get('login', function () {
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'isActive'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/', function () {
         return view('order.index');

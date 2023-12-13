@@ -83,6 +83,9 @@
                             @if($errors->any())
                                 <p class="alert alert-danger">{{$errors->first()}}</p>
                             @endif
+                            @if (\Session::has('message'))
+                                <p class="alert alert-warning">{!! \Session::get('message') !!}</p>
+                            @endif
                             <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <div class="form-group">

@@ -47,7 +47,6 @@
 @endsection
 
 @section('script')
-{{--    <script src="{{ asset('assets/js/scripts/forms/form-select2.js') }}"></script>--}}
     <script>
         function form_clear(form) {
             form.find('.js_name').val('')

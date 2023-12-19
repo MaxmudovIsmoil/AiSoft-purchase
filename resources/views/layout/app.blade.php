@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <meta name="keywords" content="admin template, web app">
     <meta name="author" content="Purchase">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>{{ config('app.name', 'Purchase') }}</title>
     <link rel="apple-touch-icon" href="{{ asset("assets/images/ico/apple-icon-120.png")}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset("assets/images/ico/favicon.ico")}}">
@@ -70,7 +71,7 @@
 <script src="{{ asset("assets/vendors/js/vendors.min.js")}}"></script>
 
 <script src="{{ asset("assets/vendors/js/tables/datatable/jquery.dataTables.min.js")}}"></script>
-{{--<script src="{{ asset("assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js")}}"></script>--}}
+<script src="{{ asset("assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js")}}"></script>
 {{--<script src="{{ asset("assets/vendors/js/tables/datatable/dataTables.responsive.min.js")}}"></script>--}}
 {{--<script src="{{ asset("assets/vendors/js/tables/datatable/responsive.bootstrap4.js")}}"></script>--}}
 {{--<script src="{{ asset("assets/vendors/js/tables/datatable/datatables.buttons.min.js")}}"></script>--}}

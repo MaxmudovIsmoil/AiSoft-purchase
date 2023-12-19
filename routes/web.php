@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InstanceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserPlanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,7 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 
 
 Route::middleware(['auth', 'isActive'])->group(function () {
+
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/', function () {
         return view('order.index');
@@ -32,6 +34,12 @@ Route::middleware(['auth', 'isActive'])->group(function () {
     Route::group(['prefix' => '/'], function() {
         Route::resource('order', OrderController::class)->except(['create', 'edit', 'show']);
         Route::get('/order/one/{id}', [OrderController::class, 'getOne'])->name('order.getOne');
+    });
+
+    Route::group(['prefix' => '/'], function() {
+        Route::resource('/user-plan', UserPlanController::class)->except(['create', 'edit', 'show']);
+        Route::get('/user-plan/one/{id}', [UserPlanController::class, 'getOne'])->name('user-plan.getOne');
+        Route::get('/user-plan/get-instances/{id}', [UserPlanController::class, 'getInstances'])->name('user-plan.getInstances');
     });
 
 

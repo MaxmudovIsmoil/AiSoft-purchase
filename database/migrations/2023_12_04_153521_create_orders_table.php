@@ -16,10 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('instance_id')->comment('qaysi instansiyaga tegishli');
             $table->unsignedBigInteger('current_instance_id')->comment('hozir qaysi instansiyada ketyapti');
-            $table->string('comment')->default('');
-            $table->string('status')->index();
-            $table->string('stage_count')->nullable();
             $table->string('current_stage')->nullable();
+            $table->string('stage_count')->nullable();
+            $table->enum('status', [0,1,2,3,4])->index()
+                ->comment('0-create,1-processing,2-accepted,3-go back,4-declined');
+            $table->string('comment')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();

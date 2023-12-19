@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\User;
 use App\Models\UserInstance;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
 use function PHPUnit\Framework\isFalse;
@@ -80,7 +81,7 @@ class UserService
                 'phone' => $data['phone'],
                 'photo' => $photo,
                 'username' => strtolower($data['username']),
-                'password' => $data['password']
+                'password' => Hash::make($data['password'])
             ]);
 
             $this->user_instance($data['instances'], $userId);
@@ -99,7 +100,7 @@ class UserService
                 $user->fill(['photo' => $this->file_upload($data['photo'])]);
             }
             if (isset($data['password'])) {
-                $user->fill(['password' => $data['password']]);
+                $user->fill(['password' => Hash::make($data['password'])]);
             }
             $user->fill([
                 'name' => $data['name'],

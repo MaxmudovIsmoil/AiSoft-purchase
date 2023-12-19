@@ -3,58 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserProfileRequest;
+use App\Http\Requests\UserPlanCreateRequest;
+use App\Http\Requests\UserPlanUpdateRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Models\Instance;
-use App\Services\UserService;
+use App\Services\UserPlanService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
-class UserController extends Controller
+class UserPlanController extends Controller
 {
     public function __construct(
-        public UserService $service
-    ){}
+        public UserPlanService $service
+    )
+    {}
 
     public function index()
     {
-        $instances = Instance::where(['status' => 1])
-            ->wherenull('deleted_at')
-            ->get();
+        $userInstances = $this->service->userInstances();
 
-        return view('user.index', compact('instances'));
+        return view('user-plan.index',
+            compact('userInstances')
+        );
     }
 
-    public function getUsers()
+    public function getInstances(int $userInstanceId): JsonResponse
     {
-        return $this->service->list();
+        try {
+            return response()->success($this->service->instances($userInstanceId));
+        }
+        catch (\Exception $e) {
+            return response()->fail($e->getMessage(), $e->getCode());
+        }
     }
 
     public function getOne(int $id): JsonResponse
     {
         try {
-            return response()->success($this->service->one($id));
+            return response()->success($this->service->getInstance($id));
         }
         catch (\Exception $e) {
-            return response()->fail($e->getMessage());
+            return response()->fail($e->getMessage(), $e->getCode());
         }
     }
 
-    public function store(UserCreateRequest $request): JsonResponse
+    public function store(UserPlanCreateRequest $request): JsonResponse
     {
         try {
             $result = $this->service->create($request->validated());
             return response()->success($result);
         }
         catch(\Exception $e) {
-            DB::rollBack();
             return response()->fail($e->getMessage());
         }
     }
 
-    public function update(UserUpdateRequest $request, int $id)
+    public function update(UserPlanUpdateRequest $request, int $id)
     {
         try {
             $result = $this->service->update($request->validated(), $id);
@@ -66,17 +70,6 @@ class UserController extends Controller
         }
     }
 
-    public function profile(UserProfileRequest $request)
-    {
-        try {
-            $result = $this->service->profile($request->validated());
-            return response()->success($result);
-        }
-        catch(\Exception $e) {
-            return response()->fail($e->getMessage());
-        }
-    }
-
     public function destroy(int $id)
     {
         try {
@@ -84,8 +77,8 @@ class UserController extends Controller
             return response()->success($result);
         }
         catch(\Exception $e) {
+            DB::rollBack();
             return response()->fail($e->getMessage());
         }
     }
-
 }

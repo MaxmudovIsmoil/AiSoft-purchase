@@ -242,7 +242,7 @@ $(function () {
             var select = $(
               '<select id="UserPlan" class="form-control text-capitalize mb-md-0 mb-2"><option value=""> Select Plan </option></select>'
             )
-              .appendTo('.user_plan')
+              .appendTo('.user-plan')
               .on('change', function () {
                 var val = $.fn.dataTable.util.escapeRegex($(this).val());
                 column.search(val ? '^' + val + '$' : '', true, false).draw();

@@ -100,6 +100,13 @@
                     <i data-feather="home"></i> Orders
                 </a>
             </li>
+            @if(\Illuminate\Support\Facades\Auth::user()->rule === "0")
+                <li class="nav-item @if (Request::segment(1) === 'user-plan') active @endif">
+                    <a class="d-flex align-items-center" href="{{ route('user-plan.index') }}">
+                        <i data-feather="home"></i> User Plan
+                    </a>
+                </li>
+            @endif
             @if (Auth::user()->rule == 1)
                 <li class="nav-item @if (Request::segment(1) === 'instance') active @endif">
                     <a class="d-flex align-items-center" href="{{ route('instance.index') }}">

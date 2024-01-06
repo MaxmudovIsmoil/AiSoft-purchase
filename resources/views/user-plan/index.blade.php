@@ -25,9 +25,10 @@
                                        <table class="table">
                                            <thead>
                                                <tr>
-                                                   <th>№</th>
-                                                   <th>Name</th>
-                                                   <th class="text-right">Action</th>
+                                                   <th width="2%">№</th>
+                                                   <th width="40%">Name</th>
+                                                   <th>User</th>
+                                                   <th width="15%" class="text-right">Action</th>
                                                </tr>
                                            </thead>
                                            <tbody>
@@ -35,6 +36,11 @@
                                                     <tr data-userPlanId="{{ $user_plan->id }}">
                                                         <td class="js_stage">{{ $user_plan->stage }}</td>
                                                         <td>{{ $user_plan->instance->name_ru }}</td>
+                                                        <td>
+                                                            @foreach($user_plan->another_instance as $user)
+                                                                {{ $user->name }},&nbsp;
+                                                            @endforeach
+                                                        </td>
                                                         <td class="text-right">
                                                             <a data-update_url="{{ route('user-plan.update', $user_plan->id) }}"
                                                                data-one_data_url="{{ route('user-plan.getOne', $user_plan->instance_id) }}"
@@ -42,7 +48,7 @@
 
                                                             <a href="javascript:void(0);"
                                                                 data-url="{{ route('user-plan.destroy', $user_plan->id) }}"
-                                                               class="text-danger ml-2 js_delete_btn"><i class="fas fa-trash"></i></a>
+                                                               class="text-danger ml-1 js_delete_btn"><i class="fas fa-trash"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

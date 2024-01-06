@@ -25,8 +25,20 @@ return new class extends Migration
                 "instance_id" => 1,
             ],
             [
-                "user_id" => 2,
+                "user_id" => 3,
                 "instance_id" => 2,
+            ],
+            [
+                "user_id" => 4,
+                "instance_id" => 3,
+            ],
+            [
+                "user_id" => 5,
+                "instance_id" => 4,
+            ],
+            [
+                "user_id" => 6,
+                "instance_id" => 5,
             ],
         ]);
     }

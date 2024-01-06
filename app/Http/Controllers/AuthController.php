@@ -6,7 +6,6 @@ use App\Dto\Auth\AuthDto;
 use App\Exceptions\UnauthorizedException;
 use App\Http\Requests\LoginRequest;
 use App\Services\AuthService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller

@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserPlanCreateRequest;
 use App\Http\Requests\UserPlanUpdateRequest;
-use App\Http\Requests\UserUpdateRequest;
 use App\Services\UserPlanService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserPlanController extends Controller

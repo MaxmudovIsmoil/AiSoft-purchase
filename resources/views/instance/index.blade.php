@@ -8,7 +8,9 @@
         <div class="content-body position-relative">
             <div class="form-modal-ex add-bnt">
                 <!-- add btn click show modal -->
-                <a href="javascript:void(0);" data-store_url="{{ route('instance.store') }}" class="btn btn-outline-primary js_add_btn">Add</a>
+                <a href="javascript:void(0);" data-store_url="{{ route('instance.store') }}" class="btn btn-outline-primary js_add_btn">
+                    <i data-feather="plus"></i>&nbsp; Add
+                </a>
             </div>
             <!-- Multilingual -->
             <section id="multilingual-datatable">

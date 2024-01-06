@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('order_files', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
-            $table->string('file');
-            $table->timestamps();
+            $table->string('file')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }

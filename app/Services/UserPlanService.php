@@ -23,12 +23,8 @@ class UserPlanService
     public function userInstances()
     {
         return UserInstance::where('user_id', Auth::id())
-            ->with([
-                'instance',
-                'user_plan' => function($query) {
-                      $query->where('user_id', Auth::id());
-                },
-            ])->get();
+            ->with(['instance', 'user_plan', 'user_plan.another_instance'])
+            ->get();
     }
 
     public function getInstance(int $id)

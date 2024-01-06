@@ -6,14 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Instance extends Model
+class OrderDetail extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name_ru',
-        'status',
-        'time_line',
+        'order_id',
+        'name',
+        'count',
+        'pcs', // шт
+        'purpose',
+        'address',
+        'approximate_price', // taxminiy narx
         'deleted_at',
     ];
 }

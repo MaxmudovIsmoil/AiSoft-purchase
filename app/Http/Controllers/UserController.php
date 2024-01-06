@@ -8,9 +8,7 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Models\Instance;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -22,7 +20,7 @@ class UserController extends Controller
     {
         $instances = Instance::where(['status' => 1])
             ->wherenull('deleted_at')
-            ->get();
+            ->get(['id', 'name_ru']);
 
         return view('user.index', compact('instances'));
     }
@@ -54,7 +52,7 @@ class UserController extends Controller
         }
     }
 
-    public function update(UserUpdateRequest $request, int $id)
+    public function update(UserUpdateRequest $request, int $id): JsonResponse
     {
         try {
             $result = $this->service->update($request->validated(), $id);
@@ -66,7 +64,7 @@ class UserController extends Controller
         }
     }
 
-    public function profile(UserProfileRequest $request)
+    public function profile(UserProfileRequest $request): JsonResponse
     {
         try {
             $result = $this->service->profile($request->validated());

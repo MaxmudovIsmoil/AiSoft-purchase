@@ -6,14 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Instance extends Model
+class OrderAction extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name_ru',
-        'status',
-        'time_line',
-        'deleted_at',
+        'order_id',
+        'user_id',
+        'instance_id',
+        'status', // 2-accepted, 3-go back, 4-declined
+        'time_signed',
+        'comment',
+        'stage',
     ];
+
 }

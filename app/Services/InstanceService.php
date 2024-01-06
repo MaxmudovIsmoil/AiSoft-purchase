@@ -9,9 +9,7 @@ class InstanceService
 {
     public function list()
     {
-        $instances = Instance::whereNull('deleted_at')
-            ->orderBy('id', 'DESC')
-            ->get();
+        $instances = Instance::orderBy('id', 'DESC')->get();
 
         return DataTables::of($instances)
             ->addIndexColumn()
@@ -69,11 +67,7 @@ class InstanceService
 
     public function delete(int $id)
     {
-        Instance::where(['id' => $id])
-            ->update([
-                'status' => 0,
-                'deleted_at' => now()
-            ]);
+        Instance::destroy($id);
         return $id;
     }
 

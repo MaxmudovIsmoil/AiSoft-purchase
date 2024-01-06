@@ -6,14 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Instance extends Model
+class OrderFile extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name_ru',
-        'status',
-        'time_line',
-        'deleted_at',
+        'order_id',
+        'user_id',
+        'file',
     ];
 }

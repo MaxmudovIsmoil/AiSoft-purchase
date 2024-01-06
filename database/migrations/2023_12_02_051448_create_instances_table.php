@@ -18,16 +18,14 @@ return new class extends Migration
             $table->string('status')->default(1);
             $table->string('time_line')->default(8);
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
         });
 
         DB::table('instances')->insert([
-            ["name_ru" => 'Отдел контрактов'],
-            ["name_ru" => 'Финансовый Отдел'],
             ["name_ru" => 'Технический Отдел'],
-            ["name_ru" => 'Коммерческий Отдел'],
             ["name_ru" => 'Маркетинг центр'],
+            ["name_ru" => 'Финансовый Отдел'],
             ["name_ru" => 'Секретарь'],
             ["name_ru" => 'Директор']
         ]);

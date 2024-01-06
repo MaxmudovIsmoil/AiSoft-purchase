@@ -40,11 +40,13 @@ $('#add_order_modal button[data-dismiss="modal"]').click(function () {
 
     let form = $('.js_add_form')
 
-    form.find('.js_copy_to_email').val([]);
-    form.find('.js_copy_to_email').trigger('change');
-
-    let comment = form.find('textarea')
-    comment.val('')
+    // theme
+    let theme = form.find('.js_theme')
+    if(theme) {
+        theme.val('')
+        theme.removeClass('is-invalid')
+        theme.siblings('.invalid-feedback').addClass('valid-feedback')
+    }
 
     let inputs = form.find('input[type="text"]')
     inputs.val('')
@@ -87,6 +89,13 @@ $('.js_phone').on('input', function () {
 });
 
 $('.js_photo').on('change', function () {
+    $(this).removeClass('is-invalid')
+    $(this).siblings('.invalid-feedback').addClass('valid-feedback')
+});
+
+
+
+$('.js_theme').on('input', function () {
     $(this).removeClass('is-invalid')
     $(this).siblings('.invalid-feedback').addClass('valid-feedback')
 });

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('stage')->nullable();
             $table->enum('status', [0, 1])->default(0);
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user_instance_id')->references('id')->on('instances')->onDelete('restrict');

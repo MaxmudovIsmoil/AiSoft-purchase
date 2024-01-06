@@ -2,17 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Dto\Instance\CreateDebtorDto;
-use App\Http\Requests\CreateDebtorRequest;
-use App\Http\Requests\UpdateDebtorRequest;
-use App\Http\Resources\DebtorResource;
-use App\Models\Debtor;
-use App\Services\DebtorService;
+
 use App\Services\OrderService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -23,38 +16,26 @@ class OrderController extends Controller
 
     public function index()
     {
-        return view('order.index');
+        $user_plans = $this->service->getUserPlan();
+
+        $orders = $this->service->getOrder();
+
+        return view('order.index',
+            compact('user_plans', 'orders')
+        );
     }
 
-    public function store(CreateDebtorRequest $request): JsonResponse
+
+    public function store(Request $request): JsonResponse
     {
-
-        $result = $this->service->create(new CreateDebtorDto(
-            name: $request->name,
-            phone: $request->phone,
-            status: $request->status,
-        ));
-
-        return response()->success($result);
+        try {
+            $result = $this->service->create($request);
+            return response()->success($result);
+        }
+        catch (\Exception $e) {
+            return response()->fail($e->getMessage());
+        }
     }
 
-    public function update(UpdateDebtorRequest $request)
-    {
-        $result = $this->service->update(new CreateDebtorDto(
-            name: $request->name,
-            phone: $request->phone,
-            status: $request->status,
-        ), $request->id);
-
-        return response()->success($result);
-    }
-
-    public function destroy(int $id)
-    {
-
-        $result = $this->service->delete($id);
-
-        return response()->success($result);
-    }
 
 }

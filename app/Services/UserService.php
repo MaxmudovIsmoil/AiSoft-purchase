@@ -5,9 +5,11 @@ namespace App\Services;
 use App\Helpers\Helper;
 use App\Models\User;
 use App\Models\UserInstance;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Testing\Fluent\Concerns\Has;
 use Yajra\DataTables\DataTables;
 use function PHPUnit\Framework\isFalse;
 
@@ -17,7 +19,6 @@ class UserService
     {
         $users = User::where(['rule' => '0'])
             ->with('user_instances')
-            ->whereNull('deleted_at')
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -117,19 +118,19 @@ class UserService
 
     public function delete(int $id)
     {
-        return User::findOrFail($id)->update(['deleted_at' => now()]);
+        return User::destroy($id);
     }
 
 
     public function profile(array $data)
     {
-        $id = auth()->id();
+        $id = Auth::id();
         $user = User::findOrfail($id);
         if (isset($data['photo'])) {
             $user->fill(['photo' => $this->file_upload($data['photo'])]);
         }
         if (isset($data['password'])) {
-            $user->fill(['password' => $data['password']]);
+            $user->fill(['password' => Hash::make($data['password'])]);
         }
         $user->fill([
             'name' => $data['name'],
@@ -137,6 +138,7 @@ class UserService
             'username' => $data['username']
         ]);
         $user->save();
+        return $id;
     }
 
     protected function user_instance(array $instances, int $userId) : void

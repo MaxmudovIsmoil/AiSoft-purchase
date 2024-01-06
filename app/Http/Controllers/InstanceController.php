@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\InstanceRequest;
 use App\Services\InstanceService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 
 class InstanceController extends Controller
 {

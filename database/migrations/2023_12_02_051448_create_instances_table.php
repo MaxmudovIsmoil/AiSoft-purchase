@@ -14,7 +14,9 @@ return new class extends Migration
     {
         Schema::create('instances', function (Blueprint $table) {
             $table->id();
-            $table->string('name_ru');
+            $table->string('name_en')->nullable();
+            $table->string('name_ru')->nullable();
+            $table->string('name_uz')->nullable();
             $table->string('status')->default(1);
             $table->string('time_line')->default(8);
             $table->timestamp('created_at')->useCurrent();
@@ -23,11 +25,31 @@ return new class extends Migration
         });
 
         DB::table('instances')->insert([
-            ["name_ru" => 'Технический Отдел'],
-            ["name_ru" => 'Маркетинг центр'],
-            ["name_ru" => 'Финансовый Отдел'],
-            ["name_ru" => 'Секретарь'],
-            ["name_ru" => 'Директор']
+            [
+                "name_en" => 'Technical department',
+                "name_ru" => 'Технический Отдел',
+                "name_uz" => 'Texnik bo\'lim',
+            ],
+            [
+                "name_en" => 'Marketing department',
+                "name_ru" => 'Маркетинг центр',
+                "name_uz" => 'marketing bo\'lim'
+            ],
+            [
+                "name_en" => 'Financial department',
+                "name_ru" => 'Финансовый Отдел',
+                "name_uz" => 'Moliya bo\'lim',
+            ],
+            [
+                "name_en" => 'Secretary',
+                "name_ru" => 'Секретарь',
+                "name_uz" => 'Kotiba',
+            ],
+            [
+                "name_en" => 'Director',
+                "name_ru" => 'Директор',
+                "name_uz" => 'Direktor',
+            ]
         ]);
     }
 

@@ -8,10 +8,10 @@
     <div class="content-wrapper">
         <div class="content-header mb-1 d-flex justify-content-between">
             <div>
-                <div class="badge badge-light-success">All</div>
-                <div class="badge badge-light-secondary">Agreed</div>
-                <div class="badge badge-light-secondary">Refused</div>
-                <div class="badge badge-light-secondary">Under consideration</div>
+                <div class="badge badge-light-success" role="button">All</div>
+                <div class="badge badge-light-secondary" role="button">Accepted</div>
+                <div class="badge badge-light-secondary" role="button">Declined</div>
+                <div class="badge badge-light-secondary" role="button">Completed</div>
             </div>
             <div>
                 <a href="#" class="btn btn-primary btn-sm js_add_btn">Create Order</a>
@@ -23,51 +23,56 @@
                 <!-- list section start -->
                 <div class="card">
                     <div class="card-datatable table-responsive">
-                        <table class="table" id="datatable">
+                        <table class="table order-table" id="datatable">
                             <thead class="thead-light">
-                            <tr>
-                                <th width="2%">№</th>
-                                <th>Author</th>
-                                <th>Theme</th>
-                                <th>Process</th>
-                                <th>Status</th>
-                                <th class="text-center" width="10%">Action</th>
-                            </tr>
+                                <tr>
+                                    <th width="2%">№</th>
+                                    <th>Author</th>
+                                    <th>Theme</th>
+                                    <th>Current Instance</th>
+                                    <th>Process</th>
+                                    <th>Status</th>
+                                    <th class="text-center" width="10%">Action</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach($orders['data'] as $order)
-                                <tr class="@if($order['current_stage'] == $order['up_stage']) bg-light-danger @endif">
+                            @foreach($orders as $order)
+                                <tr class="js_this_tr @if(($order->current_stage == $order->up_stage && !in_array($order->up_user_instance_id, $userInstanceIds)) || ($order->user_id == Auth::id() && $order->status->isGoBack())) bg-light-danger js_action_btn_check @endif"
+                                    data-order-id="{{ $order->order_id }}">
                                     <td class="control">{{ ++$loop->index }}</td>
                                     <td>
                                         <div class="d-flex justify-content-left align-items-center">
                                             <div class="avatar-wrapper">
                                                 <div class="avatar avatar-xl mr-1">
-                                                    <img src="{{ asset("assets/images/".$order['user']['photo'])}}"
+                                                    <img src="{{ asset("assets/images/".$order->user->photo)}}"
                                                          alt="Avatar" height="32" width="32">
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-column"><a href="#" class="user_name text-truncate">
-                                                    <span class="font-weight-bold">{{ $order['user']['name'] }}</span></a>
-                                                <small class="emp_post text-muted">{{$order['instance']['name_ru']}}</small></div>
+                                                    <span class="font-weight-bold">{{ $order->user->name }}</span></a>
+                                                <small class="emp_post text-muted">{{$order->instance->name_ru}}</small></div>
                                         </div>
                                     </td>
-                                    <td>{{ $order['theme'] }}</td>
-                                    <td class="text-center collapse-default">
-                                        <div class="card" id="accordionWrapa{{$loop->index}}">
-                                            <div id="heading{{$loop->index}}" class="card-header" data-toggle="collapse"
-                                                 role="button" data-target="#accordion{{$loop->index}}">
-                                                <div class="avatar bg-light-success avatar-lg">
-                                                    <span class="avatar-content">{{ $order['current_stage'] }}/{{ $order['stage_count'] }}</span>
+                                    <td>{{ $order->theme }}</td>
+                                    <td>{{ $order->currentInstance->name_ru }}</td>
+                                    <td class="text-center pt-0 pb-0">
+                                        <div class="card mb-0 order-action-process">
+                                            <div class="card-header">
+                                                <div class="avatar bg-light-success avatar-lg js_accordion_btn" data-url="{{ route('order.getOrderActionComments', [$order->order_id]) }}">
+                                                    <span class="avatar-content">{{ $order->current_stage }}/{{ $order->stage_count }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        @if($order['status'] == 1) Processing
-                                        @elseif($order['status'] == 2) Accepted
-                                        @elseif($order['status'] == 3) Go back
-                                        @elseif($order['status'] == 4) Declined
-                                        @else Completed @endif
+                                        <span @class([
+                                            "badge",
+                                            'badge-light-success' => $order->status->isAccepted(),
+                                            'badge-light-warning' => $order->status->isGoBack(),
+                                            'badge-light-danger' => $order->status->isDeclined(),
+                                        ])>
+                                            {{ $order->status->getLabelText() }}
+                                        </span>
                                     </td>
                                     <td class="text-center">
                                         <a href="#" class="show-btn js_show_btn"><i class="fas fa-eye"></i></a>
@@ -75,116 +80,8 @@
                                 </tr>
                                 <tr>
                                     <td colspan="7" class="p-0 order-comment-div">
-                                        <div id="accordion{{$loop->index}}" role="tabpanel"
-                                             data-parent="#accordionWrapa{{$loop->index}}"
-                                             class="card collapse js_order_collapse">
-                                            <div class="card-body">
-                                                <div class="order-card bg-light-success">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-xl mr-1">
-                                                                <img
-                                                                    src="{{ asset("assets/images/avatars/6-small.png")}}"
-                                                                    alt="Avatar" height="32" width="32">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><a href="#"
-                                                                                           class="user_name text-truncate">
-                                                                <span
-                                                                    class="font-weight-bold">Zsazsa Cleverty</span></a>
-                                                            <small class="emp_post text-muted">Finance</small></div>
-                                                    </div>
-                                                    <div class="comment">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                        Aliquam asperiores assumenda dolorum eligendi
-                                                    </div>
-                                                    <i class="fas fa-arrow-right"></i>
-                                                </div>
-                                                <div class="order-card bg-light-danger">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-xl mr-1">
-                                                                <img
-                                                                    src="{{ asset("assets/images/avatars/5-small.png")}}"
-                                                                    alt="Avatar" height="32" width="32">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><a href="#"
-                                                                                           class="user_name text-truncate">
-                                                                <span
-                                                                    class="font-weight-bold">Zsazsa Cleverty</span></a>
-                                                            <small class="emp_post text-muted">Finance</small></div>
-                                                    </div>
-                                                    <div class="comment">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                        Aliquam asperiores assumenda dolorum eligendi
-                                                    </div>
-                                                    <i class="fas fa-arrow-right"></i>
-                                                </div>
-                                                <div class="order-card bg-light-success">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-xl mr-1">
-                                                                <img
-                                                                    src="{{ asset("assets/images/avatars/4-small.png")}}"
-                                                                    alt="Avatar" height="32" width="32">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><a href="#"
-                                                                                           class="user_name text-truncate">
-                                                                <span
-                                                                    class="font-weight-bold">Zsazsa Cleverty</span></a>
-                                                            <small class="emp_post text-muted">Finance</small></div>
-                                                    </div>
-                                                    <div class="comment">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                        Aliquam asperiores assumenda dolorum eligendi
-                                                    </div>
-                                                    <i class="fas fa-arrow-right"></i>
-                                                </div>
-                                                <div class="order-card bg-light-success">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-xl mr-1">
-                                                                <img
-                                                                    src="{{ asset("assets/images/avatars/1-small.png")}}"
-                                                                    alt="Avatar" height="32" width="32">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><a href="#"
-                                                                                           class="user_name text-truncate">
-                                                                <span
-                                                                    class="font-weight-bold">Zsazsa Cleverty</span></a>
-                                                            <small class="emp_post text-muted">Finance</small></div>
-                                                    </div>
-                                                    <div class="comment">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                        Aliquam asperiores assumenda dolorum eligendi
-                                                    </div>
-                                                    <i class="fas fa-arrow-right"></i>
-                                                </div>
-                                                <div class="order-card bg-light-warning">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-xl mr-1">
-                                                                <img
-                                                                    src="{{ asset("assets/images/avatars/3-small.png")}}"
-                                                                    alt="Avatar" height="32" width="32">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><a href="#"
-                                                                                           class="user_name text-truncate">
-                                                                <span
-                                                                    class="font-weight-bold">Zsazsa Cleverty</span></a>
-                                                            <small class="emp_post text-muted">Finance</small></div>
-                                                    </div>
-                                                    <div class="comment">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                        Aliquam asperiores assumenda dolorum eligendi
-                                                    </div>
-                                                    <i class="fas fa-arrow-right"></i>
-                                                </div>
-                                            </div>
+                                        <div class="card collapse js_order_collapse">
+                                            <div class="card-body"></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -195,7 +92,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-{{--                    {{ $orders['links'] }}--}}
+                    {{ $orders->links() }}
                 </div>
                 <!-- list section end -->
             </section>
@@ -218,8 +115,8 @@
 
 
 @section('script')
-    <script src="{{ asset('assets/js/scripts/components/components-collapse.js') }}"></script>
     <script src="{{ asset('assets/js/order-add.js') }}"></script>
+    <script src="{{ asset('assets/js/order-action.js') }}"></script>
     <script src="{{ asset('assets/js/order-show.js') }}"></script>
     <script src="{{ asset('assets/js/order-reply.js') }}"></script>
     <script src="{{ asset('assets/js/order-detail.js') }}"></script>

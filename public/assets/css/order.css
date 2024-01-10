@@ -73,3 +73,14 @@
 .title-p {
     margin-bottom: 5px;
 }
+
+
+.order-table .collapse {
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+
+.bg-light-danger .order-action-process {
+    background: rgba(234, 84, 85, 0) !important;
+}

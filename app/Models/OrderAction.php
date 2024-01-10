@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,10 +15,25 @@ class OrderAction extends Model
         'order_id',
         'user_id',
         'instance_id',
-        'status', // 2-accepted, 3-go back, 4-declined
+        'status',
         'time_signed',
         'comment',
         'stage',
     ];
+
+    public $timestamps = true;
+
+    protected $casts = [
+        'status' => OrderStatus::class
+    ];
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function instance()
+    {
+        return $this->hasOne(Instance::class, 'id', 'instance_id');
+    }
 
 }

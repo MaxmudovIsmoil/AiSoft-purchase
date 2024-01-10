@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,10 @@ class Order extends Model
         'deleted_at',
     ];
 
+   protected $casts = [
+       'status' => OrderStatus::class
+   ];
+
     public function user()
     {
         return $this->hasOne(User::class, 'id','user_id');
@@ -30,7 +35,12 @@ class Order extends Model
         return $this->hasOne(Instance::class, 'id', 'instance_id');
     }
 
-    public function order_action()
+    public function currentInstance()
+    {
+        return $this->hasOne(Instance::class, 'id', 'current_instance_id');
+    }
+
+    public function orderAction()
     {
         return $this->hasMany(OrderAction::class, 'id', 'order_id');
     }
@@ -40,33 +50,5 @@ class Order extends Model
         return $this->hasMany(UserPlan::class, 'user_id', 'user_id');
     }
 
-//    public function scopeFilter($builder, $filters = [])
-//    {
-//        if(!$filters) {
-//            return $builder;
-//        }
-//        $tableName = $this->getTable();
-//        $defaultFillableFields = $this->fillable;
-//        foreach ($filters as $field => $value) {
-//            if(in_array($field, $this->boolFilterFields) && $value != null) {
-//                $builder->where($field, (bool)$value);
-//                continue;
-//            }
-//
-//            if(!in_array($field, $defaultFillableFields) || !$value) {
-//                continue;
-//            }
-//
-//            if(in_array($field, $this->likeFilterFields)) {
-//                $builder->where($tableName.'.'.$field, 'LIKE', "%$value%");
-//            } else if(is_array($value)) {
-//
-//                $builder->whereIn($field, $value);
-//            } else {
-//                $builder->where($field, $value);
-//            }
-//        }
-//
-//        return $builder;
-//    }
+
 }

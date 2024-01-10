@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class themeNotEmptyException extends Exception
+class ThemeNotEmptyException extends Exception
 {
     //
 }

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\OrderStatus;
 use App\Models\Order;
+use App\Models\OrderAction;
 use App\Models\OrderDetail;
 use App\Models\OrderFile;
 use App\Models\UserInstance;
@@ -38,38 +39,23 @@ class OrderService
         $userInstanceIds = $this->userInstanceIds();
 
         $orders = Order::select('o.id as order_id', 'o.user_id', 'o.instance_id', 'o.theme', 'o.stage_count',
-            'o.status', 'o.current_stage', 'up.instance_id as up_instance_id', 'up.stage as up_stage')
+            'o.status', 'o.current_stage', 'o.current_instance_id', 'up.instance_id as up_instance_id',
+            'up.stage as up_stage', 'up.user_instance_id as up_user_instance_id')
             ->from('orders as o')
             ->leftJoin('user_plans as up', function ($join) {
                 $join->on('up.user_instance_id', '=', 'o.instance_id')
                     ->on('up.user_id', '=', 'o.user_id');
             })
-            ->with(['user', 'instance'])
-            ->whereIn('up.instance_id', $userInstanceIds)
-            ->where('up.stage', '<=', DB::raw('o.current_stage'))
+            ->with(['user', 'instance', 'currentInstance'])
+            ->where(function ($query) use ($userInstanceIds) {
+                $query->whereIn('up.instance_id', $userInstanceIds)
+                    ->where('up.stage', '<=', DB::raw('o.current_stage'));
+            })
+            ->whereIn('up.user_instance_id', $userInstanceIds, 'or')
+            ->groupBy('o.id')
             ->orderBy('o.id', 'DESC')
             ->orderBy('o.current_stage', 'ASC')
-            ->paginate(20)->toArray();
-
-
-//        $orders = Order::select('o.id as order_id', 'o.user_id', 'o.instance_id', 'o.theme', 'o.stage_count',
-//            'o.status', 'o.current_stage', 'up.instance_id as up_instance_id', 'up.stage as up_stage')
-//            ->from('orders as o')
-//            ->leftJoin('user_plans as up', function ($join) {
-//                $join->on('up.user_instance_id', '=', 'o.instance_id')
-//                    ->on('up.user_id', '=', 'o.user_id');
-//            })
-//            ->with(['user', 'instance'])
-//            ->whereIn('o.instance_id', $userInstanceIds) // Check instance_id directly
-//            ->where(function ($query) {
-//                $query->where('up.stage', '<=', DB::raw('o.current_stage'));
-////                    ->orWhereNull('up.user_id'); // Check for NULL values in user_plans (left join)
-//            })
-//            ->orderBy('o.id', 'DESC')
-//            ->orderBy('o.current_stage', 'ASC')
-//            ->paginate(20)
-//            ->toArray();
-
+            ->paginate(20);
 
         return $orders;
     }
@@ -103,7 +89,7 @@ class OrderService
                 'theme' => $data->theme,
                 'current_instance_id' => $current_instance_id,
                 'stage_count' => $stageCount,
-                'status' => OrderStatus::PROCESSING,
+                'status' => OrderStatus::ACCEPTED,
                 'current_stage' => 1,
             ]);
 
@@ -149,6 +135,49 @@ class OrderService
                 ]);
             }
         }
+    }
+
+
+    public function getOrderActionComments(int $orderId)
+    {
+        $orderAction = OrderAction::with(['user', 'instance'])
+            ->where(['order_id' => $orderId])
+            ->get();
+
+        return ($orderAction->count() !== 0)
+            ? $this->getOrderActionCommentDiv($orderAction)
+            : 'Not Comments';
+    }
+
+    public function getOrderActionCommentDiv(object $orderAction): string
+    {
+        $div = "";
+        foreach ($orderAction as $action) {
+            $class = 'bg-light-success';
+            if ($action->status->isGoBack()) {
+                $class = 'bg-light-warning';
+            }
+            else if($action->status->isDeclined()) {
+                $class = 'bt-light-danger';
+            }
+
+            $div .= '<div class="order-card '.$class.'">' .
+                '<div class="d-flex justify-content-left align-items-center">' .
+                '    <div class="avatar-wrapper">' .
+                '        <div class="avatar avatar-xl mr-1">' .
+                '            <img src="' . asset("assets/images/".$action->user->photo) . '" alt="Avatar" height="32" width="32">' .
+                '        </div>' .
+                '    </div>' .
+                '    <div class="d-flex flex-column"><a href="#" class="user_name text-truncate">' .
+                '        <span class="font-weight-bold">'.$action->user->name.'</span></a>' .
+                '        <small class="emp_post text-muted">'.$action->instance->name_ru.'</small>' .
+                '    </div>' .
+                '</div>' .
+                '<div class="comment">'.$action->comment.'</div>'.
+                '<i class="fas fa-arrow-right"></i>' .
+                '</div>';
+        }
+        return $div;
     }
 
 }

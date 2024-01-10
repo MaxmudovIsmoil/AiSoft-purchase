@@ -8,18 +8,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="#" method="post" class="js_reply_form">
+            <form action="{{ route('order.action') }}" method="post" class="js_reply_form">
                 @csrf
+                <input type="hidden" name="order_id" class="js_order_id">
+                <input type="hidden" name="status" class="js_status" value="2">
+
                 <div class="modal-body">
-                    <input type="hidden" name="order_id" value="1">
-                    <input type="hidden" name="status" class="js_status" value="1">
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">{{ __('Ответить') }}:</label>
                         <b class="js_text">{{ __('Согласовано') }}</b>
                     </div>
                     <div class="form-group">
                         <label for="comment2">Comment:</label>
-                        <textarea class="form-control" id="comment2" rows="2"></textarea>
+                        <textarea class="form-control" id="comment2" name="comment" rows="2"></textarea>
                         <div class="invalid-feedback">name fail!</div>
                     </div>
                 </div>

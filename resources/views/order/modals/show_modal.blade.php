@@ -3,21 +3,21 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Order</h4>
+                <h4 class="modal-title js_title">Order</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="action-div">
-                    <button class="btn btn-outline-success btn-sm js_reply_btn" data-status="1" data-text="Agreed">
+                    <button class="btn btn-outline-success btn-sm js_reply_btn" data-status="2" data-text="Agreed">
                         <i class="avatar-icon" data-feather="check"></i> Reply: Agreed
                     </button>
-                    <button type="button" class="btn btn-outline-danger js_reply_btn btn-sm" data-status="3" data-text="Declined">
-                        <i class="avatar-icon" data-feather="x"></i>
-                        Reply: Declined
+                    <button type="button" class="btn btn-outline-danger js_reply_btn btn-sm" data-status="3" data-text="Declined (Go Back)">
+                        <i class="avatar-icon" data-feather="x"></i> Reply: Declined (Go Back)
                     </button>
                 </div>
+
                 <div class="row">
                     <div class="col-md-8">
                         <div class="order-detail-div">

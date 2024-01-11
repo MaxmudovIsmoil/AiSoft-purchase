@@ -53,6 +53,53 @@ $('#add_order_modal button[data-dismiss="modal"]').click(function () {
 
 });
 
+$('#add_order_detail_modal button[data-dismiss="modal"]').click(function () {
+
+    let form = $('.js_add_order_detail_form')
+
+    let name = form.find('.js_name')
+    if(name) {
+        name.val('')
+        name.removeClass('is-invalid')
+        name.siblings('.invalid-feedback').addClass('valid-feedback')
+    }
+
+    let purpose = form.find('.js_purpose')
+    if(purpose) {
+        purpose.val('')
+        purpose.removeClass('is-invalid')
+        purpose.siblings('.invalid-feedback').addClass('valid-feedback')
+    }
+
+    let count = form.find('.js_count')
+    if(count) {
+        count.val('')
+        count.removeClass('is-invalid')
+        count.siblings('.invalid-feedback').addClass('valid-feedback')
+    }
+
+    let pcs = form.find('.js_pcs')
+    if(pcs) {
+        pcs.val('')
+        pcs.removeClass('is-invalid')
+        pcs.siblings('.invalid-feedback').addClass('valid-feedback')
+    }
+
+    let address = form.find('.js_address')
+    if(address) {
+        address.val('')
+        address.removeClass('is-invalid')
+        address.siblings('.invalid-feedback').addClass('valid-feedback')
+    }
+
+    let approximate_price = form.find('.js_approximate_price')
+    if(approximate_price) {
+        approximate_price.val('')
+        approximate_price.removeClass('is-invalid')
+        approximate_price.siblings('.invalid-feedback').addClass('valid-feedback')
+    }
+
+})
 
 
 $('.js_username').on('input', function () {
@@ -94,8 +141,36 @@ $('.js_photo').on('change', function () {
 });
 
 
-
+// order create
 $('.js_theme').on('input', function () {
     $(this).removeClass('is-invalid')
     $(this).siblings('.invalid-feedback').addClass('valid-feedback')
 });
+
+
+// order - detail add
+$('.js_count').on('input', function () {
+    $(this).removeClass('is-invalid')
+    $(this).siblings('.invalid-feedback').addClass('valid-feedback')
+});
+
+$('.js_pcs').on('input', function () {
+    $(this).removeClass('is-invalid')
+    $(this).siblings('.invalid-feedback').addClass('valid-feedback')
+});
+
+$('.js_address').on('input', function () {
+    $(this).removeClass('is-invalid')
+    $(this).siblings('.invalid-feedback').addClass('valid-feedback')
+});
+
+$('.js_purpose').on('input', function () {
+    $(this).removeClass('is-invalid')
+    $(this).siblings('.invalid-feedback').addClass('valid-feedback')
+});
+
+$('.js_approximate_price').on('input', function () {
+    $(this).removeClass('is-invalid')
+    $(this).siblings('.invalid-feedback').addClass('valid-feedback')
+});
+

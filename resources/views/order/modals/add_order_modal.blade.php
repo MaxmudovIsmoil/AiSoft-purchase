@@ -61,7 +61,7 @@
                                         <td>1</td>
                                         <td><input type="text" name="name[]" class="form-control js_od_name"/></td>
                                         <td><input type="number" name="count[]" class="form-control js_od_pcs"/></td>
-                                        <td><input type="text" name="psc[]" class="form-control"/></td>
+                                        <td><input type="text" name="pcs[]" class="form-control"/></td>
                                         <td><input type="text" name="purpose[]" class="form-control"/></td>
                                         <td><input type="text" name="address[]" class="form-control"/></td>
                                         <td><input type="text" name="approximate_price[]" class="form-control"/></td>

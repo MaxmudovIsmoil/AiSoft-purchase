@@ -23,46 +23,24 @@
                         <div class="order-detail-div">
                             <div class="d-flex justify-content-between">
                                 <p class="title-p">Order detail</p>
-                                <button class="btn btn-outline-primary btn-sm js_add_order_detail_btn"><i class="fas fa-plus"></i>&nbsp; Add</button>
+                                <button class="btn btn-outline-primary btn-sm js_add_order_detail_btn"
+                                data-url="{{ route('order_detail.store') }}"
+                                ><i class="fas fa-plus"></i>&nbsp; Add</button>
                             </div>
                             <table class="table table-sm table-responsive-xl table-bordered table-striped table-hover">
                                 <thead>
                                 <tr>
                                     <th>№</th>
                                     <th>Name</th>
-                                    <th>Amount</th>
+                                    <th>Count</th>
                                     <th>Unit</th>
                                     <th>Purpose</th>
                                     <th>Address</th>
+                                    <th>APPROXIMATE PRICE</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Laptop Hp</td>
-                                        <td>4</td>
-                                        <td>Pc</td>
-                                        <td>for new employees</td>
-                                        <td>Hp online shop (alifshop)</td>
-                                        <td class="text-right d-flex justify-content-end">
-                                            <a class="text-primary mr-1"><i class="fas fa-pen"></i></a>
-                                            <a class="text-danger"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td>2</td>
-                                    <td>LG monitor</td>
-                                    <td>10</td>
-                                    <td>Pc</td>
-                                    <td>all employees</td>
-                                    <td>LG (malika market)</td>
-                                    <td class="text-right d-flex justify-content-end">
-                                        <a class="text-primary mr-1"><i class="fas fa-pen"></i></a>
-                                        <a class="text-danger"><i class="fas fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
+                                <tbody class="js_order_detail_tbody"></tbody>
                             </table>
                         </div>
                     </div>

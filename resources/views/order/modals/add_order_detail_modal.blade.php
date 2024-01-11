@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade text-left static" id="add_order_detail_modal" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+<div class="modal fade text-left static" id="add_edit_order_detail_modal" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,29 +8,41 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('order.store') }}" method="post" class="js_add_order_detail_form" enctype="multipart/form-data">
+            {{-- action-type -> store = 1 or update = 2 --}}
+            <form action="#" method="post" class="js_add_edit_order_detail_form" data-action-type="1">
                 @csrf
+                <input type="hidden" name="order_id" class="js_order_id" value="">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" />
+                            <label>Name <i class="text-danger">*</i></label>
+                            <input type="text" name="name" class="form-control js_name" />
+                            <div class="invalid-feedback">The name field is required.</div>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Amount</label>
-                            <input type="text" name="amount" class="form-control" />
+                            <label>Count <i class="text-danger">*</i></label>
+                            <input type="number" name="count" class="form-control js_count" />
+                            <div class="invalid-feedback">The count field is required.</div>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Unit</label>
-                            <input type="text" name="unit" class="form-control" />
+                            <label>Pcs <i class="text-danger">*</i></label>
+                            <input type="text" name="pcs" class="form-control js_pcs" />
+                            <div class="invalid-feedback">The pcs field is required.</div>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Purpose</label>
-                            <input type="text" name="purpose" class="form-control" />
+                            <label>Purpose <i class="text-danger">*</i></label>
+                            <input type="text" name="purpose" class="form-control js_purpose" />
+                            <div class="invalid-feedback">The purpose field is required.</div>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Address</label>
-                            <input type="text" name="address" class="form-control" />
+                            <label>Address <i class="text-danger">*</i></label>
+                            <input type="text" name="address" class="form-control js_address" />
+                            <div class="invalid-feedback">The address field is required.</div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Approximate price <i class="text-danger">*</i></label>
+                            <input type="text" name="approximate_price" class="form-control js_approximate_price" />
+                            <div class="invalid-feedback">The approximate price field is required.</div>
                         </div>
                     </div>
                 </div>

@@ -75,7 +75,9 @@
                                         </span>
                                     </td>
                                     <td class="text-center">
-                                        <a href="#" class="show-btn js_show_btn"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="show-btn js_show_btn"
+                                        data-order-detail-url="{{ route('order_detail.getOne', [$order->order_id]) }}"
+                                        ><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                                 <tr>

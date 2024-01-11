@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPlanController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,13 @@ Route::middleware(['auth', 'isActive'])->group(function () {
     Route::resource('order', OrderController::class)->except(['create', 'edit', 'show']);
     Route::get('/order/one/{id}', [OrderController::class, 'getOne'])->name('order.getOne');
     Route::get('/order/comments/{id}', [OrderController::class, 'getOrderActionComments'])->name('order.getOrderActionComments');
+
+
+    // order detail
+    Route::get('/order-detail/one/{orderId}', [OrderDetailController::class, 'getOne'])->name('order_detail.getOne');
+    Route::post('/order-detail/store/', [OrderDetailController::class, 'store'])->name('order_detail.store');
+    Route::post('/order-detail/update/{id}', [OrderDetailController::class, 'update']);
+    Route::delete('/order-detail/destroy/{id}', [OrderDetailController::class, 'destroy']);
 
     // order action
     Route::post('/order-action/', [OrderActionController::class, 'action'])->name('order.action');

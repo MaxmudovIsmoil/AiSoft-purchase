@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DebtorDetailResource extends JsonResource
+class OrderActionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,12 @@ class DebtorDetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            "debtor_id" => $this->debtor_id,
-            "debtor" => $this->debtor->name,
-            "money" => $this->phone,
+            "user" => $this->user->name,
+            "instance" => $this->instance->name_ru,
             "status" => $this->status,
-            "created_at" => $this->created_at,
-            "updated_at" => $this->updated_at
+            "comment" => $this->comment,
+            "created_at" => date('d.m.Y H:m', strtotime($this->created_at)),
+            "updated_at" => date('d.m.Y H:m', strtotime($this->updated_at))
         ];
     }
 }

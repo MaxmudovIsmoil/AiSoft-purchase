@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderActionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPlanController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrderActionController;
 
 
 Route::get('login', function () {
@@ -33,7 +33,10 @@ Route::middleware(['auth', 'isActive'])->group(function () {
     Route::delete('/order-detail/destroy/{id}', [OrderDetailController::class, 'destroy']);
 
     // order action
+    Route::get('/order/get-action/{orderId}', [OrderActionController::class, 'getOrderAction']);
     Route::post('/order-action/', [OrderActionController::class, 'action'])->name('order.action');
+
+    Route::get('/order/get-plan/{orderId}', [OrderController::class, 'getOrderPlan']);
 
     // user plan
     Route::resource('/user-plan', UserPlanController::class)->except(['create', 'edit', 'show']);

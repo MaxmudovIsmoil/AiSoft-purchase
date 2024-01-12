@@ -3,13 +3,12 @@
 namespace App\Services;
 
 use App\Enums\OrderStatus;
-use App\Helpers\Helper;
+use App\Http\Resources\OrderActionResource;
 use App\Models\Order;
 use App\Models\OrderAction;
 use App\Models\UserPlan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 
 
@@ -47,7 +46,7 @@ class OrderActionService
                 ];
 
                 if ($status == self::ACCEPTED_STATUS) {
-                    if ($orderCurrentStage >= 1 && $orderCurrentStage < $order->stage_count) {
+                    if (($orderCurrentStage >= 1) && ($orderCurrentStage < $order->stage_count)) {
                         $actionStage = $orderCurrentStage;
                         $orderCurrentStage++;
                         $newCurrentInstanceId = $this->newInstanceId($order, $orderCurrentStage);
@@ -59,6 +58,7 @@ class OrderActionService
                     elseif ($orderCurrentStage == $order->stage_count) {
                         $actionStage = $orderCurrentStage;
                         $orderData['status'] = self::COMPLETED_STATUS;
+                        $orderData['current_stage'] = $order->stage_count;
                     }
                 }
                 elseif ($status == self::GO_BACK_STATUS) {
@@ -99,4 +99,15 @@ class OrderActionService
             'stage' => $stage
         ])->first()->instance_id;
     }
+
+
+    public function getOrderAction(int $orderId): object
+    {
+        $orderAction = OrderAction::with(['user', 'instance'])
+            ->where(['order_id' => $orderId])
+            ->get();
+
+        return OrderActionResource::collection($orderAction);
+    }
+
 }

@@ -92,64 +92,37 @@
                                     <th>User</th>
                                     <th>Instance</th>
                                     <th>Instance reply</th>
-                                    <th style="text-align:center">Instance replied in</th>
+{{--                                    <th style="text-align:center">Instance replied in</th>--}}
                                     <th>Comment</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>31 July 2023 15:57</td>
-                                    <td>Isroil Maxmudov</td>
-                                    <td>
-                                        Intance1
-                                    </td>
-                                    <td>
-                                        Agreed
-                                    </td>
-                                    <td style="text-align:center">22 h 23 m</td>
-                                    <td>ok</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>31 July 2023 15:57</td>
-                                    <td>Isroil Maxmudov</td>
-                                    <td>
-                                        Intance3
-                                    </td>
-                                    <td>
-                                        Agreed
-                                    </td>
-                                    <td style="text-align:center">00 h 00 m</td>
-                                    <td>ok</td>
-                                </tr>
-                                </tbody>
+                                <tbody class="js_order_action_tbody"></tbody>
                             </table>
                 </div>
 
-                <div class="order-detail-update">
-                    <p class="title-p">Actions under subjects</p>
-                    <table class="table table-sm table-responsive-xl table-striped table-bordered table-hover nowrap" id="order_subject_activities">
-                                <thead>
-                                <tr>
-                                    <th>№</th>
-                                    <th>№ Subject</th>
-                                    <th>Executed</th>
-                                    <th>User</th>
-                                    <th>Description</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>10 Jul 2023 17:33:30</td>
-                                    <td>Isroil Maxmudov</td>
-                                    <td>Creator</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                </div>
+{{--                <div class="order-detail-update">--}}
+{{--                    <p class="title-p">Actions under subjects</p>--}}
+{{--                    <table class="table table-sm table-responsive-xl table-striped table-bordered table-hover nowrap" id="order_subject_activities">--}}
+{{--                                <thead>--}}
+{{--                                <tr>--}}
+{{--                                    <th>№</th>--}}
+{{--                                    <th>№ Subject</th>--}}
+{{--                                    <th>Executed</th>--}}
+{{--                                    <th>User</th>--}}
+{{--                                    <th>Description</th>--}}
+{{--                                </tr>--}}
+{{--                                </thead>--}}
+{{--                                <tbody>--}}
+{{--                                <tr>--}}
+{{--                                    <td></td>--}}
+{{--                                    <td></td>--}}
+{{--                                    <td>10 Jul 2023 17:33:30</td>--}}
+{{--                                    <td>Isroil Maxmudov</td>--}}
+{{--                                    <td>Creator</td>--}}
+{{--                                </tr>--}}
+{{--                                </tbody>--}}
+{{--                            </table>--}}
+{{--                </div>--}}
 
                 <div class="progress-plan">
                     <p class="title-p">Passage plan</p>
@@ -158,51 +131,16 @@
                             <tr>
                                 <th>Instance</th>
                                 <th>Stage</th>
-                                <th>Period of consideration</th>
                                 <th>Users (in instance)</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Intance1
-                                </td>
-                                <td>1</td>
-                                <td>8 working hours</td>
-                                <td>
-                                    Isroil Maxmudov,
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Intance3
-                                </td>
-                                <td>2</td>
-                                <td>8 working hours</td>
-                                <td>
-                                    Isroil Maxmudov,
-                                    Akmal Xamidov,
-                                </td>
-                            </tr>
-                            <tr>
-                            <td>
-                                Intance2
-                            </td>
-                            <td>3</td>
-                            <td>8 working hours</td>
-                            <td>
-                                Isroil Maxmudov,
-                                Bakhodir Mirjalilov,
-                                Uchkun Rakhimov,
-                            </td>
-                        </tr>
-                        </tbody>
+                        <tbody class="js_order_plan_tbody"></tbody>
                     </table>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+{{--            <div class="modal-footer">--}}
+{{--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+{{--            </div>--}}
         </div>
     </div>
 </div>

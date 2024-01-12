@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\OrderStatus;
+use App\Http\Resources\UserPlanResource;
 use App\Models\Order;
 use App\Models\OrderAction;
 use App\Models\OrderDetail;
@@ -11,8 +12,6 @@ use App\Models\UserInstance;
 use App\Models\UserPlan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use function Psy\debug;
 
 
 class OrderService
@@ -180,4 +179,16 @@ class OrderService
         return $div;
     }
 
+
+    public function getOrderPlan(int $orderId)
+    {
+        $order = Order::findOrFail($orderId)->first(['user_id', 'instance_id']);
+
+        $userPlan = UserPlan::where([
+            'user_id' => $order->user_id,
+            'user_instance_id' => $order->instance_id
+        ])->with(['instance', 'userInstance.user'])->get();
+
+        return UserPlanResource::collection($userPlan);
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\InstanceController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\admin\InstanceController;
+use App\Http\Controllers\admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 

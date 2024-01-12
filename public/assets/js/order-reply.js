@@ -30,6 +30,8 @@ $(document).on('click', '.js_reply_btn', function () {
 
 $(document).on('submit', '.js_reply_form', function(e) {
     e.preventDefault();
+    let orderId = $(this).find('.js_order_id').val();
+    let showModal = $("#order_show_modal");
 
     let form = $(this)
     $.ajax({
@@ -39,7 +41,11 @@ $(document).on('submit', '.js_reply_form', function(e) {
         dataType: "JSON",
         success: (response) => {
             console.log('res: ', response)
-            // if (response.success === true)
+            if (response.success === true) {
+                getOrderActions(orderId, showModal);
+                $(this).find('.js_reply_comment').val('');
+                $(this).closest('#order_reply_modal').modal('hide');
+            }
             //     window.location.reload();
         },
         error: (response) => {

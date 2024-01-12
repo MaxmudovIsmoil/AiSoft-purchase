@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 
-use App\Enums\OrderStatus;
-use App\Enums\OrderStatusEnum;
 use App\Services\OrderService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -46,6 +44,17 @@ class OrderController extends Controller
     {
         try {
             return response()->success($this->service->getOrderActionComments($orderId));
+        }
+        catch (\Exception $e) {
+            return response()->fail($e->getMessage());
+        }
+    }
+
+
+    public function getOrderPlan(int $orderId): JsonResponse
+    {
+        try {
+            return response()->success($this->service->getOrderPlan($orderId));
         }
         catch (\Exception $e) {
             return response()->fail($e->getMessage());

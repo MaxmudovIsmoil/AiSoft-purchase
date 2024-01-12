@@ -3,11 +3,8 @@
 namespace App\Services;
 
 use App\Dto\Auth\AuthDto;
-use App\Exceptions\NotFoundException;
 use App\Exceptions\UnauthorizedException;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {

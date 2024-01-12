@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\admin;
 
 use App\Helpers\Helper;
 use App\Models\User;
@@ -8,10 +8,7 @@ use App\Models\UserInstance;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use Yajra\DataTables\DataTables;
-use function PHPUnit\Framework\isFalse;
 
 class UserService
 {

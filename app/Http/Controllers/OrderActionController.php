@@ -26,4 +26,13 @@ class OrderActionController extends Controller
     }
 
 
+    public function getOrderAction(int $orderId): JsonResponse
+    {
+        try {
+            return response()->success($this->service->getOrderAction($orderId));
+        }
+        catch (\Exception $e) {
+            return response()->fail($e->getMessage());
+        }
+    }
 }

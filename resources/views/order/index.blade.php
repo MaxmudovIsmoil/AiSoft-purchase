@@ -70,6 +70,7 @@
                                             'badge-light-success' => $order->status->isAccepted(),
                                             'badge-light-warning' => $order->status->isGoBack(),
                                             'badge-light-danger' => $order->status->isDeclined(),
+                                            'badge-light-info' => $order->status->isCompleted(),
                                         ])>
                                             {{ $order->status->getLabelText() }}
                                         </span>

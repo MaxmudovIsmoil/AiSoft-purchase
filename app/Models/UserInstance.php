@@ -15,6 +15,8 @@ class UserInstance extends Model
         'instance_id',
     ];
 
+    public $timestamps = false;
+
     public function instance()
     {
         return $this->hasOne(Instance::class, 'id', 'instance_id')
@@ -28,5 +30,8 @@ class UserInstance extends Model
             ->orderBy('stage', 'ASC');
     }
 
-    public $timestamps = false;
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

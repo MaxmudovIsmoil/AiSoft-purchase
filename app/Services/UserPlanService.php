@@ -3,12 +3,10 @@
 namespace App\Services;
 
 use App\Models\Instance;
-use App\Models\User;
 use App\Models\UserInstance;
 use App\Models\UserPlan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class UserPlanService
 {

@@ -18,6 +18,8 @@ class UserPlan extends Model
         'status',
     ];
 
+    public $timestamps = false;
+
     public function instance()
     {
         return $this->hasOne(Instance::class, 'id', 'instance_id');
@@ -30,5 +32,9 @@ class UserPlan extends Model
             ->select('user_instances.*', 'users.name');
     }
 
-    public $timestamps = false;
+    public function userInstance()
+    {
+        return $this->hasMany(userInstance::class, 'instance_id', 'instance_id');
+    }
+
 }

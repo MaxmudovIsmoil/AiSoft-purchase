@@ -26,6 +26,7 @@ class OrderAction extends Model
     protected $casts = [
         'status' => OrderStatus::class
     ];
+
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');

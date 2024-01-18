@@ -2,8 +2,8 @@ function addNewTr(data) {
 
     let length = $('.js_order_detail_tbody tr').length + 1;
     const href = window.location.href;
-    const updateUrl = href + "-detail/update/"+data.id;
-    const deleteUrl = href + "-detail/delete/"+data.id;
+    const updateUrl = href + "-detail/update/" + data.id;
+    const deleteUrl = href + "-detail/delete/" + data.id;
     let tr = '<tr class="js_this_tr" data-order-detail-id="' + data.id + '">\n' +
         '    <td>'+length+'</td>\n' +
         '    <td>'+data.name+'</td>\n' +
@@ -24,9 +24,7 @@ function addNewTr(data) {
 function editThisTr(orderDetailId, data) {
     let trs = $('.js_order_detail_tbody tr');
     $.each(trs, function(i, tr){
-
-        if ($(tr).data('orderDetailId') === orderDetailId) {
-            // $(tr).find('td:nth-child(1)').html(i+1);
+        if ($(tr).data('orderDetailId') == orderDetailId) {
             $(tr).find('td:nth-child(2)').html(data.name);
             $(tr).find('td:nth-child(3)').html(data.count);
             $(tr).find('td:nth-child(4)').html(data.pcs);
@@ -97,7 +95,6 @@ $(document).ready(function() {
         let form = $(this);
         let modal = form.closest('#add_edit_order_detail_modal');
         let actionType = form.data('actionType');
-        console.log(actionType);
         $.ajax({
             type: "POST",
             url: form.attr('action'),
@@ -106,14 +103,13 @@ $(document).ready(function() {
             success: (response) => {
                 console.log('res: ', response)
                 if (response.success) {
-                    if (actionType === 1) {
+                    if (actionType == 1) {
                         // store
                         addNewTr(response.data);
                     }
                     else {
                         // update 2
                         let orderDetailId = form.data('orderDetailId');
-                        console.log(orderDetailId);
                         editThisTr(orderDetailId, response.data);
                     }
                     modal.find('input[type="text"]').val('');

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderActionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\OrderFileController;
 use App\Http\Controllers\UserPlanController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,7 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth', 'isActive'])->group(function () {
 
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/', [OrderController::class, 'index']);
+    // Route::get('/', [OrderController::class, 'index']);
 
     // Order
     Route::resource('order', OrderController::class)->except(['create', 'edit', 'show']);
@@ -32,10 +33,16 @@ Route::middleware(['auth', 'isActive'])->group(function () {
     Route::post('/order-detail/update/{id}', [OrderDetailController::class, 'update']);
     Route::delete('/order-detail/destroy/{id}', [OrderDetailController::class, 'destroy']);
 
+    // order file
+    Route::post('/order-file/files/', [OrderFileController::class, 'getFiles'])->name('order_files');
+    Route::post('/order-file/store/', [OrderFileController::class, 'store'])->name('order_file.store');
+    Route::delete('/order-file/delete/{id}', [OrderFileController::class, 'destroy']);
+
     // order action
     Route::get('/order/get-action/{orderId}', [OrderActionController::class, 'getOrderAction']);
     Route::post('/order-action/', [OrderActionController::class, 'action'])->name('order.action');
 
+    // order plan
     Route::get('/order/get-plan/{orderId}', [OrderController::class, 'getOrderPlan']);
 
     // user plan
@@ -43,6 +50,6 @@ Route::middleware(['auth', 'isActive'])->group(function () {
     Route::get('/user-plan/one/{id}', [UserPlanController::class, 'getOne'])->name('user-plan.getOne');
     Route::get('/user-plan/get-instances/{id}', [UserPlanController::class, 'getInstances'])->name('user-plan.getInstances');
 
+    // user profile
     Route::post('/user/profile', [UserController::class, 'profile'])->name('user.profile');
-
 });

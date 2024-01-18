@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DebtorResource extends JsonResource
+class OrderFileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,14 +16,9 @@ class DebtorResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            "creator_user_id" => $this->user_id,
-            "creator_user" => $this->user->name,
-            "name" => $this->name,
-            "phone" => $this->phone,
-            "status" => $this->status,
-            "money" => $this->money,
+            "name" => $this->user->name,
+            "file" => $this->file,
             "created_at" => $this->created_at,
-            "updated_at" => $this->updated_at
         ];
     }
 }

@@ -48,7 +48,12 @@
                         <div class="order-file-div">
                             <div class="d-flex justify-content-between">
                                 <p class="title-p">Order files (Kim qo'shsa o'sha ochira olsin)</p>
-                                <button class="btn btn-outline-primary btn-sm js_add_file_btn"><i data-feather='file-plus'></i>&nbsp; add file</button>
+                                <button
+                                    class="btn btn-outline-primary btn-sm js_add_order_file_btn"
+                                    data-url="{{ route('order_file.store') }}"
+                                >
+                                    <i data-feather='file-plus'></i>&nbsp; add file
+                                </button>
                             </div>
                             <table class="table table-sm table-responsive-xl table-bordered table-striped table-hover">
                                 <thead>
@@ -59,24 +64,7 @@
                                         <th width="10%" class="text-center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                    <td>1</td>
-                                    <td>Maxmudov Ismoil</td>
-                                    <td><a href="{{ asset('assets/images/admin.png') }}" target="_blank">file link</a></td>
-                                    <td class="text-center">
-                                        <a class="text-danger"><i class="fas fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                    <tr>
-                                    <td>2</td>
-                                    <td>Rakhimov Uchqun</td>
-                                    <td><a href="{{ asset('assets/images/avatars/1.png') }}" target="_blank">file link2</a></td>
-                                    <td class="text-center">
-                                        <a class="text-danger"><i class="fas fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
+                                <tbody class="js_order_file_tbody"></tbody>
                             </table>
                         </div>
                     </div>

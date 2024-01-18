@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('file')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });

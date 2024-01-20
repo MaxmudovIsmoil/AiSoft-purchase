@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class OrderDetail extends Model
 {
     use HasFactory, SoftDeletes;
+const STATUS_DEFAULT =1;
+const STATUS_UPDATE =2;
 
     protected $fillable = [
         'order_id',
@@ -19,5 +21,6 @@ class OrderDetail extends Model
         'address',
         'approximate_price', // taxminiy narx
         'deleted_at',
+        'status',
     ];
 }

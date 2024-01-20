@@ -6,6 +6,8 @@ use App\Enums\OrderStatus;
 use App\Http\Resources\OrderActionResource;
 use App\Models\Order;
 use App\Models\OrderAction;
+use App\Models\OrderDetail;
+use App\Models\OrderFile;
 use App\Models\UserPlan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -46,26 +48,39 @@ class OrderActionService
                 ];
 
                 if ($status == self::ACCEPTED_STATUS) {
-                    if (($orderCurrentStage >= 1) && ($orderCurrentStage < $order->stage_count)) {
-                        $actionStage = $orderCurrentStage;
-                        $orderCurrentStage++;
-                        $newCurrentInstanceId = $this->newInstanceId($order, $orderCurrentStage);
+                    if ($order->user_id == Auth::id() && $order->status->isGoBack()){
 
-                        $orderData['status'] = self::ACCEPTED_STATUS;
-                        $orderData['current_instance_id'] = $newCurrentInstanceId;
-                        $orderData['current_stage'] = $orderCurrentStage;
+                        if ($this->isCheckUpdateOwner($order->id)){
+                            $actionStage = $orderCurrentStage;
+                            $orderData['status'] = self::ACCEPTED_STATUS;
+                            $orderData['current_instance_id'] =  $this->newInstanceId($order, 1);
+                            $orderData['current_stage'] = 1;
+                        }else{
+                            $actionStage = $orderCurrentStage;
+                            $orderData['status'] = self::ACCEPTED_STATUS;
+                            $orderData['current_instance_id'] = $orderCurrentInstanceId;
+                            $orderData['current_stage'] = $orderCurrentStage;
+                        }
+                    }else{
+                        if (($orderCurrentStage >= 1) && ($orderCurrentStage < $order->stage_count)) {
+                            $actionStage = $orderCurrentStage;
+                            $orderCurrentStage++;
+                            $newCurrentInstanceId = $this->newInstanceId($order, $orderCurrentStage);
+
+                            $orderData['status'] = self::ACCEPTED_STATUS;
+                            $orderData['current_instance_id'] = $newCurrentInstanceId;
+                            $orderData['current_stage'] = $orderCurrentStage;
+                        } elseif ($orderCurrentStage == $order->stage_count) {
+                            $actionStage = $orderCurrentStage;
+                            $orderData['status'] = self::COMPLETED_STATUS;
+                            $orderData['current_stage'] = $order->stage_count;
+                        }
                     }
-                    elseif ($orderCurrentStage == $order->stage_count) {
-                        $actionStage = $orderCurrentStage;
-                        $orderData['status'] = self::COMPLETED_STATUS;
-                        $orderData['current_stage'] = $order->stage_count;
-                    }
-                }
-                elseif ($status == self::GO_BACK_STATUS) {
+                } elseif ($status == self::GO_BACK_STATUS) {
                     $actionStatus = self::GO_BACK_STATUS;
                     $actionStage = $orderCurrentStage;
                     $orderData['status'] = self::GO_BACK_STATUS;
-                    $orderData['current_stage'] = 1;
+                    $orderData['current_stage'] = $orderCurrentStage;
                 }
 
                 $order->fill($orderData);
@@ -110,4 +125,10 @@ class OrderActionService
         return OrderActionResource::collection($orderAction);
     }
 
+    public function isCheckUpdateOwner(int $orderId):bool
+    {
+        $orderDetailsExists = OrderDetail::where(['order_id'=>$orderId,'status' => OrderDetail::STATUS_UPDATE])->exists();
+        $orderFilesExists = OrderFile::where(['order_id'=>$orderId,'status' => OrderFile::STATUS_UPDATE])->exists();
+        return $orderDetailsExists || $orderFilesExists;
+    }
 }

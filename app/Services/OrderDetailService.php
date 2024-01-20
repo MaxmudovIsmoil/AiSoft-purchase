@@ -22,6 +22,7 @@ class OrderDetailService
             'pcs' => $data['pcs'],
             'purpose' => $data['purpose'],
             'address' => $data['address'],
+            'status' => OrderDetail::STATUS_UPDATE,
             'approximate_price' => $data['approximate_price'],
         ]);
         $data['id'] = $id;
@@ -37,6 +38,7 @@ class OrderDetailService
             'pcs' => $data['pcs'],
             'purpose' => $data['purpose'],
             'address' => $data['address'],
+            'status' => OrderDetail::STATUS_UPDATE,
             'approximate_price' => $data['approximate_price'],
         ]);
         $orderDetail->save();

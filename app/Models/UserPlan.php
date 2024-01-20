@@ -34,7 +34,7 @@ class UserPlan extends Model
 
     public function userInstance()
     {
-        return $this->hasMany(userInstance::class, 'instance_id', 'instance_id');
+        return $this->hasMany(UserInstance::class, 'instance_id', 'instance_id');
     }
 
 }

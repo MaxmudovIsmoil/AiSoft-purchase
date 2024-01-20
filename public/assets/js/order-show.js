@@ -109,6 +109,7 @@ function getOrderActions(orderId,) {
         url: url,
         dataType: "JSON",
         success: (response) => {
+            console.log("response",response);
             if (response.success) {
                 drawTrOrderAction(response.data);
             }
@@ -181,7 +182,7 @@ $(document).ready(function () {
         let orderDetailUrl = $(this).data('orderDetailUrl');
         getOrderDetails(orderDetailUrl);
 
-        getOrderFiles(orderDetailUrl);
+        // getOrderFiles(orderDetailUrl);
 
         getOrderActions(orderId);
 

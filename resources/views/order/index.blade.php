@@ -37,7 +37,12 @@
                             </thead>
                             <tbody>
                             @foreach($orders as $order)
-                                <tr class="js_this_tr @if(($order->current_stage == $order->up_stage && !in_array($order->up_user_instance_id, $userInstanceIds)) || ($order->user_id == Auth::id() && $order->status->isGoBack())) bg-light-danger js_action_btn_check @endif"
+                                <tr class="js_this_tr @if(($order->current_stage == $order->up_stage && !in_array($order->up_user_instance_id, $userInstanceIds) && $order->status->isAccepted())/* || ($order->user_id == Auth::id() && $order->status->isAccepted())*/)
+                                 bg-light-danger js_action_btn_check
+                                 @elseif(($order->user_id == Auth::id() && $order->status->isGoBack())||(!in_array($order->up_user_instance_id, $userInstanceIds) && $order->status->isGoBack()) )
+                                 bg-light-warning
+                                    @if($order->user_id == Auth::id() && $order->status->isGoBack() ) js_action_btn_check @endif
+                                 @endif"
                                     data-order-id="{{ $order->order_id }}">
                                     <td class="control">{{ ++$loop->index }}</td>
                                     <td>

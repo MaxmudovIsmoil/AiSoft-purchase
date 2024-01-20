@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('pcs')->default('')->comment('dona, karobka, штук');
             $table->string('purpose')->nullable()->comment('maqsad');
             $table->string('address')->nullable();
+            $table->smallInteger('status')->nullable()->comment("Order Detailsni holatini bilish yangilangan yangilanmaganligi");
             $table->string('approximate_price')->nullable()->comment('taxminiy narx');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

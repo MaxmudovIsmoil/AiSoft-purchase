@@ -54,8 +54,10 @@ class OrderService
             ->groupBy('o.id')
             ->orderBy('o.id', 'DESC')
             ->orderBy('o.current_stage', 'ASC')
+//            ->get();
             ->paginate(20);
 
+//        dd($orders);
         return $orders;
     }
 
@@ -113,6 +115,7 @@ class OrderService
                     'pcs' => $data->pcs[$i] ?? "",
                     'purpose' => $data->purpose[$i] ?? "",
                     'address' => $data->address[$i] ?? "",
+                    'status' => OrderDetail::STATUS_DEFAULT,
                     'approximate_price' => $data->approximate_price[$i] ?? "",
                 ]);
             }

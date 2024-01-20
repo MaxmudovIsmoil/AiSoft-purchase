@@ -1,5 +1,5 @@
 /**** ############################## Order detail ############################# **/
-function drawTrOrderDetail(detailData) {
+function drawTrOrderDetails(detailData) {
     let trs = '';
     const href = window.location.href;
     let updateUrl, deleteUrl;
@@ -8,7 +8,7 @@ function drawTrOrderDetail(detailData) {
         updateUrl = href + "-detail/update/"+data.id;
         deleteUrl = href + "-detail/delete/"+data.id;
 
-        trs += '<tr class="js_this_tr" data-order-detail-id="' + data.id + '">\n' +
+        trs += '<tr class="js_this_tr order-detail-id-'+data.id+'" data-id="'+data.id+'">\n' +
             '    <td>'+(i+1)+'</td>\n' +
             '    <td>'+data.name+'</td>\n' +
             '    <td>'+data.count+'</td>\n' +
@@ -26,7 +26,7 @@ function drawTrOrderDetail(detailData) {
 }
 
 
-function getOrderDetails(url, modal) {
+function getOrderDetails(url) {
     $.ajax({
         type: "GET",
         url: url,
@@ -34,11 +34,11 @@ function getOrderDetails(url, modal) {
         success: (response) => {
             // console.log('getOrderDetails: ', response)
             if (response.success) {
-                drawTrOrderDetail(response.data);
+                drawTrOrderDetails(response.data);
             }
         },
         error: (response) => {
-            console.log('error: ', response)
+            console.log('error: ', response);
         }
     })
 }
@@ -46,26 +46,62 @@ function getOrderDetails(url, modal) {
 
 
 /**** ############################## Order file ############################## **/
+function drawTrOrderFiles(detailData) {
+    let trs = '';
+    const href = window.location.href;
+    let deleteUrl;
+
+    $.each(detailData, function(i, data) {
+        deleteUrl = href + "-file/delete/"+data.id;
+
+        trs += '<tr class="js_this_tr file-id-' + data.id + '" data-id="' + data.id + '">\n' +
+            '    <td>'+(i+1)+'</td>\n' +
+            '    <td>'+data.name+'</td>\n' +
+            '    <td><a href="'+window.location.href+'/public/files/'+data.file+'" target="_blank">'+data.file+'</a></td>\n' +
+            '    <td class="text-center">\n' +
+            '        <a class="text-danger js_delete_file_btn" data-url="' + deleteUrl + '"><i class="fas fa-trash"></i></a>\n' +
+            '    </td>\n' +
+            '</tr>';
+    });
+    $('.js_file_tbody').html(trs);
+}
+
+function getOrderFiles(url) {
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "JSON",
+        success: (response) => {
+            // console.log('getOrderDetails: ', response)
+            if (response.success) {
+                drawTrOrderFiles(response.data);
+            }
+        },
+        error: (response) => {
+            console.log('error: ', response);
+        }
+    })
+}
 /**** ############################## ./Order file ############################## **/
 
 
 /**** ############################## Order action ############################# **/
-function drawTrOrderAction(data, modal) {
+function drawTrOrderAction(data) {
     let tr = '';
     $.each(data, function (i, action) {
         tr += '<tr>\n' +
-            '<td>'+(i+1)+'</td>\n' +
-            '<td>'+action.created_at+'</td>\n' +
-            '<td>'+action.user+'</td>\n' +
-            '<td>'+action.instance+'</td>\n' +
-            '<td>'+action.status+'</td>\n' +
-            '<td>'+action.comment+'</td>\n' +
+                '<td>'+(i+1)+'</td>\n' +
+                '<td>'+action.created_at+'</td>\n' +
+                '<td>'+action.user+'</td>\n' +
+                '<td>'+action.instance+'</td>\n' +
+                '<td>'+action.status+'</td>\n' +
+                '<td>'+action.comment+'</td>\n' +
             '</tr>';
     });
-    modal.find('.js_order_action_tbody').html(tr);
+    $('.js_order_action_tbody').html(tr);
 }
 
-function getOrderActions(orderId, modal) {
+function getOrderActions(orderId,) {
     let url = window.location.href + "/get-action/" + orderId;
 
     $.ajax({
@@ -73,10 +109,8 @@ function getOrderActions(orderId, modal) {
         url: url,
         dataType: "JSON",
         success: (response) => {
-            // console.log('getOrderActions: ', response);
             if (response.success) {
-                drawTrOrderAction(response.data, modal);
-                // modal.modal('show');
+                drawTrOrderAction(response.data);
             }
         },
         error: (response) => {
@@ -145,9 +179,11 @@ $(document).ready(function () {
         showModal.find('.modal-title').html('Show order');
 
         let orderDetailUrl = $(this).data('orderDetailUrl');
-        getOrderDetails(orderDetailUrl, showModal);
+        getOrderDetails(orderDetailUrl);
 
-        getOrderActions(orderId, showModal);
+        getOrderFiles(orderDetailUrl);
+
+        getOrderActions(orderId);
 
         getOrderPlan(orderId, showModal);
     });

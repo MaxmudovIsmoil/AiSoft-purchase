@@ -2,7 +2,7 @@
 function addNewFileTr(data) {
     let length = $('.js_order_file_tbody tr').length + 1;
     const deleteUrl = window.location.href + "-file/delete/" + data.id;
-    let tr = '<tr class="js_this_tr" data-order-file-id="' + data.id + '">\n' +
+    let tr = '<tr class="js_this_tr order-file-id-' + data.id + '" data-id="' + data.id + '">\n' +
         '    <td>'+length+'</td>\n' +
         '    <td>'+data.name+'</td>\n' +
         '    <td><a href="'+window.location.href+'/public/files/'+data.file+'" target="_blank">'+data.file+'</a></td>\n' +

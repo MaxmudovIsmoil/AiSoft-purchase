@@ -4,7 +4,7 @@ function addNewTr(data) {
     const href = window.location.href;
     const updateUrl = href + "-detail/update/" + data.id;
     const deleteUrl = href + "-detail/delete/" + data.id;
-    let tr = '<tr class="js_this_tr" data-order-detail-id="' + data.id + '">\n' +
+    let tr = '<tr class="js_this_tr order-detail-id-'+data.id+'" data-id="'+data.id+'">\n' +
         '    <td>'+length+'</td>\n' +
         '    <td>'+data.name+'</td>\n' +
         '    <td>'+data.count+'</td>\n' +
@@ -21,18 +21,13 @@ function addNewTr(data) {
     $('.js_order_detail_tbody').append(tr);
 }
 
-function editThisTr(orderDetailId, data) {
-    let trs = $('.js_order_detail_tbody tr');
-    $.each(trs, function(i, tr){
-        if ($(tr).data('orderDetailId') == orderDetailId) {
-            $(tr).find('td:nth-child(2)').html(data.name);
-            $(tr).find('td:nth-child(3)').html(data.count);
-            $(tr).find('td:nth-child(4)').html(data.pcs);
-            $(tr).find('td:nth-child(5)').html(data.purpose);
-            $(tr).find('td:nth-child(6)').html(data.address);
-            $(tr).find('td:nth-child(7)').html(data.approximate_price);
-        }
-    });
+function editThisTr(id, data) {
+    $('tr.order-detail-id-' + id + ' td:nth-child(2)').html(data.name);
+    $('tr.order-detail-id-' + id + ' td:nth-child(3)').html(data.count);
+    $('tr.order-detail-id-' + id + ' td:nth-child(4)').html(data.pcs);
+    $('tr.order-detail-id-' + id + ' td:nth-child(5)').html(data.purpose);
+    $('tr.order-detail-id-' + id + ' td:nth-child(6)').html(data.address);
+    $('tr.order-detail-id-' + id + ' td:nth-child(7)').html(data.approximate_price);
 }
 
 $(document).ready(function() {
@@ -66,8 +61,8 @@ $(document).ready(function() {
         form.attr('data-action-type', 2);
 
         let tr = $(this).closest('.js_this_tr');
-        let orderDetailId = tr.data('orderDetailId');
-        form.attr('data-order-detail-id', orderDetailId);
+        let id = tr.data('id');
+        form.attr('data-order-detail-id', id);
 
         let name = tr.find('td:nth-child(2)').html();
         let count = tr.find('td:nth-child(3)').html();
@@ -94,14 +89,14 @@ $(document).ready(function() {
         e.preventDefault();
         let form = $(this);
         let modal = form.closest('#add_edit_order_detail_modal');
-        let actionType = form.data('actionType');
+        let actionType = form.attr('data-action-type');
         $.ajax({
             type: "POST",
             url: form.attr('action'),
             data: form.serialize(),
             dataType: "JSON",
             success: (response) => {
-                console.log('res: ', response)
+                // console.log('res: ', response);
                 if (response.success) {
                     if (actionType == 1) {
                         // store
@@ -109,7 +104,7 @@ $(document).ready(function() {
                     }
                     else {
                         // update 2
-                        let orderDetailId = form.data('orderDetailId');
+                        let orderDetailId = form.attr('data-order-detail-id');
                         editThisTr(orderDetailId, response.data);
                     }
                     modal.find('input[type="text"]').val('');

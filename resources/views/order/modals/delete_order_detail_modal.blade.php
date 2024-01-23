@@ -1,5 +1,5 @@
 <!-- Delete Modal -->
-<div class="modal fade modal-danger text-left" id="deleteModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="deleteModalMabel" aria-hidden="true">
+<div class="modal fade modal-danger text-left" id="deleteOrderDetailModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="deleteModalMabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,7 +16,7 @@
                 <span class="js_danger text-danger"></span>
             </div>
             <div class="modal-footer">
-                <form id="js_modal_delete_form" method="POST">
+                <form class="js_delete_order_detail_form" method="POST">
                     @csrf
                     {{ method_field('DELETE') }}
                     <button type="submit" class="btn btn-danger">Да</button>

@@ -14,7 +14,7 @@ function addNewTr(data) {
         '    <td>'+data.approximate_price+'</td>\n' +
         '    <td class="text-right d-flex justify-content-end">\n' +
         '        <a class="text-primary mr-1 js_edit_order_detail_btn" data-url="' + updateUrl + '"><i class="fas fa-pen"></i></a>\n' +
-        '        <a class="text-danger js_delete_order_detail_btn" data-url="' + deleteUrl + '"><i class="fas fa-trash"></i></a>\n' +
+        '        <a class="text-danger js_delete_order_detail_btn" data-name="'+data.name+'" data-url="' + deleteUrl + '"><i class="fas fa-trash"></i></a>\n' +
         '    </td>\n' +
         '</tr>';
 
@@ -152,4 +152,46 @@ $(document).ready(function() {
     });
 
 
+    body.delegate('.js_delete_order_detail_btn', 'click', function (e) {
+        e.preventDefault();
+        let deleteModal = $('#deleteOrderDetailModal');
+        let name = $(this).data('name');
+        let url = $(this).data('url');
+        deleteModal.find('.modal-title').html(name);
+
+        let form = deleteModal.find('.js_delete_order_detail_form');
+        form.attr('action', url);
+        deleteModal.modal('show');
+    });
+
+
+    body.delegate('.js_delete_order_detail_form', 'submit', function (e) {
+        e.preventDefault();
+        let deleteModal = $('#deleteOrderDetailModal');
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: (response) => {
+                if(!response.success) {
+                    deleteModal.find('.js_message').addClass('d-none');
+                    deleteModal.find('.js_danger').html(response.error);
+                }
+                console.log('res', response)
+                if(response.success) {
+                    let tr = $('.js_order_detail_tbody .order-detail-id-'+response.data);
+                    tr.nextAll().each(function() {
+                        let item = $(this).find('td:first').html() - 1;
+                        $(this).find('td:first').html(item);
+                    });
+                    tr.remove();
+                    deleteModal.modal('hide')
+                }
+            },
+            error: (response) => {
+                console.log('error:', response);
+            }
+        });
+
+    });
 });

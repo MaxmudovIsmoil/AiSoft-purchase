@@ -50,8 +50,7 @@
                                 <p class="title-p">Order files (Kim qo'shsa o'sha ochira olsin)</p>
                                 <button
                                     class="btn btn-outline-primary btn-sm js_add_order_file_btn"
-                                    data-url="{{ route('order_file.store') }}"
-                                >
+                                    data-url="{{ route('order_file.store') }}">
                                     <i data-feather='file-plus'></i>&nbsp; add file
                                 </button>
                             </div>
@@ -73,7 +72,7 @@
                 <div class="order-action-list mt-1">
                     <p class="title-p">Actions under order</p>
                     <table class="table table-bordered table-sm table-responsive-xl table-striped table-hover nowrap" id="order_passage_logs">
-                                <thead>
+                        <thead>
                                 <tr>
                                     <th>№</th>
                                     <th>Time</th>
@@ -85,7 +84,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="js_order_action_tbody"></tbody>
-                            </table>
+                    </table>
                 </div>
 
 {{--                <div class="order-detail-update">--}}

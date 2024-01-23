@@ -37,19 +37,20 @@
                             </thead>
                             <tbody>
                             @foreach($orders as $order)
-                                <tr class="js_this_tr @if(($order->current_stage == $order->up_stage && !in_array($order->up_user_instance_id, $userInstanceIds) && $order->status->isAccepted())/* || ($order->user_id == Auth::id() && $order->status->isAccepted())*/)
-                                 bg-light-danger js_action_btn_check
-                                 @elseif(($order->user_id == Auth::id() && $order->status->isGoBack())||(!in_array($order->up_user_instance_id, $userInstanceIds) && $order->status->isGoBack()) )
-                                 bg-light-warning
-                                    @if($order->user_id == Auth::id() && $order->status->isGoBack() ) js_action_btn_check @endif
-                                 @endif"
+                                <tr class="js_this_tr
+                                @if(($order->current_stage == $order->up_stage && !in_array($order->up_user_instance_id, $userInstanceIds) && $order->status->isAccepted())/* || ($order->user_id == Auth::id() && $order->status->isAccepted())*/)
+                                    bg-light-danger js_action_btn_check
+                                @elseif(($order->user_id == Auth::id() && $order->status->isGoBack())||(!in_array($order->up_user_instance_id, $userInstanceIds) && $order->status->isGoBack()) )
+                                    bg-light-warning
+                                    @if($order->user_id == Auth::id() && $order->status->isGoBack()) js_action_btn_check @endif
+                                @endif"
                                     data-order-id="{{ $order->order_id }}">
                                     <td class="control">{{ ++$loop->index }}</td>
                                     <td>
                                         <div class="d-flex justify-content-left align-items-center">
                                             <div class="avatar-wrapper">
                                                 <div class="avatar avatar-xl mr-1">
-                                                    <img src="{{ asset("assets/images/".$order->user->photo)}}"
+                                                    <img src="{{ asset("storage/photos/".$order->user->photo)}}"
                                                          alt="Avatar" height="32" width="32">
                                                 </div>
                                             </div>
@@ -83,6 +84,7 @@
                                     <td class="text-center">
                                         <a href="#" class="show-btn js_show_btn"
                                         data-order-detail-url="{{ route('order_detail.getOne', [$order->order_id]) }}"
+                                        data-order-file-url="{{ route('order_files', [$order->order_id]) }}"
                                         ><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
@@ -112,6 +114,7 @@
             @include('order.modals.reply_modal')
 
             @include('order.modals.add_order_detail_modal')
+            @include('order.modals.delete_order_detail_modal')
 
             @include('order.modals.add_file_modal')
 

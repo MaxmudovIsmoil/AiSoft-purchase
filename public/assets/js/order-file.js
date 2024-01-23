@@ -2,12 +2,12 @@
 function addNewFileTr(data) {
     let length = $('.js_order_file_tbody tr').length + 1;
     const deleteUrl = window.location.href + "-file/delete/" + data.id;
-    let tr = '<tr class="js_this_tr order-file-id-' + data.id + '" data-id="' + data.id + '">\n' +
+    let tr = '<tr class="js_this_tr file-id-' + data.id + '" data-id="' + data.id + '">\n' +
         '    <td>'+length+'</td>\n' +
         '    <td>'+data.name+'</td>\n' +
-        '    <td><a href="'+window.location.href+'/public/files/'+data.file+'" target="_blank">'+data.file+'</a></td>\n' +
+        '    <td><a href="/storage/files/'+data.file+'" target="_blank">'+data.file+'</a></td>\n' +
         '    <td class="text-center">\n' +
-        '        <a class="text-danger js_delete_order_file_btn" data-url="' + deleteUrl + '"><i class="fas fa-trash"></i></a>\n' +
+        '        <a class="text-danger js_delete_btn" data-url="' + deleteUrl + '"><i class="fas fa-trash"></i></a>\n' +
         '    </td>\n' +
         '</tr>';
 
@@ -42,10 +42,12 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: form.attr('action'),
-            data: form.serialize(),
+            data: new FormData(this),
             dataType: "JSON",
+            contentType: false,
+            processData: false,
             success: (response) => {
-                console.log('res: ', response)
+                // console.log('res: ', response)
                 if (response.success) {
                     addNewFileTr(response.data);
                     modal.find('input[type="text"]').val('');
@@ -72,4 +74,46 @@ $(document).ready(function() {
     });
 
 
+    body.delegate('.js_order_file_delete_btn', 'click', function (e) {
+        e.preventDefault();
+        let deleteModal = $('#deleteModal');
+        let name = $(this).data('name')
+        let url = $(this).data('url')
+        deleteModal.find('.modal-title').html(name)
+
+        let form = deleteModal.find('#js_modal_delete_form')
+        form.attr('action', url)
+        deleteModal.modal('show');
+    });
+
+
+    body.delegate('#js_modal_delete_form', 'submit', function (e) {
+        e.preventDefault();
+        let deleteModal = $('#deleteModal');
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: (response) => {
+                if(!response.success) {
+                    deleteModal.find('.js_message').addClass('d-none')
+                    deleteModal.find('.js_danger').html(response.error)
+                }
+                // console.log('res', response)
+                if(response.success) {
+                    let tr = $('.js_order_file_tbody .file-id-'+response.data);
+                    tr.nextAll().each(function() {
+                        let item = $(this).find('td:first').html() - 1;
+                        $(this).find('td:first').html(item);
+                    });
+                    tr.remove();
+                    deleteModal.modal('hide')
+                }
+            },
+            error: (response) => {
+                console.log('error:', response);
+            }
+        });
+
+    });
 });

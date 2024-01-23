@@ -125,10 +125,10 @@ class OrderService
 
     public function filesUpload(object $data, int $orderId): void
     {
-        if ($data->hasfile('files')) {
-            foreach ($data->file('files') as $file) {
+        if ($data->hasfile('upload')) {
+            foreach ($data->file('upload') as $file) {
                 $file_name = $orderId . "_" . time() . "." . $file->getClientOriginalExtension();
-                $file->move(public_path() . '/files/', $file_name);
+                $file->move(public_path() . '/upload/', $file_name);
 
                 OrderFile::create([
                     'order_id' => $orderId,
@@ -167,7 +167,7 @@ class OrderService
                 '<div class="d-flex justify-content-left align-items-center">' .
                 '    <div class="avatar-wrapper">' .
                 '        <div class="avatar avatar-xl mr-1">' .
-                '            <img src="' . asset("assets/images/".$action->user->photo) . '" alt="Avatar" height="32" width="32">' .
+                '            <img src="' . asset("storage/photos/".$action->user->photo) . '" alt="Avatar" height="32" width="32">' .
                 '        </div>' .
                 '    </div>' .
                 '    <div class="d-flex flex-column"><a href="#" class="user_name text-truncate">' .

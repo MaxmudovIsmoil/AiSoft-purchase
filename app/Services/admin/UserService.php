@@ -7,7 +7,9 @@ use App\Models\User;
 use App\Models\UserInstance;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
 
 class UserService
@@ -30,7 +32,7 @@ class UserService
             })
             ->addColumn('photo', function($users) {
                 return '<div class="avatar avatar-xl">
-                            <img src="'.asset("assets/images/".$users->photo).'" alt="Photo"/>
+                            <img src="'.asset("storage/photos/".$users->photo).'" alt="Photo"/>
                         </div>';
             })
             ->addColumn('instance', function($users) {
@@ -92,9 +94,10 @@ class UserService
         DB::beginTransaction();
             $user = User::findOrfail($id);
             if (isset($data['photo'])) {
-                if (file_exists(public_path().'/assets/images/'.$user->photo)) {
-                    unlink(public_path().'/assets/images/'.$user->photo);
-                }
+                $filePath = storage_path('upload/photos/'.$user->photo);
+                if (File::exists($filePath))
+                    File::delete($filePath);
+
                 $user->fill(['photo' => $this->file_upload($data['photo'])]);
             }
             if (isset($data['password'])) {
@@ -115,7 +118,13 @@ class UserService
 
     public function delete(int $id)
     {
-        return User::destroy($id);
+        $user = User::findOrFail($id);
+        $filePath = storage_path('upload/photos/'.$user->photo);
+        Log::info($filePath);
+        if (File::exists($filePath))
+            File::delete($filePath);
+
+        return $user->delete();
     }
 
 
@@ -153,11 +162,11 @@ class UserService
 
     public function file_upload(object $photo): string
     {
-        $photo_name = '';
+        $photoName = '';
         if($photo) {
-            $photo_name = time().'.'.$photo->getClientOriginalExtension();
-            $photo->move(public_path().'/assets/images/', $photo_name);
+            $photoName = time() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('upload/photos', $photoName, 'public');
         }
-        return $photo_name;
+        return $photoName;
     }
 }

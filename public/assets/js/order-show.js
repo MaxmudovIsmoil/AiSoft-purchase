@@ -18,7 +18,7 @@ function drawTrOrderDetails(detailData) {
             '    <td>'+data.approximate_price+'</td>\n' +
             '    <td class="text-right d-flex justify-content-end">\n' +
             '        <a class="text-primary mr-1 js_edit_order_detail_btn" data-url="' + updateUrl + '"><i class="fas fa-pen"></i></a>\n' +
-            '        <a class="text-danger js_delete_order_detail_btn" data-url="'+deleteUrl+'"><i class="fas fa-trash"></i></a>\n' +
+            '        <a class="text-danger js_delete_order_detail_btn" data-name="'+data.name+'" data-url="'+deleteUrl+'"><i class="fas fa-trash"></i></a>\n' +
             '    </td>\n' +
             '</tr>';
     });
@@ -52,18 +52,18 @@ function drawTrOrderFiles(detailData) {
     let deleteUrl;
 
     $.each(detailData, function(i, data) {
-        deleteUrl = href + "-file/delete/"+data.id;
+        deleteUrl = href + "-file/delete/" + data.id;
 
         trs += '<tr class="js_this_tr file-id-' + data.id + '" data-id="' + data.id + '">\n' +
             '    <td>'+(i+1)+'</td>\n' +
             '    <td>'+data.name+'</td>\n' +
-            '    <td><a href="'+window.location.href+'/public/files/'+data.file+'" target="_blank">'+data.file+'</a></td>\n' +
+            '    <td><a href="/storage/files/'+data.file+'" target="_blank">'+data.file+'</a></td>\n' +
             '    <td class="text-center">\n' +
-            '        <a class="text-danger js_delete_file_btn" data-url="' + deleteUrl + '"><i class="fas fa-trash"></i></a>\n' +
+            '        <a class="text-danger js_order_file_delete_btn" data-url="' + deleteUrl + '"><i class="fas fa-trash"></i></a>\n' +
             '    </td>\n' +
             '</tr>';
     });
-    $('.js_file_tbody').html(trs);
+    $('.js_order_file_tbody').html(trs);
 }
 
 function getOrderFiles(url) {
@@ -72,13 +72,13 @@ function getOrderFiles(url) {
         url: url,
         dataType: "JSON",
         success: (response) => {
-            // console.log('getOrderDetails: ', response)
+            // console.log('getOrderFiles: ', response)
             if (response.success) {
                 drawTrOrderFiles(response.data);
             }
         },
         error: (response) => {
-            console.log('error: ', response);
+            console.log('file error: ', response);
         }
     })
 }
@@ -109,7 +109,7 @@ function getOrderActions(orderId,) {
         url: url,
         dataType: "JSON",
         success: (response) => {
-            console.log("response",response);
+            // console.log("response: ", response);
             if (response.success) {
                 drawTrOrderAction(response.data);
             }
@@ -164,6 +164,7 @@ function getOrderPlan(orderId, modal) {
 $(document).ready(function () {
 
     var showModal = $(document).find('#order_show_modal');
+    var deleteModal = $(document).find('#deleteModal');
 
     $('.js_show_btn').on('click', function (e) {
         e.preventDefault();
@@ -182,7 +183,8 @@ $(document).ready(function () {
         let orderDetailUrl = $(this).data('orderDetailUrl');
         getOrderDetails(orderDetailUrl);
 
-        // getOrderFiles(orderDetailUrl);
+        let fileUrl = $(this).data('orderFileUrl');
+        getOrderFiles(fileUrl);
 
         getOrderActions(orderId);
 

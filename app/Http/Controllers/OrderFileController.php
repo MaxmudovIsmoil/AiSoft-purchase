@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderFileRequest;
 use App\Services\OrderFileService;
-use Illuminate\Http\Request;
 
 
 class OrderFileController extends Controller
@@ -22,14 +21,13 @@ class OrderFileController extends Controller
 
     public function store(OrderFileRequest $request)
     {
-//        return response()->success($request->all());
         return $this->service->store($request->validated());
     }
 
 
-    public function destroy(int $fileId)
+    public function destroy(int $id)
     {
-        return $this->service->destroy($fileId);
+        return $this->service->destroy($id);
     }
 
 }

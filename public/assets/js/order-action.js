@@ -8,16 +8,16 @@ $(document).on('click', '.js_accordion_btn', function () {
     {
         if (orderCollapse.is(":hidden")) {
             orderCollapse.slideUp();
-            console.log('slide Up')
+            // console.log('slide Up')
         }
         else {
-            console.log('Slide Down')
+            // console.log('Slide Down')
             $.ajax({
                 type: "GET",
                 url: url,
                 dataType: "JSON",
                 success: (response) => {
-                    console.log('res: ', response)
+                    // console.log('res: ', response)
                     if (response.success) {
                         let div = $($.parseHTML(response.data));
                         div.last().find('.fas').remove();

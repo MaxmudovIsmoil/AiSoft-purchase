@@ -10,8 +10,9 @@ class OrderFile extends Model
 {
     use HasFactory, SoftDeletes;
 
-    const STATUS_DEFAULT =1;
-    const STATUS_UPDATE =2;
+    const STATUS_DEFAULT = 1;
+    const STATUS_UPDATE = 2;
+
     protected $fillable = [
         'order_id',
         'user_id',

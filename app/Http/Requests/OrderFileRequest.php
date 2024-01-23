@@ -23,7 +23,7 @@ class OrderFileRequest extends FormRequest
     {
         return [
             'order_id' => 'required',
-            'file' => 'required|mimes:png,jpg,jpeg,txt,pdf,doc,docx,xls,xlsx|max:2048',
+            'file' => 'required|mimes:png,jpg,jpeg,txt,pdf,doc,docx,xls,xlsx|max:4096',
         ];
     }
 }

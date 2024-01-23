@@ -9,7 +9,7 @@ function delete_function(delete_modal, $this, table) {
                 delete_modal.find('.js_message').addClass('d-none')
                 delete_modal.find('.js_danger').html(response.error)
             }
-            console.log('res', response)
+            // console.log('res', response)
             if(response.success) {
                 table.draw();
                 delete_modal.modal('hide')

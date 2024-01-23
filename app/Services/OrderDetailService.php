@@ -29,9 +29,9 @@ class OrderDetailService
         return $data;
     }
 
-    public function update(int $orderDetailId, array $data): array
+    public function update(int $id, array $data): array
     {
-        $orderDetail = OrderDetail::findOrFail($orderDetailId);
+        $orderDetail = OrderDetail::findOrFail($id);
         $orderDetail->fill([
             'name' => $data['name'],
             'count' => $data['count'],
@@ -42,13 +42,13 @@ class OrderDetailService
             'approximate_price' => $data['approximate_price'],
         ]);
         $orderDetail->save();
-        $data['id'] = $orderDetailId;
+        $data['id'] = $id;
         return $data;
     }
 
-    public function destroy(int $orderDetailId)
+    public function destroy(int $id)
     {
-        OrderDetail::destroy($orderDetailId);
-        return $orderDetailId;
+        OrderDetail::destroy($id);
+        return $id;
     }
 }

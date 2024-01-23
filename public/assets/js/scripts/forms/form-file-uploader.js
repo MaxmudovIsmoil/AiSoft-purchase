@@ -13,10 +13,10 @@ $(function () {
   'use strict';
 
   var singleFile = $('#dpz-single-file');
-  var multipleFiles = $('#dpz-multiple-files');
-  var buttonSelect = $('#dpz-btn-select-files');
+  var multipleFiles = $('#dpz-multiple-upload');
+  var buttonSelect = $('#dpz-btn-select-upload');
   var limitFiles = $('#dpz-file-limits');
-  var acceptFiles = $('#dpz-accept-files');
+  var acceptFiles = $('#dpz-accept-upload');
   var removeThumb = $('#dpz-remove-thumb');
   var removeAllThumbs = $('#dpz-remove-all-thumb');
 
@@ -35,7 +35,7 @@ $(function () {
 
   // Use Button To Select Files
   buttonSelect.dropzone({
-    clickable: '#select-files' // Define the element that should be used as click trigger to select files.
+    clickable: '#select-upload' // Define the element that should be used as click trigger to select upload.
   });
 
   // Limit File Size and No. Of Files

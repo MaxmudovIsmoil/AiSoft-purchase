@@ -54,12 +54,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | When using the native session driver, we need a location where session
-    | files may be stored. A default has been set for you but a different
+    | upload may be stored. A default has been set for you but a different
     | location may be specified. This is only needed for file sessions.
     |
     */
 
-    'files' => storage_path('framework/sessions'),
+    'upload' => storage_path('framework/sessions'),
 
     /*
     |--------------------------------------------------------------------------

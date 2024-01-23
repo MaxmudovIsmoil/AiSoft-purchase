@@ -43,6 +43,7 @@ $(document).on('submit', '.js_reply_form', function(e) {
             console.log('res: ', response)
             if (response.success === true) {
                 getOrderActions(orderId, showModal);
+                modal.find('.action-div').addClass('d-none');
                 $(this).find('.js_reply_comment').val('');
                 $(this).closest('#order_reply_modal').modal('hide');
             }

@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserInstance::class, 'user_id', 'id');
     }
+
+    public function getPhotoAttribute()
+    {
+        return $this->attributes['photo'] ?? 'user.png';
+    }
 }

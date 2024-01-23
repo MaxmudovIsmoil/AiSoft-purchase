@@ -40,7 +40,7 @@
                     <div class="user-nav d-sm-flex d-none">
                         <span class="user-name font-weight-bolder">{{ auth()->user()->name }}</span>
                         <span class="user-status">{{ auth()->user()->username }}</span></div><span class="avatar">
-                        <img class="round" src="{{ asset("assets/images/". auth()->user()->photo )}}"
+                        <img class="round" src="{{ asset("storage/photos/". auth()->user()->photo )}}"
                              alt="avatar" height="40" width="40">
                         <span class="avatar-status-online"></span>
                     </span>

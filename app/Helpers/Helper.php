@@ -21,10 +21,10 @@ class Helper
         $startDate = strtotime(date('Y-m-d', strtotime($start)));
         $endDate = strtotime(date('Y-m-d', strtotime($end)));
 
-        $start_working_hour = strtotime('09:00:00');
-        $start_dinner_hour = strtotime('13:00:00');
-        $end_dinner_hour = strtotime('14:00:00');
-        $end_working_hour = strtotime('18:00:00');
+        $start_working_hour = strtotime(env('START_WORKING_HOUR'));
+        $start_dinner_hour = strtotime(env('START_DINNER_HOUR'));
+        $end_dinner_hour = strtotime(ENV('END_DINNER_HOUR'));
+        $end_working_hour = strtotime(ENV('END_WORKING_HOUR'));
 
         return '1';
     }

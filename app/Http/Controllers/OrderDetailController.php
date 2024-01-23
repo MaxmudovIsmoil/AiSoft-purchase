@@ -46,10 +46,10 @@ class OrderDetailController extends Controller
     }
 
 
-    public function destroy(int $orderDetailId): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         try {
-            return response()->success($this->service->destroy($orderDetailId));
+            return response()->success($this->service->destroy($id));
         }
         catch (\Exception $e) {
             return response()->fail($e->getMessage());

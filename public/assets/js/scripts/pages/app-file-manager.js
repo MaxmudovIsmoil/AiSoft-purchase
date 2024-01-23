@@ -21,7 +21,7 @@ $(function () {
     noResult = $('.no-result'),
     fileActions = $('.file-actions'),
     viewToggle = $('.view-toggle'),
-    filterInput = $('.files-filter'),
+    filterInput = $('.upload-filter'),
     toggleDropdown = $('.toggle-dropdown'),
     sidebarMenuList = $('.sidebar-list'),
     fileDropdown = $('.file-dropdown'),

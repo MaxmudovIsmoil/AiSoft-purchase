@@ -34,10 +34,10 @@ Route::middleware(['auth', 'isActive'])->group(function () {
     Route::get('/order-detail/one/{orderId}', [OrderDetailController::class, 'getOne'])->name('order_detail.getOne');
     Route::post('/order-detail/store/', [OrderDetailController::class, 'store'])->name('order_detail.store');
     Route::post('/order-detail/update/{id}', [OrderDetailController::class, 'update']);
-    Route::delete('/order-detail/destroy/{id}', [OrderDetailController::class, 'destroy']);
+    Route::delete('/order-detail/delete/{id}', [OrderDetailController::class, 'destroy']);
 
     // order file
-    Route::post('/order-file/files/', [OrderFileController::class, 'getFiles'])->name('order_files');
+    Route::get('/order-file/upload/{id}', [OrderFileController::class, 'getFiles'])->name('order_files');
     Route::post('/order-file/store/', [OrderFileController::class, 'store'])->name('order_file.store');
     Route::delete('/order-file/delete/{id}', [OrderFileController::class, 'destroy']);
 

@@ -6,6 +6,8 @@ use App\Http\Resources\OrderFileResource;
 use App\Models\OrderFile;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class OrderFileService {
 
@@ -23,26 +25,40 @@ class OrderFileService {
     public function store(array $data): JsonResponse
     {
         try {
-
-            $filename = time().'.'.$data['file']->getClientOriginalExtension();
-            $data['file']->move(public_path().'/assets/files/', $filename);
+            $file = $data['file'];
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('upload/files', $filename, 'public');
 
             OrderFile::create([
                 'order_id' => $data['order_id'],
                 'user_id' => Auth::id(),
                 'file' => $filename,
             ]);
-            return response()->success($data);
+
+            return response()->success([
+                'order_id' => $data['order_id'],
+                'file' => $filename,
+                'name' => Auth::user()->name
+            ]);
         }
         catch (\Exception $e) {
             return response()->fail($e->getMessage());
         }
     }
 
-    public function destroy(int $fileId): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         try {
-//            OrderFile::destroy($fileId);
+            $fileId = $id;
+            $orderFile = OrderFile::findOrfail($id);
+
+            $filePath = storage_path('upload/files/'.$orderFile->file);
+            Log::info($filePath);
+            if (File::exists($filePath))
+                File::delete($filePath);
+
+            $orderFile->delete();
+
             return response()->success($fileId);
         }
         catch (\Exception $e) {

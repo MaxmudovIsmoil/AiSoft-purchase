@@ -64,4 +64,6 @@ return [
     "Login" => "Login",
     "Password" => "Password",
     "Sign in" => "Sign in",
+    "Orders" => "Orders",
+    "User Plan" => "User Plan",
 ];

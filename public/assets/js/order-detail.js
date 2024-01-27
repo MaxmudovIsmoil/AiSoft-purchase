@@ -1,33 +1,32 @@
 function addNewTr(data) {
-
-    let length = $('.js_order_detail_tbody tr').length + 1;
+    const length = $('.js_order_detail_tbody tr').length + 1;
     const href = window.location.href;
-    const updateUrl = href + "-detail/update/" + data.id;
-    const deleteUrl = href + "-detail/delete/" + data.id;
-    let tr = '<tr class="js_this_tr order-detail-id-'+data.id+'" data-id="'+data.id+'">\n' +
-        '    <td>'+length+'</td>\n' +
-        '    <td>'+data.name+'</td>\n' +
-        '    <td>'+data.count+'</td>\n' +
-        '    <td>'+data.pcs+'</td>\n' +
-        '    <td>'+data.purpose+'</td>\n' +
-        '    <td>'+data.address+'</td>\n' +
-        '    <td>'+data.approximate_price+'</td>\n' +
-        '    <td class="text-right d-flex justify-content-end">\n' +
-        '        <a class="text-primary mr-1 js_edit_order_detail_btn" data-url="' + updateUrl + '"><i class="fas fa-pen"></i></a>\n' +
-        '        <a class="text-danger js_delete_order_detail_btn" data-name="'+data.name+'" data-url="' + deleteUrl + '"><i class="fas fa-trash"></i></a>\n' +
-        '    </td>\n' +
-        '</tr>';
+    const updateUrl = `${href}-detail/update/${data.id}`;
+    const deleteUrl = `${href}-detail/delete/${data.id}`;
+
+    const tr = `<tr class="js_this_tr order-detail-id-${data.id}" data-id="${data.id}">
+                    <td>${length}</td>
+                    <td>${data.name}</td>
+                    <td>${data.count}</td>
+                    <td>${data.pcs}</td>
+                    <td>${data.price_source}</td>
+                    <td><a href="${data.address}" target="_blank">link</a></td>
+                    <td class="text-right d-flex justify-content-end">
+                        <a class="text-primary mr-1 js_edit_order_detail_btn" data-url="${updateUrl}"><i class="fas fa-pen"></i></a>
+                        <a class="text-danger js_delete_order_detail_btn" data-name="${data.name}" data-url="${deleteUrl}"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>`;
 
     $('.js_order_detail_tbody').append(tr);
 }
+
 
 function editThisTr(id, data) {
     $('tr.order-detail-id-' + id + ' td:nth-child(2)').html(data.name);
     $('tr.order-detail-id-' + id + ' td:nth-child(3)').html(data.count);
     $('tr.order-detail-id-' + id + ' td:nth-child(4)').html(data.pcs);
-    $('tr.order-detail-id-' + id + ' td:nth-child(5)').html(data.purpose);
+    $('tr.order-detail-id-' + id + ' td:nth-child(5)').html(data.price_source);
     $('tr.order-detail-id-' + id + ' td:nth-child(6)').html(data.address);
-    $('tr.order-detail-id-' + id + ' td:nth-child(7)').html(data.approximate_price);
 }
 
 $(document).ready(function() {
@@ -67,17 +66,15 @@ $(document).ready(function() {
         let name = tr.find('td:nth-child(2)').html();
         let count = tr.find('td:nth-child(3)').html();
         let pcs = tr.find('td:nth-child(4)').html();
-        let purpose = tr.find('td:nth-child(5)').html();
+        let price_source = tr.find('td:nth-child(5)').html();
         let address = tr.find('td:nth-child(6)').html();
-        let approximate_price = tr.find('td:nth-child(7)').html();
 
         form.find('.js_order_id').val(orderId);
         form.find('.js_name').val(name);
         form.find('.js_count').val(count);
         form.find('.js_pcs').val(pcs);
-        form.find('.js_purpose').val(purpose);
+        form.find('.js_price_source').val(price_source);
         form.find('.js_address').val(address);
-        form.find('.js_approximate_price').val(approximate_price);
 
         modal.find('.modal-title').html('Edit order detail ')
         modal.modal('show');
@@ -118,9 +115,8 @@ $(document).ready(function() {
                     let name = form.find('.js_name');
                     let count = form.find('.js_count');
                     let pcs = form.find('.js_pcs');
-                    let purpose = form.find('.js_purpose');
+                    let price_source = form.find('.js_price_source');
                     let address = form.find('.js_address');
-                    let approximate_price = form.find('.js_approximate_price');
 
                     if(response.responseJSON.errors.name) {
                         name.addClass('is-invalid')
@@ -130,9 +126,9 @@ $(document).ready(function() {
                         count.addClass('is-invalid')
                         count.siblings('.invalid-feedback').html(response.responseJSON.errors.count[0])
                     }
-                    if(response.responseJSON.errors.purpose) {
-                        purpose.addClass('is-invalid')
-                        purpose.siblings('.invalid-feedback').html(response.responseJSON.errors.purpose[0])
+                    if(response.responseJSON.errors.price_source) {
+                        price_source.addClass('is-invalid')
+                        price_source.siblings('.invalid-feedback').html(response.responseJSON.errors.price_source[0])
                     }
                     if(response.responseJSON.errors.address) {
                         address.addClass('is-invalid')
@@ -141,10 +137,6 @@ $(document).ready(function() {
                     if(response.responseJSON.errors.pcs) {
                         pcs.addClass('is-invalid')
                         pcs.siblings('.invalid-feedback').html(response.responseJSON.errors.pcs[0])
-                    }
-                    if(response.responseJSON.errors.approximate_price) {
-                        approximate_price.addClass('is-invalid')
-                        approximate_price.siblings('.invalid-feedback').html(response.responseJSON.errors.approximate_price[0])
                     }
                 }
             }

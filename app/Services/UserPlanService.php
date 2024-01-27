@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Http\Resources\Admin\AdminUserInstanceResource;
+use App\Http\Resources\Admin\UserInstanceResource;
 use App\Models\Instance;
 use App\Models\UserInstance;
 use App\Models\UserPlan;
@@ -35,8 +37,8 @@ class UserPlanService
         return UserPlan::create([
             'user_id' => Auth::id(),
             'user_instance_id' => $data['user_instance_id'],
-            'stage' => ($data['stage']*1 + 1),
             'instance_id' => $data['instance_id'],
+            'stage' => ($data['stage']*1 + 1),
         ]);
     }
 

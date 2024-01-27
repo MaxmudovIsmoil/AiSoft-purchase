@@ -17,10 +17,9 @@ return new class extends Migration
             $table->text('name');
             $table->integer('count')->nullable();
             $table->string('pcs')->default('')->comment('dona, karobka, штук');
-            $table->string('purpose')->nullable()->comment('maqsad');
-            $table->string('address')->nullable();
+            $table->text('address')->nullable();
             $table->smallInteger('status')->nullable()->comment("Order Detailsni holatini bilish yangilangan yangilanmaganligi");
-            $table->string('approximate_price')->nullable()->comment('taxminiy narx');
+            $table->string('price_source')->nullable()->comment('taxminiy narx');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();

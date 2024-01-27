@@ -31,22 +31,22 @@ Route::middleware(['auth', 'isActive'])->group(function () {
 
 
     // order detail
-    Route::get('/order-detail/one/{orderId}', [OrderDetailController::class, 'getOne'])->name('order_detail.getOne');
+    Route::get('/order/get-detail/{orderId}', [OrderDetailController::class, 'getOne'])->name('order_detail.getOne');
     Route::post('/order-detail/store/', [OrderDetailController::class, 'store'])->name('order_detail.store');
     Route::post('/order-detail/update/{id}', [OrderDetailController::class, 'update']);
     Route::delete('/order-detail/delete/{id}', [OrderDetailController::class, 'destroy']);
 
     // order file
-    Route::get('/order-file/upload/{id}', [OrderFileController::class, 'getFiles'])->name('order_files');
+    Route::get('/order/get-file/{id}', [OrderFileController::class, 'getFiles'])->name('order_files');
     Route::post('/order-file/store/', [OrderFileController::class, 'store'])->name('order_file.store');
     Route::delete('/order-file/delete/{id}', [OrderFileController::class, 'destroy']);
 
     // order action
-    Route::get('/order/get-action/{orderId}', [OrderActionController::class, 'getOrderAction']);
+    Route::get('/order/get-action/{orderId}', [OrderActionController::class, 'getOrderAction'])->name('order_action');
     Route::post('/order-action/', [OrderActionController::class, 'action'])->name('order.action');
 
     // order plan
-    Route::get('/order/get-plan/{orderId}', [OrderController::class, 'getOrderPlan']);
+    Route::get('/order/get-plan/{orderId}', [OrderController::class, 'getOrderPlan'])->name('order_plan');
 
     // user plan
     Route::resource('/user-plan', UserPlanController::class)->except(['create', 'edit', 'show']);

@@ -27,7 +27,7 @@ $(function () {
     adminDetails = {
       'App Design': 'Designed UI kit & app pages.',
       'App Customization': 'Customization & Bug Fixes.',
-      'ABC Template': 'Bootstrap 4 admin template.',
+      'ABC Template': 'Bootstrap 4 Admin template.',
       'App Development': 'Native App Development.'
     },
     customerDetails = {

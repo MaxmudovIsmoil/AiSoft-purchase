@@ -40,23 +40,23 @@ $(document).on('submit', '.js_reply_form', function(e) {
         data: form.serialize(),
         dataType: "JSON",
         success: (response) => {
-            console.log('res: ', response)
+            //console.log('res: ', response)
             if (response.success === true) {
                 getOrderActions(orderId, showModal);
-                modal.find('.action-div').addClass('d-none');
+                showModal.find('.action-div').addClass('d-none');
                 $(this).find('.js_reply_comment').val('');
                 $(this).closest('#order_reply_modal').modal('hide');
             }
-            //     window.location.reload();
         },
         error: (response) => {
-            console.log('error: ', response)
-            // if(typeof response.responseJSON !== 'undefined') {
-            //     if (response.responseJSON.error === "requiredTheme") {
-            //         theme.addClass('is-invalid')
-            //         theme.siblings('.invalid-feedback').html('theme required')
-            //     }
-            // }
+            console.log('reply-error: ', response)
+            if(typeof response.responseJSON !== "undefined") {
+                if (response.responseJSON.errors.comment[0] === 'The comment field is required.') {
+                    let comment = $(this).find('.js_reply_comment');
+                    comment.addClass('is-invalid')
+                    comment.siblings('.invalid-feedback').html(response.errors.comment[0])
+                }
+            }
         }
     })
 });

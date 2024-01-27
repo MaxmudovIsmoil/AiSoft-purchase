@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="action-div">
+                <div class="action-div d-none">
                     <button class="btn btn-outline-success btn-sm js_reply_btn" data-status="2" data-text="Agreed">
                         <i class="avatar-icon" data-feather="check"></i> Reply: Agreed
                     </button>
@@ -23,22 +23,21 @@
                         <div class="order-detail-div">
                             <div class="d-flex justify-content-between">
                                 <p class="title-p">Order detail</p>
-                                <button class="btn btn-outline-primary btn-sm js_add_order_detail_btn"
+                                <button class="btn btn-outline-primary btn-sm js_add_order_detail_btn d-none"
                                 data-url="{{ route('order_detail.store') }}"
                                 ><i class="fas fa-plus"></i>&nbsp; Add</button>
                             </div>
                             <table class="table table-sm table-responsive-xl table-bordered table-striped table-hover">
                                 <thead>
-                                <tr>
-                                    <th>№</th>
-                                    <th>Name</th>
-                                    <th>Count</th>
-                                    <th>Unit</th>
-                                    <th>Purpose</th>
-                                    <th>Address</th>
-                                    <th>APPROXIMATE PRICE</th>
-                                    <th class="text-right">Action</th>
-                                </tr>
+                                    <tr>
+                                        <th>№</th>
+                                        <th>Name</th>
+                                        <th>Count</th>
+                                        <th>Unit</th>
+                                        <th>Price source</th>
+                                        <th>Address</th>
+                                        <th class="text-right js_detail_table_th d-none">Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody class="js_order_detail_tbody"></tbody>
                             </table>

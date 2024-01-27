@@ -1,32 +1,37 @@
 /**** ############################## Order detail ############################# **/
-function drawTrOrderDetails(detailData) {
-    let trs = '';
+function drawTrOrderDetails(detailData, checkBtn) {
     const href = window.location.href;
-    let updateUrl, deleteUrl;
+    let tr = ``;
+    const trs = detailData.map((data, i) => {
+        const { id, name, count, pcs, address, price_source } = data;
+        const updateUrl = `${href}-detail/update/${id}`;
+        const deleteUrl = `${href}-detail/delete/${id}`;
 
-    $.each(detailData, function(i, data) {
-        updateUrl = href + "-detail/update/"+data.id;
-        deleteUrl = href + "-detail/delete/"+data.id;
+        tr += `<tr class="js_this_tr order-detail-id-${id}" data-id="${id}">
+                    <td>${i + 1}</td>
+                    <td>${name}</td>
+                    <td>${count}</td>
+                    <td>${pcs}</td>
+                    <td>${price_source}</td>
+                    <td><a href='${address}' target="_blank">Link</a></td>`;
 
-        trs += '<tr class="js_this_tr order-detail-id-'+data.id+'" data-id="'+data.id+'">\n' +
-            '    <td>'+(i+1)+'</td>\n' +
-            '    <td>'+data.name+'</td>\n' +
-            '    <td>'+data.count+'</td>\n' +
-            '    <td>'+data.pcs+'</td>\n' +
-            '    <td>'+data.purpose+'</td>\n' +
-            '    <td>'+data.address+'</td>\n' +
-            '    <td>'+data.approximate_price+'</td>\n' +
-            '    <td class="text-right d-flex justify-content-end">\n' +
-            '        <a class="text-primary mr-1 js_edit_order_detail_btn" data-url="' + updateUrl + '"><i class="fas fa-pen"></i></a>\n' +
-            '        <a class="text-danger js_delete_order_detail_btn" data-name="'+data.name+'" data-url="'+deleteUrl+'"><i class="fas fa-trash"></i></a>\n' +
-            '    </td>\n' +
-            '</tr>';
+        if(checkBtn) {
+            tr += `<td class="text-right d-flex justify-content-end">
+                       <a class="text-primary mr-1 js_edit_order_detail_btn" data-url="${updateUrl}"><i class="fas fa-pen"></i></a>
+                       <a class="text-danger js_delete_order_detail_btn" data-name="${name}" data-url="${deleteUrl}"><i class="fas fa-trash"></i></a>
+                   </td>`;
+        }
+        tr += `</tr>`;
+
+        return tr;
     });
-    $('.js_order_detail_tbody').html(trs);
+
+    $('.js_order_detail_tbody').html(trs.join(''));
 }
 
 
-function getOrderDetails(url) {
+
+function getOrderDetails(url, checkBtn) {
     $.ajax({
         type: "GET",
         url: url,
@@ -34,11 +39,11 @@ function getOrderDetails(url) {
         success: (response) => {
             // console.log('getOrderDetails: ', response)
             if (response.success) {
-                drawTrOrderDetails(response.data);
+                drawTrOrderDetails(response.data, checkBtn);
             }
         },
         error: (response) => {
-            console.log('error: ', response);
+            console.log('order-detail-error: ', response);
         }
     })
 }
@@ -46,25 +51,29 @@ function getOrderDetails(url) {
 
 
 /**** ############################## Order file ############################## **/
+
 function drawTrOrderFiles(detailData) {
-    let trs = '';
     const href = window.location.href;
-    let deleteUrl;
+    let trs = '';
 
-    $.each(detailData, function(i, data) {
-        deleteUrl = href + "-file/delete/" + data.id;
-
-        trs += '<tr class="js_this_tr file-id-' + data.id + '" data-id="' + data.id + '">\n' +
-            '    <td>'+(i+1)+'</td>\n' +
-            '    <td>'+data.name+'</td>\n' +
-            '    <td><a href="/storage/files/'+data.file+'" target="_blank">'+data.file+'</a></td>\n' +
-            '    <td class="text-center">\n' +
-            '        <a class="text-danger js_order_file_delete_btn" data-url="' + deleteUrl + '"><i class="fas fa-trash"></i></a>\n' +
-            '    </td>\n' +
-            '</tr>';
+    detailData.forEach((data, i) => {
+        const deleteUrl = `${href}-file/delete/${data.id}`;
+        trs += `
+            <tr class="js_this_tr file-id-${data.id}" data-id="${data.id}">
+                <td>${i + 1}</td>
+                <td>${data.name}</td>
+                <td><a href="/storage/files/${data.file}" target="_blank">${data.file}</a></td>
+                <td class="text-center">
+                    <a class="text-danger js_order_file_delete_btn" data-url="${deleteUrl}">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>`;
     });
+
     $('.js_order_file_tbody').html(trs);
 }
+
 
 function getOrderFiles(url) {
     $.ajax({
@@ -86,36 +95,36 @@ function getOrderFiles(url) {
 
 
 /**** ############################## Order action ############################# **/
+
 function drawTrOrderAction(data) {
-    let tr = '';
-    $.each(data, function (i, action) {
-        tr += '<tr>\n' +
-                '<td>'+(i+1)+'</td>\n' +
-                '<td>'+action.created_at+'</td>\n' +
-                '<td>'+action.user+'</td>\n' +
-                '<td>'+action.instance+'</td>\n' +
-                '<td>'+action.status+'</td>\n' +
-                '<td>'+action.comment+'</td>\n' +
-            '</tr>';
-    });
-    $('.js_order_action_tbody').html(tr);
+    const tbody = $('.js_order_action_tbody');
+    const trArray = data.map((action, i) => `
+        <tr>
+            <td>${i + 1}</td>
+            <td>${action.created_at}</td>
+            <td>${action.user}</td>
+            <td>${action.instance}</td>
+            <td>${action.status}</td>
+            <td>${action.comment}</td>
+        </tr>`
+    );
+    tbody.html(trArray.join(''));
 }
 
-function getOrderActions(orderId,) {
-    let url = window.location.href + "/get-action/" + orderId;
 
+function getOrderActions(url) {
     $.ajax({
         type: "GET",
         url: url,
         dataType: "JSON",
         success: (response) => {
-            // console.log("response: ", response);
+            console.log("getOrderAction: ", response);
             if (response.success) {
                 drawTrOrderAction(response.data);
             }
         },
         error: (response) => {
-            console.log('error: ', response);
+            console.log('order-action-error: ', response);
         }
     })
 }
@@ -123,25 +132,20 @@ function getOrderActions(orderId,) {
 
 
 /**** ############################## Order plan ############################# **/
+
 function drawOrderPlanTr(data, modal) {
-    let tr = '';
-    $.each(data, function(i, plan) {
-        let user = '';
-        $.each(plan.users, function(j, userOne) {
-            user += userOne.name + ', ';
-        });
-        tr += '<tr>\n' +
-                '<td>' + plan.instance + '</td>\n' +
-                '<td>' + plan.stage + '</td>\n' +
-                '<td>' + user + '</td>\n' +
-            '</tr>';
-    });
+    let tr = data.map(plan => {
+        let users = plan.users.map(userOne => userOne.name).join(', ');
+        return `<tr>
+                    <td>${plan.instance}</td>
+                    <td>${plan.stage}</td>
+                    <td>${users}</td>
+                </tr>`;
+    }).join('\n');
 
     modal.find('.js_order_plan_tbody').html(tr);
 }
-function getOrderPlan(orderId, modal) {
-    let url = window.location.href + "/get-plan/" + orderId;
-
+function getOrderPlan(url, modal) {
     $.ajax({
         type: "GET",
         url: url,
@@ -154,7 +158,7 @@ function getOrderPlan(orderId, modal) {
             }
         },
         error: (response) => {
-            console.log('error: ', response);
+            console.log('order-plan-error: ', response);
         }
     })
 }
@@ -164,31 +168,38 @@ function getOrderPlan(orderId, modal) {
 $(document).ready(function () {
 
     var showModal = $(document).find('#order_show_modal');
-    var deleteModal = $(document).find('#deleteModal');
 
     $('.js_show_btn').on('click', function (e) {
         e.preventDefault();
         let this_tr = $(this).closest('.js_this_tr');
         let orderId = this_tr.data('orderId');
         showModal.attr('data-order-id', orderId);
-
+        let checkBtn = 0;
         if (this_tr.hasClass('js_action_btn_check')) {
             showModal.find('.action-div').removeClass('d-none');
+            showModal.find('.js_detail_table_th').removeClass('d-none');
+            showModal.find('.js_add_order_detail_btn').removeClass('d-none');
+            checkBtn = 1;
         }
         else {
             showModal.find('.action-div').addClass('d-none');
+            showModal.find('.js_detail_table_th').addClass('d-none');
+            showModal.find('.js_add_order_detail_btn').addClass('d-none');
         }
         showModal.find('.modal-title').html('Show order');
 
-        let orderDetailUrl = $(this).data('orderDetailUrl');
-        getOrderDetails(orderDetailUrl);
+        let detailUrl = $(this).data('detailUrl');
+        getOrderDetails(detailUrl, checkBtn);
 
-        let fileUrl = $(this).data('orderFileUrl');
+        let fileUrl = $(this).data('fileUrl');
         getOrderFiles(fileUrl);
 
-        getOrderActions(orderId);
+        let actionUrl = $(this).data('actionUrl')
+        getOrderActions(actionUrl);
 
-        getOrderPlan(orderId, showModal);
+        let planUrl = $(this).data('planUrl')
+        getOrderPlan(planUrl, showModal);
+
     });
 
 
@@ -196,3 +207,7 @@ $(document).ready(function () {
 
 /**** create order detail **/
 
+$('#order_show_modal button[data-dismiss="modal"]').click(function () {
+
+    window.location.reload();
+})

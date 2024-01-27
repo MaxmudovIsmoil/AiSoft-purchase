@@ -8,9 +8,8 @@ $(document).on('click', '.js_add_tr_btn', function(e) {
                         '<td><input type="text" name="name[]" class="form-control js_od_name"/></td>\n' +
                         '<td><input type="number" name="count[]" class="form-control js_od_count"/></td>\n' +
                         '<td><input type="text" name="pcs[]" class="form-control js_od_pcs"/></td>\n' +
-                        '<td><input type="text" name="purpose[]" class="form-control"/></td>\n' +
+                        '<td><input type="text" name="price_source[]" class="form-control"/></td>\n' +
                         '<td><input type="text" name="address[]" class="form-control"/></td>\n' +
-                        '<td><input type="text" name="approximate_price[]" class="form-control"/></td>\n' +
                     '</tr>'+
                 '</tr>';
 
@@ -49,8 +48,7 @@ var addForm = addModal.find('.js_add_form');
 
 $('.js_add_btn').on('click', function (e) {
     e.preventDefault();
-    addModal.find('.modal-title').html('Add Order')
-    // form_clear(addForm);
+    addModal.find('.modal-title').html('Add Order');
     addModal.modal('show');
 });
 
@@ -65,12 +63,12 @@ addForm.on('submit', function (e) {
         contentType: false,
         processData: false,
         success: (response) => {
-            console.log('res: ', response)
+            // console.log('res: ', response)
             if (response.success === true)
                 window.location.reload();
         },
         error: (response) => {
-            console.log('error: ', response)
+            console.log('order-add-error: ', response)
             if(typeof response.responseJSON !== 'undefined') {
                 if (response.responseJSON.error === "requiredTheme") {
                     theme.addClass('is-invalid')

@@ -85,6 +85,10 @@
     background: rgba(234, 84, 85, 0) !important;
 }
 
+.bg-light-warning .order-action-process {
+    background: #423d45 !important;
+}
+
 .modal .modal-footer {
     padding-top:  5px;
     padding-bottom:  5px;

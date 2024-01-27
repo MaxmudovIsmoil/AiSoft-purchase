@@ -26,9 +26,8 @@ class OrderDetailRequest extends FormRequest
             'name' => 'required',
             'count' => 'required',
             'pcs' => 'required',
+            'price_source' => 'required',
             'address' => 'required',
-            'purpose' => 'required',
-            'approximate_price' => 'required',
         ];
     }
 }

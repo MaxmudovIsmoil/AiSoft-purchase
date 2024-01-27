@@ -20,10 +20,21 @@ class OrderController extends Controller
 
         $userInstanceIds = $this->service->userInstanceIds();
 
-        $orders = $this->service->getOrder();
+        $orderAll = $this->service->getOrder();
+        $orderAccepted = $this->service->getOrder(2);
+        $orderGoBack = $this->service->getOrder(3);
+        $orderCompleted = $this->service->getOrder(5);
+
 
         return view('order.index',
-            compact('user_plans', 'orders', 'userInstanceIds')
+            compact(
+                'user_plans',
+                'orderAll',
+                'orderAccepted',
+                'orderGoBack',
+                'orderCompleted',
+                'userInstanceIds'
+            )
         );
     }
 

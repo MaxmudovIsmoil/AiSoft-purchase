@@ -53,6 +53,15 @@ $('#add_order_modal button[data-dismiss="modal"]').click(function () {
 
 });
 
+$('#order_reply_modal button[data-dismiss="modal"]').click(function () {
+    let comment = $('.js_reply_comment')
+    if(comment) {
+        comment.val('')
+        comment.removeClass('is-invalid')
+        comment.siblings('.invalid-feedback').addClass('valid-feedback')
+    }
+});
+
 $('#add_order_detail_modal button[data-dismiss="modal"]').click(function () {
 
     let form = $('.js_add_order_detail_form')
@@ -64,12 +73,6 @@ $('#add_order_detail_modal button[data-dismiss="modal"]').click(function () {
         name.siblings('.invalid-feedback').addClass('valid-feedback')
     }
 
-    let purpose = form.find('.js_purpose')
-    if(purpose) {
-        purpose.val('')
-        purpose.removeClass('is-invalid')
-        purpose.siblings('.invalid-feedback').addClass('valid-feedback')
-    }
 
     let count = form.find('.js_count')
     if(count) {
@@ -164,12 +167,13 @@ $('.js_address').on('input', function () {
     $(this).siblings('.invalid-feedback').addClass('valid-feedback')
 });
 
-$('.js_purpose').on('input', function () {
+$('.js_approximate_price').on('input', function () {
     $(this).removeClass('is-invalid')
     $(this).siblings('.invalid-feedback').addClass('valid-feedback')
 });
 
-$('.js_approximate_price').on('input', function () {
+
+$('.js_reply_comment').on('input', function () {
     $(this).removeClass('is-invalid')
     $(this).siblings('.invalid-feedback').addClass('valid-feedback')
 });

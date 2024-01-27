@@ -7,4 +7,6 @@ return [
     'Users' => 'Users',
     'Roles' => 'Roles',
     'Permission' => 'Permission',
+    'Category' => 'Category',
+    'Create Order' => "Create order",
 ];

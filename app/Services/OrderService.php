@@ -33,13 +33,14 @@ class OrderService
         return $instance_ids;
     }
 
-    public function getOrder()
+    public function getOrder(int $status = null)
     {
         $userInstanceIds = $this->userInstanceIds();
 
-        $orders = Order::select('o.id as order_id', 'o.user_id', 'o.instance_id', 'o.theme', 'o.stage_count',
-            'o.status', 'o.current_stage', 'o.current_instance_id', 'up.instance_id as up_instance_id',
-            'up.stage as up_stage', 'up.user_instance_id as up_user_instance_id')
+        $orderQuery = Order::select('o.id as order_id', 'o.user_id', 'o.instance_id', 'o.theme',
+            'o.stage_count', 'o.status', 'o.current_stage', 'o.current_instance_id',
+            'up.instance_id as up_instance_id', 'up.stage as up_stage',
+            'up.user_instance_id as up_user_instance_id')
             ->from('orders as o')
             ->leftJoin('user_plans as up', function ($join) {
                 $join->on('up.user_instance_id', '=', 'o.instance_id')
@@ -47,19 +48,26 @@ class OrderService
             })
             ->with(['user', 'instance', 'currentInstance'])
             ->where(function ($query) use ($userInstanceIds) {
-                $query->whereIn('up.instance_id', $userInstanceIds)
-                    ->where('up.stage', '<=', DB::raw('o.current_stage'));
-            })
-            ->whereIn('up.user_instance_id', $userInstanceIds, 'or')
-            ->groupBy('o.id')
-            ->orderBy('o.id', 'DESC')
-            ->orderBy('o.current_stage', 'ASC')
-//            ->get();
-            ->paginate(20);
+                $query->where(function ($query) use ($userInstanceIds) {
+                    $query->whereIn('up.instance_id', $userInstanceIds)
+                        ->where('up.stage', '<=', DB::raw('o.current_stage'));
+                })
+                ->whereIn('up.user_instance_id', $userInstanceIds, 'or');
+            });
 
-//        dd($orders);
+            if(!is_null($status)){
+                $orderQuery = $orderQuery->where(['o.status' => $status]);
+            }
+
+            $orders = $orderQuery->groupBy('o.id')
+                ->orderBy('o.id', 'DESC')
+                ->orderBy('o.current_stage', 'ASC')
+                ->paginate(20);
+
+
         return $orders;
     }
+
 
 
     public function create(object $data): int

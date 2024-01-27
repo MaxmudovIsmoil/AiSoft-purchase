@@ -2,9 +2,6 @@
 
 namespace App\Enums;
 
-use http\Encoding\Stream\Inflate;
-use function Laravel\Prompts\select;
-
 enum OrderStatus: int
 {
     case PROCESSING = 1;
@@ -48,7 +45,7 @@ enum OrderStatus: int
     {
         return match ($this) {
             self::PROCESSING => 'In Processing',
-            self::ACCEPTED => 'In Accepted',
+            self::ACCEPTED => 'Accepted',
             self::GO_BACK => 'Go back',
             self::DECLINED => 'Declined',
             self::COMPLETED => 'Competed',

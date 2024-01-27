@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone')->nullable();
-            $table->enum('rule', [1, 0])->default(0)->comment('1-admin,0-user');
+            $table->enum('rule', [1, 0])->default(0)->comment('1-Admin,0-user');
             $table->string('username')->unique();
             $table->string('password');
             $table->string('photo')->nullable();
@@ -35,8 +35,8 @@ return new class extends Migration
             [
                 "name" => 'Administrator',
                 "phone" => '911234567',
-                "username" => 'admin',
-                "photo" => 'admin.png',
+                "username" => 'Admin',
+                "photo" => 'Admin.png',
                 "rule" => 1,
                 "password" => Hash::make(123),
             ],

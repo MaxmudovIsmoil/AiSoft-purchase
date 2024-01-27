@@ -120,7 +120,6 @@ class UserService
     {
         $user = User::findOrFail($id);
         $filePath = storage_path('upload/photos/'.$user->photo);
-        Log::info($filePath);
         if (File::exists($filePath))
             File::delete($filePath);
 
@@ -162,11 +161,10 @@ class UserService
 
     public function file_upload(object $photo): string
     {
-        $photoName = '';
         if($photo) {
             $photoName = time() . '.' . $photo->getClientOriginalExtension();
             $photo->storeAs('upload/photos', $photoName, 'public');
         }
-        return $photoName;
+        return $photoName ?? "";
     }
 }

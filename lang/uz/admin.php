@@ -7,4 +7,5 @@ return [
     'Users' => 'Users',
     'Roles' => 'Roles',
     'Permission' => 'Permission',
+    "Create Order" => "Buyurtma qo'shish",
 ];

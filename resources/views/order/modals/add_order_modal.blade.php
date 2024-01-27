@@ -51,9 +51,8 @@
                                         <th>Name</th>
                                         <th>Count</th>
                                         <th>Pcs</th>
-                                        <th>Purpose</th>
+                                        <th>Price source</th>
                                         <th>Address</th>
-                                        <th>Approximate price</th>
                                     </tr>
                                 </thead>
                                 <tbody class="js_tbody">
@@ -62,18 +61,8 @@
                                         <td><input type="text" name="name[]" class="form-control js_od_name"/></td>
                                         <td><input type="number" name="count[]" class="form-control js_od_pcs"/></td>
                                         <td><input type="text" name="pcs[]" class="form-control"/></td>
-                                        <td><input type="text" name="purpose[]" class="form-control"/></td>
+                                        <td><input type="text" name="price_source[]" class="form-control"/></td>
                                         <td><input type="text" name="address[]" class="form-control"/></td>
-                                        <td><input type="text" name="approximate_price[]" class="form-control"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><input type="text" name="name[]" class="form-control js_od_name"/></td>
-                                        <td><input type="number" name="count[]" class="form-control js_od_count"/></td>
-                                        <td><input type="text" name="pcs[]" class="form-control js_od_pcs"/></td>
-                                        <td><input type="text" name="purpose[]" class="form-control"/></td>
-                                        <td><input type="text" name="address[]" class="form-control"/></td>
-                                        <td><input type="text" name="approximate_price[]" class="form-control"/></td>
                                     </tr>
                                 </tbody>
                             </table>

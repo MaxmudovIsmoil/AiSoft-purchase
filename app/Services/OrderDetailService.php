@@ -3,14 +3,16 @@
 namespace App\Services;
 
 
+use App\Models\Order;
 use App\Models\OrderDetail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class OrderDetailService
 {
     public function getOne(int $orderId)
     {
-        return OrderDetail::where(['order_id' => $orderId])
-            ->get();
+        return OrderDetail::where(['order_id' => $orderId])->get();
     }
 
     public function store(array $data): array
@@ -20,10 +22,9 @@ class OrderDetailService
             'name' => $data['name'],
             'count' => $data['count'],
             'pcs' => $data['pcs'],
-            'purpose' => $data['purpose'],
+            'price_source' => $data['price_source'],
             'address' => $data['address'],
             'status' => OrderDetail::STATUS_UPDATE,
-            'approximate_price' => $data['approximate_price'],
         ]);
         $data['id'] = $id;
         return $data;
@@ -36,10 +37,9 @@ class OrderDetailService
             'name' => $data['name'],
             'count' => $data['count'],
             'pcs' => $data['pcs'],
-            'purpose' => $data['purpose'],
+            'price_source' => $data['price_source'],
             'address' => $data['address'],
             'status' => OrderDetail::STATUS_UPDATE,
-            'approximate_price' => $data['approximate_price'],
         ]);
         $orderDetail->save();
         $data['id'] = $id;

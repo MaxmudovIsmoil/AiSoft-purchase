@@ -821,7 +821,7 @@
     },
 
     /**
-     * Ensure an admin submenu is within the visual viewport.
+     * Ensure an Admin submenu is within the visual viewport.
      * @param {jQuery} $menuItem The parent menu item containing the submenu.
      */
 

@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label for="comment2">Comment:</label>
                         <textarea class="form-control js_reply_comment" id="comment2" name="comment" rows="2"></textarea>
-                        <div class="invalid-feedback">name fail!</div>
+                        <div class="invalid-feedback">The comment field is required</div>
                     </div>
                 </div>
                 <div class="modal-footer">

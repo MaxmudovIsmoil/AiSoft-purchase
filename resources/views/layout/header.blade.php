@@ -6,30 +6,30 @@
             <ul class="nav navbar-nav d-xl-none">
                 <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon" data-feather="menu"></i></a></li>
             </ul>
-            <ul class="nav navbar-nav bookmark-icons">
-                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon" data-feather="mail"></i></a></li>
-                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Chat"><i class="ficon" data-feather="message-square"></i></a></li>
-                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon" data-feather="calendar"></i></a></li>
-                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Todo"><i class="ficon" data-feather="check-square"></i></a></li>
-            </ul>
+{{--            <ul class="nav navbar-nav bookmark-icons">--}}
+{{--                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon" data-feather="mail"></i></a></li>--}}
+{{--                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Chat"><i class="ficon" data-feather="message-square"></i></a></li>--}}
+{{--                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon" data-feather="calendar"></i></a></li>--}}
+{{--                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Todo"><i class="ficon" data-feather="check-square"></i></a></li>--}}
+{{--            </ul>--}}
         </div>
         <ul class="nav navbar-nav align-items-center ml-auto">
-            <li class="nav-item dropdown dropdown-language">
-                <a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="flag-icon flag-icon-ru"></i><span class="selected-language">Russian</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag">
-                    <a class="dropdown-item" href="javascript:void(0);" data-language="ru">
-                        <i class="flag-icon flag-icon-ru"></i> Russian
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0);" data-language="en">
-                        <i class="flag-icon flag-icon-us"></i> English
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0);" data-language="ru">
-                        <i class="flag-icon flag-icon-uz"></i> Uzbek
-                    </a>
-                </div>
-            </li>
+{{--            <li class="nav-item dropdown dropdown-language">--}}
+{{--                <a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                    <i class="flag-icon flag-icon-ru"></i><span class="selected-language">Russian</span>--}}
+{{--                </a>--}}
+{{--                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag">--}}
+{{--                    <a class="dropdown-item" href="javascript:void(0);" data-language="ru">--}}
+{{--                        <i class="flag-icon flag-icon-ru"></i> Russian--}}
+{{--                    </a>--}}
+{{--                    <a class="dropdown-item" href="javascript:void(0);" data-language="en">--}}
+{{--                        <i class="flag-icon flag-icon-us"></i> English--}}
+{{--                    </a>--}}
+{{--                    <a class="dropdown-item" href="javascript:void(0);" data-language="ru">--}}
+{{--                        <i class="flag-icon flag-icon-uz"></i> Uzbek--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--            </li>--}}
             <li class="nav-item d-none d-lg-block">
                 <a class="nav-link nav-link-style1" id="theme-toggle">
                     <i id="theme-icon" class="ficon fas fa-sun"></i>
@@ -112,28 +112,28 @@
                         <i data-feather="check-square"></i> User Plan
                     </a>
                 </li>
-                <li class="nav-item @if (Request::segment(1) === 'user-document') active @endif">
-                    <a class="d-flex align-items-center" href="#">
-                        <i data-feather="file"></i> User Document
-                    </a>
-                </li>
+{{--                <li class="nav-item @if (Request::segment(1) === 'user-document') active @endif">--}}
+{{--                    <a class="d-flex align-items-center" href="#">--}}
+{{--                        <i data-feather="file"></i> User Document--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             @endif
             @if (Auth::user()->rule == 1)
-                <li class="nav-item @if (Request::segment(1) === 'instance') active @endif">
+                <li class="nav-item @if (Request::segment(2) === 'instance') active @endif">
                     <a class="d-flex align-items-center" href="{{ route('instance.index') }}">
                         <i data-feather="list"></i> Instance
                     </a>
                 </li>
-                <li class="nav-item @if (Request::segment(1) === 'user') active @endif">
+                <li class="nav-item @if (Request::segment(2) === 'user') active @endif">
                     <a class="d-flex align-items-center" href="{{ route('user.index') }}">
                         <i data-feather="user"></i> User
                     </a>
                 </li>
-                <li class="nav-item @if (Request::segment(1) === 'document') active @endif">
-                    <a class="d-flex align-items-center" href="#">
-                        <i data-feather="file"></i> Document
-                    </a>
-                </li>
+{{--                <li class="nav-item @if (Request::segment(2) === 'document') active @endif">--}}
+{{--                    <a class="d-flex align-items-center" href="#">--}}
+{{--                        <i data-feather="file"></i> Document--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             @endif
         </ul>
     </div>

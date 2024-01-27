@@ -14,35 +14,30 @@
                 <input type="hidden" name="order_id" class="js_order_id" value="">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
                             <label>Name <i class="text-danger">*</i></label>
                             <input type="text" name="name" class="form-control js_name" />
                             <div class="invalid-feedback">The name field is required.</div>
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
                             <label>Count <i class="text-danger">*</i></label>
                             <input type="number" name="count" class="form-control js_count" />
                             <div class="invalid-feedback">The count field is required.</div>
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
                             <label>Pcs <i class="text-danger">*</i></label>
                             <input type="text" name="pcs" class="form-control js_pcs" />
                             <div class="invalid-feedback">The pcs field is required.</div>
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label>Purpose <i class="text-danger">*</i></label>
-                            <input type="text" name="purpose" class="form-control js_purpose" />
-                            <div class="invalid-feedback">The purpose field is required.</div>
+                        <div class="col-md-4 form-group">
+                            <label>Price source <i class="text-danger">*</i></label>
+                            <input type="text" name="price_source" class="form-control js_price_source" />
+                            <div class="invalid-feedback">The price source field is required.</div>
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address <i class="text-danger">*</i></label>
+                        <div class="col-md-8 form-group">
+                            <label>Address (link) <i class="text-danger">*</i></label>
                             <input type="text" name="address" class="form-control js_address" />
                             <div class="invalid-feedback">The address field is required.</div>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Approximate price <i class="text-danger">*</i></label>
-                            <input type="text" name="approximate_price" class="form-control js_approximate_price" />
-                            <div class="invalid-feedback">The approximate price field is required.</div>
                         </div>
                     </div>
                 </div>

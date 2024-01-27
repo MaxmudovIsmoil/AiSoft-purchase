@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 
 class UserPlanResource extends JsonResource
 {
@@ -18,7 +19,7 @@ class UserPlanResource extends JsonResource
             'id' => $this->id,
             "instance" => $this->instance->name_ru,
             "stage" => $this->stage,
-            "users" => UserInstanceResource::collection($this->userInstance),
+            "users" => UserInstanceResource::collection($this->userInstance)
         ];
     }
 }

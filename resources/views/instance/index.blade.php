@@ -9,7 +9,7 @@
             <div class="form-modal-ex add-bnt">
                 <!-- add btn click show modal -->
                 <a href="javascript:void(0);" data-store_url="{{ route('instance.store') }}" class="btn btn-outline-primary js_add_btn">
-                    <i data-feather="plus"></i>&nbsp; Add
+                    <i data-feather="plus"></i>&nbsp; {{__("admin.Add")}}
                 </a>
             </div>
             <!-- Multilingual -->
@@ -22,9 +22,9 @@
                                     <thead>
                                         <tr>
                                             <th>№</th>
-                                            <th>Name</th>
-                                            <th>Status</th>
-                                            <th class="text-right">Action</th>
+                                            <th>{{__("admin.Name")}}</th>
+                                            <th>{{__("admin.Status")}}</th>
+                                            <th class="text-right">{{__("admin.Action")}}</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -89,7 +89,7 @@
             });
 
             $('.js_add_btn').on('click', function () {
-                modal.find('.modal-title').html('Add Instance')
+                modal.find('.modal-title').html('{{__("admin.Add Instance")}}')
                 form_clear(form);
                 let url = $(this).data('store_url');
                 form.attr('action', url);
@@ -98,7 +98,7 @@
 
             $(document).on('click', '.js_edit_btn', function(e) {
                 e.preventDefault();
-                modal.find('.modal-title').html('Edit Instance')
+                modal.find('.modal-title').html('{{__("admin.Edit Instance")}}')
                 let status = form.find('.js_status option')
                 let url = $(this).data('one_data_url')
                 let update_url = $(this).data('update_url')

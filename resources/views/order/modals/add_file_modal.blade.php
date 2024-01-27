@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Order file</h4>
+                <h4 class="modal-title">@lang("admin.Order file")</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,7 +13,7 @@
                 <div class="modal-body">
                     <input type="hidden" name="order_id" class="js_order_id" value="1">
                     <div class="form-group">
-                        <label for="">File</label>
+                        <label for="">@lang("admin.File")</label>
                         <div class="custom-file">
                             <label for="order_file" class="custom-file-label">{{ __('Прикрепленные файлы') }}</label>
                             <input type="file" id="order_file" class="custom-file-input" name="file" />
@@ -21,8 +21,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">@lang("admin.Save")</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang("admin.Close")</button>
                 </div>
             </form>
         </div>

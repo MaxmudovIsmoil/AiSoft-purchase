@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+__{{(admin."")}}<!DOCTYPE html>
 <html class="loading dark-layout" lang="en" data-layout="dark-layout" data-textdirection="ltr">
 <!-- BEGIN: Head-->
 
@@ -89,13 +89,13 @@
                             <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="login" class="form-label">Login</label>
+                                    <label for="login" class="form-label">{{__("admin.Login")}}</label>
                                     <input type="text" class="form-control" id="login" name="username" aria-describedby="login" tabindex="1" autofocus />
                                 </div>
 
                                 <div class="form-group">
                                     <div class="d-flex justify-content-between">
-                                        <label for="login-password">Password</label>
+                                        <label for="login-password">{{__("admin.Password")}}</label>
                                     </div>
                                     <div class="input-group input-group-merge form-password-toggle">
                                         <input type="password" class="form-control form-control-merge" id="login-password" name="password" tabindex="2" />
@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
 
-                                <button class="btn btn-primary btn-block mt-2" tabindex="4">Sign in</button>
+                                <button class="btn btn-primary btn-block mt-2" tabindex="4">{{__("admin.Sign in")}}</button>
                             </form>
 
                         </div>

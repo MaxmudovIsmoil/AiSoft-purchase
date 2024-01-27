@@ -1,4 +1,4 @@
-@extends('layout.app')
+__{{(admin."")}}@extends('layout.app')
 
 @section('content')
     <div class="content-overlay"></div>
@@ -26,9 +26,9 @@
                                            <thead>
                                                <tr>
                                                    <th width="2%">№</th>
-                                                   <th width="40%">Name</th>
-                                                   <th>User</th>
-                                                   <th width="15%" class="text-right">Action</th>
+                                                   <th width="40%">{{__("admin.Name")}}</th>
+                                                   <th>{{__("admin.User")}}</th>
+                                                   <th width="15%" class="text-right">{{__("admin.Action")}}</th>
                                                </tr>
                                            </thead>
                                            <tbody>

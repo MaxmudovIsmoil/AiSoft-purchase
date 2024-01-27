@@ -13,7 +13,7 @@
             <div class="form-modal-ex add-bnt">
                 <!-- add btn click show modal -->
                 <a href="javascript:void(0);" data-store_url="{{ route('user.store') }}" class="btn btn-outline-primary js_add_btn">
-                    <i data-feather="user-plus"></i>&nbsp; Add
+                    <i data-feather="user-plus"></i>&nbsp; {{__("admin.Add")}}
                 </a>
             </div>
             <!-- Multilingual -->
@@ -26,13 +26,13 @@
                                     <thead>
                                     <tr>
                                         <th>№</th>
-                                        <th>Photo</th>
-                                        <th>Instance</th>
-                                        <th>Name</th>
-                                        <th>Phone</th>
-                                        <th>Username</th>
-                                        <th>Status</th>
-                                        <th class="text-right">Action</th>
+                                        <th>{{__("admin.Photo")}}</th>
+                                        <th>{{__("admin.Instance")}}</th>
+                                        <th>{{__("admin.Name")}}</th>
+                                        <th>{{__("admin.Phone")}}</th>
+                                        <th>{{__("admin.Username")}}</th>
+                                        <th>{{__("admin.Status")}}</th>
+                                        <th class="text-right">{{__("admin.Action")}}</th>
                                     </tr>
                                     </thead>
                                     <tbody></tbody>

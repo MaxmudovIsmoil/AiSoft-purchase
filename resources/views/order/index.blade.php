@@ -7,25 +7,19 @@
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
         <div class="content-header mb-1 d-flex justify-content-between">
-{{--            <div>--}}
-{{--                <div class="badge badge-light-success" role="button">All</div>--}}
-{{--                <div class="badge badge-light-secondary" role="button">Accepted</div>--}}
-{{--                <div class="badge badge-light-secondary" role="button">Declined</div>--}}
-{{--                <div class="badge badge-light-secondary" role="button">Completed</div>--}}
-{{--            </div>--}}
 
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#orderAll" aria-controls="orderAll" role="tab" aria-selected="true">All</a>
+                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#orderAll" aria-controls="orderAll" role="tab" aria-selected="true">{{__("admin.All")}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="accepted-tab" data-toggle="tab" href="#orderAccepted" aria-controls="orderAccepted" role="tab" aria-selected="false">Accepted</a>
+                    <a class="nav-link" id="accepted-tab" data-toggle="tab" href="#orderAccepted" aria-controls="orderAccepted" role="tab" aria-selected="false">{{__("admin.Accepted")}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="GoBack-tab" data-toggle="tab" href="#orderGoBack" aria-controls="orderGoBack" role="tab" aria-selected="true">Declined</a>
+                    <a class="nav-link" id="GoBack-tab" data-toggle="tab" href="#orderGoBack" aria-controls="orderGoBack" role="tab" aria-selected="true">{{__("admin.Declined")}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#orderCompleted" aria-controls="orderCompleted" role="tab" aria-selected="false">Completed</a>
+                    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#orderCompleted" aria-controls="orderCompleted" role="tab" aria-selected="false">{{__("admin.Completed")}}</a>
                 </li>
             </ul>
 
@@ -45,12 +39,12 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th width="2%">№</th>
-                                            <th>Author</th>
-                                            <th>Theme</th>
-                                            <th>Current Instance</th>
-                                            <th>Process</th>
-                                            <th>Status</th>
-                                            <th class="text-center" width="10%">Action</th>
+                                            <th>{{__("admin.Author")}}</th>
+                                            <th>{{__("admin.Theme")}}</th>
+                                            <th>{{__("admin.Current Instance")}}</th>
+                                            <th>{{__("admin.Process")}}</th>
+                                            <th>{{__("admin.Status")}}</th>
+                                            <th class="text-center" width="10%">{{__("admin.Action")}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -135,12 +129,12 @@
                                     <thead class="thead-light">
                                     <tr>
                                         <th width="2%">№</th>
-                                        <th>Author</th>
-                                        <th>Theme</th>
-                                        <th>Current Instance</th>
-                                        <th>Process</th>
-                                        <th>Status</th>
-                                        <th class="text-center" width="10%">Action</th>
+                                        <th>{{__("admin.Author")}}</th>
+                                        <th>{{__("admin.Theme")}}</th>
+                                        <th>{{__("admin.Current Instance")}}</th>
+                                        <th>{{__("admin.Process")}}</th>
+                                        <th>{{__("admin.Status")}}</th>
+                                        <th class="text-center" width="10%">{{__("admin.Action")}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -225,12 +219,12 @@
                                     <thead class="thead-light">
                                     <tr>
                                         <th width="2%">№</th>
-                                        <th>Author</th>
-                                        <th>Theme</th>
-                                        <th>Current Instance</th>
-                                        <th>Process</th>
-                                        <th>Status</th>
-                                        <th class="text-center" width="10%">Action</th>
+                                        <th>{{__("admin.Author")}}</th>
+                                        <th>{{__("admin.Theme")}}</th>
+                                        <th>{{__("admin.Current Instance")}}</th>
+                                        <th>{{__("admin.Process")}}</th>
+                                        <th>{{__("admin.Status")}}</th>
+                                        <th class="text-center" width="10%">{{__("admin.Action")}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -315,12 +309,12 @@
                                     <thead class="thead-light">
                                     <tr>
                                         <th width="2%">№</th>
-                                        <th>Author</th>
-                                        <th>Theme</th>
-                                        <th>Current Instance</th>
-                                        <th>Process</th>
-                                        <th>Status</th>
-                                        <th class="text-center" width="10%">Action</th>
+                                        <th>{{__("admin.Author")}}</th>
+                                        <th>{{__("admin.Theme")}}</th>
+                                        <th>{{__("admin.Current Instance")}}</th>
+                                        <th>{{__("admin.Process")}}</th>
+                                        <th>{{__("admin.Status")}}</th>
+                                        <th class="text-center" width="10%">{{__("admin.Action")}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>

@@ -103,13 +103,13 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class="nav-item @if (Request::segment(1) === 'order' || Request::segment(1) == '') active @endif">
                 <a class="d-flex align-items-center" href="{{ route('order.index') }}">
-                    <i data-feather="home"></i> Orders
+                    <i data-feather="home"></i> {{__("admin.Orders")}}
                 </a>
             </li>
             @if(\Illuminate\Support\Facades\Auth::user()->rule === "0")
                 <li class="nav-item @if (Request::segment(1) === 'user-plan') active @endif">
                     <a class="d-flex align-items-center" href="{{ route('user-plan.index') }}">
-                        <i data-feather="check-square"></i> User Plan
+                        <i data-feather="check-square"></i> {{__("admin.User Plan")}}
                     </a>
                 </li>
 {{--                <li class="nav-item @if (Request::segment(1) === 'user-document') active @endif">--}}
@@ -121,12 +121,12 @@
             @if (Auth::user()->rule == 1)
                 <li class="nav-item @if (Request::segment(2) === 'instance') active @endif">
                     <a class="d-flex align-items-center" href="{{ route('instance.index') }}">
-                        <i data-feather="list"></i> Instance
+                        <i data-feather="list"></i> {{__("admin.Instance")}}
                     </a>
                 </li>
                 <li class="nav-item @if (Request::segment(2) === 'user') active @endif">
                     <a class="d-flex align-items-center" href="{{ route('user.index') }}">
-                        <i data-feather="user"></i> User
+                        <i data-feather="user"></i> {{__("admin.User")}}
                     </a>
                 </li>
 {{--                <li class="nav-item @if (Request::segment(2) === 'document') active @endif">--}}

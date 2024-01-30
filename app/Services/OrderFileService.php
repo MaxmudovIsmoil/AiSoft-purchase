@@ -7,7 +7,6 @@ use App\Models\OrderFile;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 
 class OrderFileService {
 
@@ -53,7 +52,7 @@ class OrderFileService {
             $orderFile = OrderFile::findOrfail($id);
 
             $filePath = storage_path('upload/files/'.$orderFile->file);
-            Log::info($filePath);
+
             if (File::exists($filePath))
                 File::delete($filePath);
 

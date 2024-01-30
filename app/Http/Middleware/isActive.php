@@ -17,7 +17,7 @@ class isActive
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::user()->status !== '1')
-            return redirect()->route('login')->with('message', 'Вы заблокированы. Обратитесь к администратору для входа в систему');
+            return redirect()->route('login')->with('message', trans('admin.You are blocked. Contact your administrator to login'));
 
         return $next($request);
     }

@@ -19,6 +19,8 @@ return [
     "Process" => "Процесс",
     "Status" => "Положение дел",
     "Action" => "Действие",
+    "In Processing" => "В процессе",
+    "Go back" => "Возвращаться",
     "All" => "Все",
     "Accepted" => "Принял",
     "Declined" => "Отклоненный",
@@ -69,4 +71,6 @@ return [
     "Add user" => "Добавить пользователя",
     "Edit user" => "Изменить пользователя",
     'instance_fail' => 'Поле Отделы является обязательным.',
+    "Login or password error" => "Ошибка логина или пароля",
+    "You are blocked. Contact your administrator to login" => "Вы заблокированы. Обратитесь к администратору для входа в систему"
 ];

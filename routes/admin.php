@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\admin\InstanceController;
-use App\Http\Controllers\admin\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\InstanceController;
+use App\Http\Controllers\Admin\OrderController;
 
 
 Route::resource('user', UserController::class)->except(['create', 'edit', 'show']);
@@ -13,3 +14,4 @@ Route::resource('instance', InstanceController::class)->except(['create', 'edit'
 Route::get('/instances', [InstanceController::class, 'getInstances'])->name('getInstances');
 Route::get('/instance/one/{id}', [InstanceController::class, 'getOne'])->name('instance.getOne');
 
+Route::get('/orders', [OrderController::class, 'getOrders'])->name('admin.orders');

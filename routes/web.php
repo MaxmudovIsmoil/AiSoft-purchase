@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\OrderActionController;

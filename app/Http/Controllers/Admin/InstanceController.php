@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InstanceRequest;
-use App\Services\admin\InstanceService;
+use App\Services\Admin\InstanceService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\App;
+
 
 class InstanceController extends Controller
 {

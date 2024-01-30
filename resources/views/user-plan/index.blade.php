@@ -26,9 +26,9 @@
                                            <thead>
                                                <tr>
                                                    <th width="2%">№</th>
-                                                   <th width="40%">{{__("admin.Name")}}</th>
-                                                   <th>{{__("admin.User")}}</th>
-                                                   <th width="15%" class="text-right">{{__("admin.Action")}}</th>
+                                                   <th width="40%">{{__("Admin.Name")}}</th>
+                                                   <th>{{__("Admin.User")}}</th>
+                                                   <th width="15%" class="text-right">{{__("Admin.Action")}}</th>
                                                </tr>
                                            </thead>
                                            <tbody>
@@ -109,7 +109,7 @@
 
             $(document).on('click', '.js_add_btn', function(e) {
                 e.preventDefault();
-                modal.find('.modal-title').html('Add Instance')
+                modal.find('.modal-title').html('{{ __('admin.Add Instance') }}')
                 form_clear(form);
                 let url = $(this).data('store_url');
                 let userInstanceId = $(this).data('userInstanceId');
@@ -125,7 +125,7 @@
 
             $(document).on('click', '.js_edit_btn', function(e) {
                 e.preventDefault();
-                modal.find('.modal-title').html('Edit Instance')
+                modal.find('.modal-title').html('{{ __("admin.Edit Instance") }}')
                 let get_instance_url = $(this).closest('.js_one_div').data('get_instance_url');
 
                 let url = $(this).data('one_data_url')

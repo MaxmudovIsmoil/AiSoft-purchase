@@ -183,7 +183,7 @@
                     error: (response) => {
                         if(typeof response.responseJSON.error !== 'undefined') {
                             instance.addClass('is-invalid');
-                            instance.siblings('.invalid-feedback').html('{{ __('admin.instance_fail') }}');
+                            instance.siblings('.invalid-feedback').html('{{ __('Admin.instance_fail') }}');
                         }
                         if(typeof response.responseJSON.errors !== 'undefined') {
                             if(response.responseJSON.errors.name) {

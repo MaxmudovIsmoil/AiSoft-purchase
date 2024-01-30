@@ -21,8 +21,10 @@ return [
     "Action" => "Harakat",
     "All" => "Hammasi",
     "Accepted" => "Qabul qilingan",
-    "Declined" => "Rad etildi",
-    "Completed" => "Bajarildi",
+    "Declined" => "Bekor qilingan",
+    "Completed" => "Bajarilgan",
+    "In Processing" => "Jarayonda",
+    "Go back" => "Ortga qaytish",
     "Order file" => "Buyurtma fayli",
     "File" => "Fayl",
     "Order" => "Buyurtma",
@@ -69,4 +71,6 @@ return [
     "Add user" => "Foydalanuvchi qo'shish",
     "Edit user" => "Foydalanuvchini tahrirlash",
     'instance_fail' => "Bo'limni tanlash talab qilinadi.",
+    "Login or password error" => "Kirish yoki parol xatosi",
+    "You are blocked. Contact your administrator to login" => "Siz bloklangansiz. Kirish uchun administratoringizga murojaat qiling"
 ];

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserProfileRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Instance;
-use App\Services\admin\UserService;
+use App\Services\Admin\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 

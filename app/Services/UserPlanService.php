@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Http\Resources\Admin\AdminUserInstanceResource;
-use App\Http\Resources\Admin\UserInstanceResource;
 use App\Models\Instance;
 use App\Models\UserInstance;
 use App\Models\UserPlan;

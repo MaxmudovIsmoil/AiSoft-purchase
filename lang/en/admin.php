@@ -19,6 +19,8 @@ return [
     "Process" => "Process",
     "Status" => "Status",
     "Action" => "Action",
+    "In Processing" => "In Processing",
+    "Go back" => "Go back",
     "All" => "All",
     "Accepted" => "Accepted",
     "Declined" => "Declined",
@@ -69,4 +71,6 @@ return [
     "Add user" => "Add user",
     "Edit user" => "Edit user",
     'instance_fail' => 'The instance field is required.',
+    "Login or password error" => "Login or password error",
+    "You are blocked. Contact your administrator to login" => "Вы заблокированы. Обратитесь к администратору для входа в систему"
 ];

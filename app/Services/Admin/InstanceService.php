@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Services\admin;
+namespace App\Services\Admin;
 
-use App\Http\Resources\InstanceResource;
 use App\Models\Instance;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
 
@@ -37,7 +35,7 @@ class InstanceService
             })
             ->editColumn('id', '{{$id}}')
             ->editColumn('status', function($instances) {
-                return ($instances->status == 1) ? trans('admin.Active') : trans('admin.No active');
+                return ($instances->status == 1) ? trans('Admin.Active') : trans('Admin.No active');
             })
             ->setRowClass('js_this_tr')
             ->setRowAttr(['data-id' => '{{ $id }}'])

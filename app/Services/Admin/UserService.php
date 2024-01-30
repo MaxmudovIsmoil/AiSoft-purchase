@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\admin;
+namespace App\Services\Admin;
 
 use App\Helpers\Helper;
 use App\Models\User;
@@ -28,7 +28,7 @@ class UserService
                 return Helper::phoneFormat($users->phone);
             })
             ->editColumn('status', function($users) {
-                return ($users->status == 1) ? trans('admin.Active') : trans('admin.No active');
+                return ($users->status == 1) ? trans('Admin.Active') : trans('Admin.No active');
             })
             ->addColumn('photo', function($users) {
                 return '<div class="avatar avatar-xl">
@@ -146,17 +146,22 @@ class UserService
         return $id;
     }
 
-    protected function user_instance(array $instances, int $userId) : void
-    {
-        UserInstance::where(['user_id' => $userId])->delete();
 
-        foreach ($instances as $instanceId) {
-            UserInstance::create([
-                'user_id' => $userId,
-                'instance_id' => $instanceId,
-            ]);
-        }
+    protected function user_instance(array $instances, int $userId): void
+    {
+        DB::transaction(function () use ($userId, $instances) {
+            UserInstance::where('user_id', $userId)->delete();
+            $data = [];
+            foreach ($instances as $instanceId) {
+                $data[] = [
+                    'user_id' => $userId,
+                    'instance_id' => $instanceId,
+                ];
+            }
+            UserInstance::insert($data);
+        });
     }
+
 
 
     public function file_upload(object $photo): string

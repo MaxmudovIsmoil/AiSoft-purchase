@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\OrderActionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
@@ -19,7 +20,7 @@ Route::get('login', function () {
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
-Route::middleware(['auth', 'isActive'])->group(function () {
+Route::middleware(['auth', 'isActive', 'setLang'])->group(function () {
 
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     // Route::get('/', [OrderController::class, 'index']);
@@ -55,4 +56,6 @@ Route::middleware(['auth', 'isActive'])->group(function () {
 
     // user profile
     Route::post('/user/profile', [UserController::class, 'profile'])->name('user.profile');
+
+    Route::get('locale/{locale}', [LocaleController::class, 'locale'])->name('locale');
 });

@@ -144,6 +144,11 @@ $('.js_photo').on('change', function () {
 });
 
 
+$('.js_instance').on('change', function () {
+    $(this).removeClass('is-invalid')
+    $(this).siblings('.invalid-feedback').addClass('valid-feedback')
+});
+
 // order create
 $('.js_theme').on('input', function () {
     $(this).removeClass('is-invalid')

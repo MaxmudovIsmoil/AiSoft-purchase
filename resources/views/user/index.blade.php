@@ -109,7 +109,7 @@
 
             $(document).on('click', '.js_add_btn', function(e) {
                 e.preventDefault();
-                modal.find('.modal-title').html('Add User')
+                modal.find('.modal-title').html('{{__("admin.Add user")}}')
                 form_clear(form);
                 let url = $(this).data('store_url');
                 form.attr('action', url);
@@ -118,7 +118,7 @@
 
             $(document).on('click', '.js_edit_btn', function(e) {
                 e.preventDefault();
-                modal.find('.modal-title').html('Edit User')
+                modal.find('.modal-title').html('{{__("admin.Edit user")}}')
                 let status = form.find('.js_status option')
                 let url = $(this).data('one_data_url')
                 let update_url = $(this).data('update_url')
@@ -151,13 +151,14 @@
                         }
                     },
                     error: (response) => {
-                        console.log('error: ',response)
+                        // console.log('error: ',response)
                     }
                 });
             })
 
             $(document).on('submit', '.js_add_edit_form', function(e) {
                 e.preventDefault();
+                let instance = form.find('.js_instance');
                 let name = form.find('.js_name')
                 let phone = form.find('.js_phone')
                 let photo = form.find('.js_photo')
@@ -172,7 +173,7 @@
                     contentType: false,
                     processData: false,
                     success: (response) => {
-                        console.log(response)
+                        // console.log(response)
                         if(response.success) {
                             modal.modal('hide')
                             form_clear(form)
@@ -180,29 +181,33 @@
                         }
                     },
                     error: (response) => {
+                        if(typeof response.responseJSON.error !== 'undefined') {
+                            instance.addClass('is-invalid');
+                            instance.siblings('.invalid-feedback').html('{{ __('admin.instance_fail') }}');
+                        }
                         if(typeof response.responseJSON.errors !== 'undefined') {
                             if(response.responseJSON.errors.name) {
-                                name.addClass('is-invalid')
-                                name.siblings('.invalid-feedback').html(response.responseJSON.errors.name[0])
+                                name.addClass('is-invalid');
+                                name.siblings('.invalid-feedback').html(response.responseJSON.errors.name[0]);
                             }
                             if(response.responseJSON.errors.phone) {
-                                phone.addClass('is-invalid')
-                                phone.siblings('.invalid-feedback').html(response.responseJSON.errors.phone[0])
+                                phone.addClass('is-invalid');
+                                phone.siblings('.invalid-feedback').html(response.responseJSON.errors.phone[0]);
                             }
                             if(response.responseJSON.errors.username) {
-                                username.addClass('is-invalid')
-                                username.siblings('.invalid-feedback').html(response.responseJSON.errors.username[0])
+                                username.addClass('is-invalid');
+                                username.siblings('.invalid-feedback').html(response.responseJSON.errors.username[0]);
                             }
                             if(response.responseJSON.errors.password) {
-                                password.addClass('is-invalid')
-                                password.siblings('.invalid-feedback').html(response.responseJSON.errors.password[0])
+                                password.addClass('is-invalid');
+                                password.siblings('.invalid-feedback').html(response.responseJSON.errors.password[0]);
                             }
                             if(response.responseJSON.errors.photo) {
-                                photo.addClass('is-invalid')
-                                photo.siblings('.invalid-feedback').html(response.responseJSON.errors.photo[0])
+                                photo.addClass('is-invalid');
+                                photo.siblings('.invalid-feedback').html(response.responseJSON.errors.photo[0]);
                             }
                         }
-                        console.log('error: ', response)
+                        // console.log('error: ', response);
                     }
                 });
             });

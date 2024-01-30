@@ -66,4 +66,7 @@ return [
     "Sign in" => "Sign in",
     "Orders" => "Orders",
     "User Plan" => "User Plan",
+    "Add user" => "Add user",
+    "Edit user" => "Edit user",
+    'instance_fail' => 'The instance field is required.',
 ];

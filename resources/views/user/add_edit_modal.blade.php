@@ -20,14 +20,14 @@
                                         <option value="{{ $instance->id }}">{{ $instance->name_ru }}</option>
                                     @endforeach
                                 </select>
-                                <div class="invalid-feedback">status fail!</div>
+                                <div class="invalid-feedback">Status fail!</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label>{{__("admin.Name")}}: </label>
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control js_name" />
-                                <div class="invalid-feedback">name fail!</div>
+                                <div class="invalid-feedback">Name fail!</div>
                             </div>
                         </div>
                         <div class="col-md-6">

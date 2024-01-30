@@ -2,7 +2,10 @@
 
 namespace App\Services\admin;
 
+use App\Http\Resources\InstanceResource;
 use App\Models\Instance;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
 
 class InstanceService
@@ -11,6 +14,7 @@ class InstanceService
     {
         $instances = Instance::orderBy('id', 'DESC')->get();
 
+        Log::info(json_encode($instances));
         return DataTables::of($instances)
             ->addIndexColumn()
             ->addColumn('action', function ($instances) {
@@ -33,10 +37,7 @@ class InstanceService
             })
             ->editColumn('id', '{{$id}}')
             ->editColumn('status', function($instances) {
-                if ($instances->status == 1)
-                    return 'active';
-                else
-                    return 'no active';
+                return ($instances->status == 1) ? trans('admin.Active') : trans('admin.No active');
             })
             ->setRowClass('js_this_tr')
             ->setRowAttr(['data-id' => '{{ $id }}'])

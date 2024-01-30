@@ -1,4 +1,4 @@
-__{{(admin."")}}@extends('layout.app')
+@extends('layout.app')
 
 @section('content')
     <div class="content-overlay"></div>

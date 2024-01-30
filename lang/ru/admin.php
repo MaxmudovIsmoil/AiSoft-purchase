@@ -1,21 +1,21 @@
 <?php
 
-// lang/en/messages.php
+// lang/ru/messages.php
 
 return [
     "Create Order" => "Создать заказ",
-    "Instance" => "Пример",
+    "Instance" => "Отделы",
     "Active" => "Активный",
     "No active" => "Нет активного",
     "Save" => "Сохранять",
     "Close" => "Закрывать",
     "Add" => "Добавлять",
     "Name" => "Имя",
-    "Add Instance" => "Добавить экземпляр",
-    "Edit Instance" => "Редактировать экземпляр",
+    "Add Instance" => "Добавить отдел",
+    "Edit Instance" => "Редактировать отдел",
     "Author" => "Автор",
     "Theme" => "Тема",
-    "Current Instance" => "Текущий экземпляр",
+    "Current Instance" => "Текущий отдел",
     "Process" => "Процесс",
     "Status" => "Положение дел",
     "Action" => "Действие",
@@ -66,4 +66,7 @@ return [
     "Sign in" => "Войти",
     "Orders" => "Заказы",
     "User Plan" => "План пользователя",
+    "Add user" => "Добавить пользователя",
+    "Edit user" => "Изменить пользователя",
+    'instance_fail' => 'Поле Отделы является обязательным.',
 ];

@@ -28,7 +28,7 @@ class UserService
                 return Helper::phoneFormat($users->phone);
             })
             ->editColumn('status', function($users) {
-                return ($users->status == 1) ? 'Active' : 'No active';
+                return ($users->status == 1) ? trans('admin.Active') : trans('admin.No active');
             })
             ->addColumn('photo', function($users) {
                 return '<div class="avatar avatar-xl">

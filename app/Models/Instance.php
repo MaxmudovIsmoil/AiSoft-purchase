@@ -12,6 +12,8 @@ class Instance extends Model
 
     protected $fillable = [
         'name_ru',
+//        'name_en',
+//        'name_uz',
         'status',
         'time_line',
         'deleted_at',

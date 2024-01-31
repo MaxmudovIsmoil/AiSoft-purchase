@@ -6,6 +6,7 @@ use App\Dto\Auth\AuthDto;
 use App\Exceptions\UnauthorizedException;
 use App\Http\Requests\LoginRequest;
 use App\Services\AuthService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
@@ -27,7 +28,11 @@ class AuthController extends Controller
                 password: $request->password
             ));
 
-            return redirect()->route('order.index');
+            if(Auth::user()->rule === "1") {
+                return redirect()->intended('/admin/orders');
+            }
+
+            return redirect()->intended('order');
         }
         catch (UnauthorizedException $e) {
             return Redirect::back()->withErrors(['message' => $e->getMessage(), 'code' => $e->getCode()]);

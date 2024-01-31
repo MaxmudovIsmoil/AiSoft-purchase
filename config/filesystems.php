@@ -32,7 +32,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('/'),
             'throw' => false,
         ],
 
@@ -70,7 +70,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('upload'),
+        public_path('upload') => storage_path('upload'),
     ],
 
 ];

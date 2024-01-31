@@ -3,7 +3,6 @@
 namespace App\Services\Admin;
 
 use App\Models\Instance;
-use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
 
 class InstanceService
@@ -12,7 +11,6 @@ class InstanceService
     {
         $instances = Instance::orderBy('id', 'DESC')->get();
 
-        Log::info(json_encode($instances));
         return DataTables::of($instances)
             ->addIndexColumn()
             ->addColumn('action', function ($instances) {

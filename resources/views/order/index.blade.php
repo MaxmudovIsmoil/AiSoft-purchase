@@ -62,7 +62,7 @@
                                                 <div class="d-flex justify-content-left align-items-center">
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar avatar-xl mr-1">
-                                                            <img src="{{ asset("storage/photos/".$order->user->photo)}}"
+                                                            <img src="{{ asset("/upload/photos/".$order->user->photo)}}"
                                                                  alt="Avatar" height="32" width="32">
                                                         </div>
                                                     </div>
@@ -152,7 +152,7 @@
                                                 <div class="d-flex justify-content-left align-items-center">
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar avatar-xl mr-1">
-                                                            <img src="{{ asset("storage/photos/".$order->user->photo)}}"
+                                                            <img src="{{ asset("/upload/photos/".$order->user->photo)}}"
                                                                  alt="Avatar" height="32" width="32">
                                                         </div>
                                                     </div>
@@ -242,7 +242,7 @@
                                                 <div class="d-flex justify-content-left align-items-center">
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar avatar-xl mr-1">
-                                                            <img src="{{ asset("storage/photos/".$order->user->photo)}}"
+                                                            <img src="{{ asset("/upload/photos/".$order->user->photo)}}"
                                                                  alt="Avatar" height="32" width="32">
                                                         </div>
                                                     </div>
@@ -332,7 +332,7 @@
                                                 <div class="d-flex justify-content-left align-items-center">
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar avatar-xl mr-1">
-                                                            <img src="{{ asset("storage/photos/".$order->user->photo)}}"
+                                                            <img src="{{ asset("/upload/photos/".$order->user->photo)}}"
                                                                  alt="Avatar" height="32" width="32">
                                                         </div>
                                                     </div>

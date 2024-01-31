@@ -59,4 +59,5 @@ class User extends Authenticatable
     {
         return $this->attributes['photo'] ?? 'user.png';
     }
+
 }

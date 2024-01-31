@@ -5,15 +5,19 @@ namespace App\Services\Admin;
 use App\Helpers\Helper;
 use App\Models\User;
 use App\Models\UserInstance;
+use App\Traits\FileTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
 class UserService
 {
+    use FileTrait;
+
     public function list()
     {
         $users = User::where(['rule' => '0'])
@@ -31,8 +35,10 @@ class UserService
                 return ($users->status == 1) ? trans('Admin.Active') : trans('Admin.No active');
             })
             ->addColumn('photo', function($users) {
+                Log::info("photo: ". $users->photo);
+                Log::info("path: ".json_encode(asset("upload/photos/".$users->photo)));
                 return '<div class="avatar avatar-xl">
-                            <img src="'.asset("storage/photos/".$users->photo).'" alt="Photo"/>
+                            <img src="'.asset("upload/photos/".$users->photo).'" alt="Photo"/>
                         </div>';
             })
             ->addColumn('instance', function($users) {
@@ -74,7 +80,7 @@ class UserService
     public function create(array $data)
     {
         DB::beginTransaction();
-            $photo = $this->file_upload($data['photo']);
+            $photo = $this->fileUpload($data['photo'], 'upload/photos');
 
             $userId = User::insertGetId([
                 'name' => $data['name'],
@@ -94,11 +100,8 @@ class UserService
         DB::beginTransaction();
             $user = User::findOrfail($id);
             if (isset($data['photo'])) {
-                $filePath = storage_path('upload/photos/'.$user->photo);
-                if (File::exists($filePath))
-                    File::delete($filePath);
-
-                $user->fill(['photo' => $this->file_upload($data['photo'])]);
+                $this->fileDelete('upload/photos/'.$data['photo']);
+                $user->fill(['photo' => $this->fileUpload($data['photo'], 'upload/photos')]);
             }
             if (isset($data['password'])) {
                 $user->fill(['password' => Hash::make($data['password'])]);
@@ -119,10 +122,7 @@ class UserService
     public function delete(int $id)
     {
         $user = User::findOrFail($id);
-        $filePath = storage_path('upload/photos/'.$user->photo);
-        if (File::exists($filePath))
-            File::delete($filePath);
-
+        $this->$this->fileDelete('upload/photos/'.$user->photo);
         return $user->delete();
     }
 
@@ -132,7 +132,7 @@ class UserService
         $id = Auth::id();
         $user = User::findOrfail($id);
         if (isset($data['photo'])) {
-            $user->fill(['photo' => $this->file_upload($data['photo'])]);
+            $user->fill(['photo' => $this->fileUpload($data['photo'], 'upload/photos')]);
         }
         if (isset($data['password'])) {
             $user->fill(['password' => Hash::make($data['password'])]);
@@ -163,13 +163,4 @@ class UserService
     }
 
 
-
-    public function file_upload(object $photo): string
-    {
-        if($photo) {
-            $photoName = time() . '.' . $photo->getClientOriginalExtension();
-            $photo->storeAs('upload/photos', $photoName, 'public');
-        }
-        return $photoName ?? "";
-    }
 }

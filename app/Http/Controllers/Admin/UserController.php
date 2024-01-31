@@ -19,9 +19,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $instances = Instance::where(['status' => 1])
-            ->wherenull('deleted_at')
-            ->get(['id', 'name_ru']);
+        $instances = Instance::where(['status' => 1])->get(['id', 'name_ru']);
 
         return view('user.index', compact('instances'));
     }

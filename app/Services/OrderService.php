@@ -10,12 +10,15 @@ use App\Models\OrderDetail;
 use App\Models\OrderFile;
 use App\Models\UserInstance;
 use App\Models\UserPlan;
+use App\Traits\FileTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
 class OrderService
 {
+    use FileTrait;
+
     public function getUserPlan(): object
     {
         return UserInstance::where(['user_id' => Auth::id()])
@@ -46,14 +49,23 @@ class OrderService
                 $join->on('up.user_instance_id', '=', 'o.instance_id')
                     ->on('up.user_id', '=', 'o.user_id');
             })
+            ->leftJoin('order_actions as oa', function ($join) {
+                $join->on('oa.order_id', '=', 'o.id');
+            })
             ->with(['user', 'instance', 'currentInstance'])
             ->where(function ($query) use ($userInstanceIds) {
                 $query->where(function ($query) use ($userInstanceIds) {
-                    $query->whereIn('up.instance_id', $userInstanceIds)
-                        ->where('up.stage', '<=', DB::raw('o.current_stage'));
+                    $query->where(function ($query) use ($userInstanceIds) {
+                        $query->whereIn('up.instance_id', $userInstanceIds)
+                            ->where('up.stage', '<=', DB::raw('o.current_stage'));
+                    })->orWhere(function ($query) use ($userInstanceIds) {
+                        $query->whereIn('up.instance_id', $userInstanceIds)
+                            ->whereIn('oa.instance_id', $userInstanceIds);
+                    });
                 })
                 ->whereIn('up.user_instance_id', $userInstanceIds, 'or');
             });
+
 
             if(!is_null($status)){
                 $orderQuery = $orderQuery->where(['o.status' => $status]);
@@ -63,7 +75,6 @@ class OrderService
                 ->orderBy('o.id', 'DESC')
                 ->orderBy('o.current_stage', 'ASC')
                 ->paginate(20);
-
 
         return $orders;
     }
@@ -135,8 +146,7 @@ class OrderService
     {
         if ($data->hasfile('upload')) {
             foreach ($data->file('upload') as $file) {
-                $file_name = $orderId . "_" . time() . "." . $file->getClientOriginalExtension();
-                $file->move(public_path() . '/upload/', $file_name);
+                $file_name = $this->fileUpload($file,  'upload/files');
 
                 OrderFile::create([
                     'order_id' => $orderId,
@@ -175,7 +185,7 @@ class OrderService
                 '<div class="d-flex justify-content-left align-items-center">' .
                 '    <div class="avatar-wrapper">' .
                 '        <div class="avatar avatar-xl mr-1">' .
-                '            <img src="' . asset("storage/photos/".$action->user->photo) . '" alt="Avatar" height="32" width="32">' .
+                '            <img src="' . asset("upload/photos/".$action->user->photo) . '" alt="Avatar" height="32" width="32">' .
                 '        </div>' .
                 '    </div>' .
                 '    <div class="d-flex flex-column"><a href="#" class="user_name text-truncate">' .

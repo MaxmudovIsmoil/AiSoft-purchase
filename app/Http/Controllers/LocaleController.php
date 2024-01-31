@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LocaleController extends Controller
 {
-    public function locale(string $locale)
+    public function lang(string $lang)
     {
         $userId = Auth::id();
-        App::setLocale($locale);
-        User::findOrfail($userId)->update(['locale' => $locale]);
+        Session::put('lang', $lang);
+        App::setLocale($lang);
+        User::findOrfail($userId)->update(['locale' => $lang]);
+
         return redirect()->back();
     }
 }

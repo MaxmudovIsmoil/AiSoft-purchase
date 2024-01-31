@@ -7,6 +7,7 @@
                 <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon" data-feather="menu"></i></a></li>
             </ul>
         </div>
+
         <ul class="nav navbar-nav align-items-center ml-auto">
             <li class="nav-item dropdown dropdown-language">
                 <a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,13 +20,13 @@
                     @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag">
-                    <a class="dropdown-item @if(App::isLocale('ru')) active @endif" href="{{ route('locale', 'ru') }}" data-language="ru">
+                    <a class="dropdown-item @if(App::isLocale('ru')) active @endif" href="{{ route('locale', ['ru']) }}" data-language="ru">
                         <i class="flag-icon flag-icon-ru"></i> Russian
                     </a>
-                    <a class="dropdown-item @if(App::isLocale('en')) active @endif" href="{{ route('locale', 'en') }}" data-language="en">
+                    <a class="dropdown-item @if(App::isLocale('en')) active @endif" href="{{ route('locale', ['en']) }}" data-language="en">
                         <i class="flag-icon flag-icon-us"></i> English
                     </a>
-                    <a class="dropdown-item @if(App::isLocale('uz')) active @endif" href="{{ route('locale', 'uz') }}" data-language="ru">
+                    <a class="dropdown-item @if(App::isLocale('uz')) active @endif" href="{{ route('locale', ['uz']) }}" data-language="ru">
                         <i class="flag-icon flag-icon-uz"></i> Uzbek
                     </a>
                 </div>
@@ -40,7 +41,7 @@
                     <div class="user-nav d-sm-flex d-none">
                         <span class="user-name font-weight-bolder">{{ auth()->user()->name }}</span>
                         <span class="user-status">{{ auth()->user()->username }}</span></div><span class="avatar">
-                        <img class="round" src="{{ asset("storage/photos/". auth()->user()->photo )}}"
+                        <img class="round" src="{{ asset("upload/photos/". auth()->user()->photo??"user.png") }}"
                              alt="avatar" height="40" width="40">
                         <span class="avatar-status-online"></span>
                     </span>

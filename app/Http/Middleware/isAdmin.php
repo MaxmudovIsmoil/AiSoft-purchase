@@ -16,8 +16,12 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->rule !== '1')
+        if (!Auth::check())
+            return redirect()->route('login');
+
+        if (Auth::user()->rule !== "1")
             return redirect()->route('order.index');
+
 
         return $next($request);
     }

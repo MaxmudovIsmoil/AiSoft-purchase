@@ -4,11 +4,14 @@ namespace App\Services;
 
 use App\Http\Resources\OrderFileResource;
 use App\Models\OrderFile;
+use App\Traits\FileTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class OrderFileService {
+
+    use FileTrait;
 
     public function getFiles(int $orderId): JsonResponse
     {
@@ -24,9 +27,7 @@ class OrderFileService {
     public function store(array $data): JsonResponse
     {
         try {
-            $file = $data['file'];
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('upload/files', $filename, 'public');
+            $filename = $this->fileUpload($data['file'],'upload/files');
 
             OrderFile::create([
                 'order_id' => $data['order_id'],
@@ -50,12 +51,7 @@ class OrderFileService {
         try {
             $fileId = $id;
             $orderFile = OrderFile::findOrfail($id);
-
-            $filePath = storage_path('upload/files/'.$orderFile->file);
-
-            if (File::exists($filePath))
-                File::delete($filePath);
-
+            $this->fileDelete('upload/files/'.$orderFile->file);
             $orderFile->delete();
 
             return response()->success($fileId);

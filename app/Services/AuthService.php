@@ -20,10 +20,6 @@ class AuthService
             throw new UnauthorizedException(message: trans('admin.Login or password error'), code: 401);
         }
 
-//        if(Auth::attempt($credentials) && Auth::user()->rule === 1) {
-//            return redirect('admin.orders');
-//        }
-
         return true;
     }
 

@@ -16,8 +16,15 @@ class isActive
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!Auth::check())
+            return redirect()->route('login')->with('message', trans('admin.Login or password error'));
+
         if (Auth::user()->status !== '1')
             return redirect()->route('login')->with('message', trans('admin.You are blocked. Contact your administrator to login'));
+
+        if (Auth::user()->rule !== '0')
+            return redirect()->route('admin.orders');
+
 
         return $next($request);
     }

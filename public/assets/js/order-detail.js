@@ -10,7 +10,13 @@ function addNewTr(data) {
                     <td>${data.count}</td>
                     <td>${data.pcs}</td>
                     <td>${data.price_source}</td>
-                    <td><a href="${data.address}" target="_blank" data-toggle="popover" data-placement="top" data-container="body" data-original-title="Popover on top" data-content="${data.address}">Link</a></td>
+                    <td class="link-td">
+                        <a href='${data.address}' target="_blank"  data-content="${data.address}">Link</a>
+                        <div class="popover custom-show bs-popover-top" role="tooltip" id="popover-${data.id}" x-placement="right">
+                            <div class="popover-header"><i class="fas fa-copy js_copy_link"> copy </i></div>
+                            <div class="popover-body">${data.address}</div>
+                        </div>
+                    </td>
                     <td class="text-right d-flex justify-content-end">
                         <a class="text-primary mr-1 js_edit_order_detail_btn" data-url="${updateUrl}"><i class="fas fa-pen"></i></a>
                         <a class="text-danger js_delete_order_detail_btn" data-name="${data.name}" data-url="${deleteUrl}"><i class="fas fa-trash"></i></a>

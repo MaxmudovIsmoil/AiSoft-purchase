@@ -112,3 +112,8 @@
 .custom-show .fa-copy:hover {
     color: lightgreen;
 }
+
+.custom-show .popover-header {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}

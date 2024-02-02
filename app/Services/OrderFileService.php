@@ -7,7 +7,6 @@ use App\Models\OrderFile;
 use App\Traits\FileTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 
 class OrderFileService {
 
@@ -16,18 +15,19 @@ class OrderFileService {
     public function getFiles(int $orderId): JsonResponse
     {
         try {
-            $orderFiles = OrderFile::where(['order_id' => $orderId])->with('user')->get();
-            return response()->success(OrderFileResource::collection($orderFiles));
+            $orderFiles = OrderFile::where('order_id', $orderId)->with('user')->get();
+            $orderFiles = OrderFileResource::collection($orderFiles);
+            return response()->success($orderFiles);
         }
         catch (\Exception $e) {
-            return response()->fail($e->getMessage());
+            return response()->fail($e->getMessage(), $e->getCode());
         }
     }
 
     public function store(array $data): JsonResponse
     {
         try {
-            $filename = $this->fileUpload($data['file'],'upload/files');
+            $filename = $this->fileUpload($data['file'],'files');
 
             OrderFile::create([
                 'order_id' => $data['order_id'],
@@ -42,7 +42,7 @@ class OrderFileService {
             ]);
         }
         catch (\Exception $e) {
-            return response()->fail($e->getMessage());
+            return response()->fail($e->getMessage(), $e->getCode());
         }
     }
 
@@ -51,13 +51,13 @@ class OrderFileService {
         try {
             $fileId = $id;
             $orderFile = OrderFile::findOrfail($id);
-            $this->fileDelete('upload/files/'.$orderFile->file);
+            $this->fileDelete('files/'.$orderFile->file);
             $orderFile->delete();
 
             return response()->success($fileId);
         }
         catch (\Exception $e) {
-            return response()->fail($e->getMessage());
+            return response()->fail($e->getMessage(), $e->getCode());
         }
     }
 }

@@ -72,5 +72,8 @@ return [
     "Edit user" => "Foydalanuvchini tahrirlash",
     'instance_fail' => "Bo'limni tanlash talab qilinadi.",
     "Login or password error" => "Kirish yoki parol xatosi",
-    "You are blocked. Contact your administrator to login" => "Siz bloklangansiz. Kirish uchun administratoringizga murojaat qiling"
+    "You are blocked. Contact your administrator to login" => "Siz bloklangansiz. Kirish uchun administratoringizga murojaat qiling",
+    "Edit" => "Tahrirlash",
+    "Delete" => "O'chirish",
+    "Welcome to Purchase!" => "Purchasega xush kelibsiz!"
 ];

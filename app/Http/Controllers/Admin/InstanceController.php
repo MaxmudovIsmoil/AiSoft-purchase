@@ -17,7 +17,7 @@ class InstanceController extends Controller
 
     public function index()
     {
-         return view('instance.index');
+         return view('admin.instance.index');
     }
 
     public function getInstances()

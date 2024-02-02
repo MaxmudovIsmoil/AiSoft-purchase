@@ -16,7 +16,7 @@ class UserInstanceResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->user->name ?? null
+            'name' => $this->user->name ?? ""
         ];
     }
 }

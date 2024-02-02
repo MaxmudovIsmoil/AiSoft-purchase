@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dto\Auth;
+namespace App\Dto;
 
 readonly class AuthDto
 {

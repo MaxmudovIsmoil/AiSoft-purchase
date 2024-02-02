@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Dto\Auth\AuthDto;
+use App\Dto\AuthDto;
 use App\Exceptions\UnauthorizedException;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\UserProfileRequest;
 use App\Services\AuthService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -44,5 +46,17 @@ class AuthController extends Controller
         $this->service->logout();
 
         return redirect()->route('login');
+    }
+
+
+    public function profile(UserProfileRequest $request): JsonResponse
+    {
+        try {
+            $result = $this->service->profile($request->validated());
+            return response()->success($result);
+        }
+        catch(\Exception $e) {
+            return response()->fail($e->getMessage());
+        }
     }
 }

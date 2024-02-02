@@ -41,7 +41,7 @@
                     <div class="user-nav d-sm-flex d-none">
                         <span class="user-name font-weight-bolder">{{ auth()->user()->name }}</span>
                         <span class="user-status">{{ auth()->user()->username }}</span></div><span class="avatar">
-                        <img class="round" src="{{ asset("upload/photos/". auth()->user()->photo??"user.png") }}"
+                        <img class="round" src="{{ asset("storage/upload/photos/". auth()->user()->photo??"user.png") }}"
                              alt="avatar" height="40" width="40">
                         <span class="avatar-status-online"></span>
                     </span>
@@ -94,7 +94,7 @@
                                     </g>
                                 </g>
                             </svg></span>
-                    <h2 class="brand-text">Vuexy</h2>
+                    <h2 class="brand-text">{{ config('app.name') }}</h2>
                 </a></li>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
         </ul>
@@ -102,7 +102,7 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            @if(\Illuminate\Support\Facades\Auth::user()->rule === "0")
+            @if(Auth::user()->rule === "0")
                 <li class="nav-item @if (Request::segment(1) === 'order' || Request::segment(1) == '') active @endif">
                     <a class="d-flex align-items-center" href="{{ route('order.index') }}">
                         <i data-feather="home"></i> {{__("admin.Orders")}}
@@ -113,33 +113,22 @@
                         <i data-feather="check-square"></i> {{__("admin.User Plan")}}
                     </a>
                 </li>
-{{--                <li class="nav-item @if (Request::segment(1) === 'user-document') active @endif">--}}
-{{--                    <a class="d-flex align-items-center" href="#">--}}
-{{--                        <i data-feather="file"></i> User Document--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-            @endif
-            @if (Auth::user()->rule == 1)
+            @else
                 <li class="nav-item @if (Request::segment(2) === 'orders') active @endif">
                     <a class="d-flex align-items-center" href="{{ route('admin.orders') }}">
                         <i data-feather="home"></i> {{__("admin.Orders")}}
                     </a>
                 </li>
                 <li class="nav-item @if (Request::segment(2) === 'instance') active @endif">
-                    <a class="d-flex align-items-center" href="{{ route('instance.index') }}">
+                    <a class="d-flex align-items-center" href="{{ route('admin.instance.index') }}">
                         <i data-feather="list"></i> {{__("admin.Instance")}}
                     </a>
                 </li>
                 <li class="nav-item @if (Request::segment(2) === 'user') active @endif">
-                    <a class="d-flex align-items-center" href="{{ route('user.index') }}">
+                    <a class="d-flex align-items-center" href="{{ route('admin.user.index') }}">
                         <i data-feather="user"></i> {{__("admin.User")}}
                     </a>
                 </li>
-{{--                <li class="nav-item @if (Request::segment(2) === 'document') active @endif">--}}
-{{--                    <a class="d-flex align-items-center" href="#">--}}
-{{--                        <i data-feather="file"></i> Document--}}
-{{--                    </a>--}}
-{{--                </li>--}}
             @endif
         </ul>
     </div>

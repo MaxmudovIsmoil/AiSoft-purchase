@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserProfileRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Instance;
 use App\Services\Admin\UserService;
@@ -21,7 +20,7 @@ class UserController extends Controller
     {
         $instances = Instance::where(['status' => 1])->get(['id', 'name_ru']);
 
-        return view('user.index', compact('instances'));
+        return view('admin.user.index', compact('instances'));
     }
 
     public function getUsers()
@@ -59,17 +58,6 @@ class UserController extends Controller
         }
         catch(\Exception $e) {
             DB::rollBack();
-            return response()->fail($e->getMessage());
-        }
-    }
-
-    public function profile(UserProfileRequest $request): JsonResponse
-    {
-        try {
-            $result = $this->service->profile($request->validated());
-            return response()->success($result);
-        }
-        catch(\Exception $e) {
             return response()->fail($e->getMessage());
         }
     }

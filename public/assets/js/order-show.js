@@ -13,7 +13,13 @@ function drawTrOrderDetails(detailData, checkBtn) {
                     <td>${count}</td>
                     <td>${pcs}</td>
                     <td>${price_source}</td>
-                    <td><a href='${address}' target="_blank">Link</a></td>`;
+                    <td class="link-td">
+                        <a href='${address}' target="_blank"  data-content="${address}">Link</a>
+                        <div class="popover custom-show bs-popover-top" role="tooltip" id="popover-${id}" x-placement="right">
+                            <div class="popover-header">Header <i class="fas fa-copy js_copy_link"></i></div>
+                            <div class="popover-body">${address}</div>
+                        </div>
+                    </td>`;
 
         if(checkBtn) {
             tr += `<td class="text-right d-flex justify-content-end">
@@ -206,8 +212,15 @@ $(document).ready(function () {
 });
 
 /**** create order detail **/
+$('body').delegate('.js_copy_link', 'click', function() {
+    let text = $(this).closest('.popover').find('.popover-body').text();
+    console.log('text:', text);
+    navigator.clipboard.writeText(text);
+});
+
 
 $('#order_show_modal button[data-dismiss="modal"]').click(function () {
 
     window.location.reload();
 })
+

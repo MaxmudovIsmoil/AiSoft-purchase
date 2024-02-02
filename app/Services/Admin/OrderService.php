@@ -3,6 +3,8 @@
 namespace App\Services\Admin;
 
 use App\Models\Order;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class OrderService
 {
@@ -19,21 +21,14 @@ class OrderService
                     ->on('up.user_id', '=', 'o.user_id');
             })
             ->with(['user', 'instance', 'currentInstance']);
-//            ->where(function ($query) use ($userInstanceIds) {
-//                $query->where(function ($query) use ($userInstanceIds) {
-//                    $query->whereIn('up.instance_id', $userInstanceIds)
-//                        ->where('up.stage', '<=', DB::raw('o.current_stage'));
-//                })
-//                    ->whereIn('up.user_instance_id', $userInstanceIds, 'or');
-//            });
 
-        if(!is_null($status)){
+        if(!is_null($status)) {
             $orderQuery = $orderQuery->where(['o.status' => $status]);
         }
 
         return $orderQuery->groupBy('o.id')
             ->orderBy('o.id', 'DESC')
             ->orderBy('o.current_stage', 'ASC')
-            ->paginate(20);
+            ->paginate(10);
     }
 }

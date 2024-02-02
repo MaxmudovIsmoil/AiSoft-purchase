@@ -72,5 +72,8 @@ return [
     "Edit user" => "Edit user",
     'instance_fail' => 'The instance field is required.',
     "Login or password error" => "Login or password error",
-    "You are blocked. Contact your administrator to login" => "Вы заблокированы. Обратитесь к администратору для входа в систему"
+    "You are blocked. Contact your administrator to login" => "Вы заблокированы. Обратитесь к администратору для входа в систему",
+    "Edit" => "Edit",
+    "Delete" => "Delete",
+    "Welcome to Purchase!" => "Welcome to Purchase!"
 ];

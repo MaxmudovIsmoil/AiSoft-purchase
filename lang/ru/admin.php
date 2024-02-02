@@ -72,5 +72,8 @@ return [
     "Edit user" => "Изменить пользователя",
     'instance_fail' => 'Поле Отделы является обязательным.',
     "Login or password error" => "Ошибка логина или пароля",
-    "You are blocked. Contact your administrator to login" => "Вы заблокированы. Обратитесь к администратору для входа в систему"
+    "You are blocked. Contact your administrator to login" => "Вы заблокированы. Обратитесь к администратору для входа в систему",
+    "Edit" => "Редактировать",
+    "Delete" => "Удалить",
+    "Welcome to Purchase!" => "Добро пожаловать в Покупку!"
 ];

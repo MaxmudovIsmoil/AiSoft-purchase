@@ -2,12 +2,16 @@
 
 namespace App\Services;
 
-use App\Dto\Auth\AuthDto;
+use App\Dto\AuthDto;
 use App\Exceptions\UnauthorizedException;
+use App\Models\User;
+use App\Traits\FileTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
+    use FileTrait;
 
     public function login(AuthDto $dto): bool
     {
@@ -29,4 +33,23 @@ class AuthService
         Auth::logout();
     }
 
+    public function profile(array $data)
+    {
+        $userId = Auth::id();
+        $user = User::findOrfail($userId);
+        if (isset($data['photo'])) {
+            $this->fileDelete('photos/'.$user->photo);
+            $user->fill(['photo' => $this->fileUpload($data['photo'])]);
+        }
+        if (isset($data['password'])) {
+            $user->fill(['password' => Hash::make($data['password'])]);
+        }
+        $user->fill([
+            'name' => $data['name'],
+            'phone' => $data['phone'],
+            'username' => $data['username']
+        ]);
+        $user->save();
+        return $userId;
+    }
 }

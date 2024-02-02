@@ -13,16 +13,16 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <label>{{__("admin.Name")}}: </label>
+                            <label for="name2">{{__("admin.Name")}}: </label>
                             <div class="form-group">
-                                <input type="text" name="name" class="form-control js_name" value="{{ auth()->user()->name }}" />
+                                <input type="text" id="name2" name="name" class="form-control js_name" value="{{ auth()->user()->name }}" />
                                 <div class="invalid-feedback">name fail!</div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label>{{__("admin.Phone")}}: </label>
+                            <label for="phone2">{{__("admin.Phone")}}: </label>
                             <div class="form-group">
-                                <input type="number" name="phone" class="form-control js_phone" value="{{ auth()->user()->phone }}" placeholder="901004050"/>
+                                <input type="number" id="phone2" name="phone" class="form-control js_phone" value="{{ auth()->user()->phone }}" placeholder="901004050"/>
                                 <div class="invalid-feedback">phone fail!</div>
                             </div>
                         </div>
@@ -37,16 +37,16 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label>{{__("admin.Login")}}: </label>
+                            <label for="username2">{{__("admin.Login")}}: </label>
                             <div class="form-group">
-                                <input type="text" name="username" readonly class="form-control js_username" value="{{ auth()->user()->username }}" />
+                                <input type="text" name="username" id="username2" readonly class="form-control js_username" value="{{ auth()->user()->username }}" />
                                 <div class="invalid-feedback">Username fail!</div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label>{{__("admin.Password")}}: </label>
+                            <label for="passwd2">{{__("admin.Password")}}: </label>
                             <div class="form-group">
-                                <input type="password" name="password" class="form-control js_password" value=""/>
+                                <input type="password" id="passwd2" name="password" class="form-control js_password" value=""/>
                                 <div class="invalid-feedback">Password fail!</div>
                             </div>
                         </div>

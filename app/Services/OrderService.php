@@ -146,7 +146,7 @@ class OrderService
     {
         if ($data->hasfile('upload')) {
             foreach ($data->file('upload') as $file) {
-                $file_name = $this->fileUpload($file,  'upload/files');
+                $file_name = $this->fileUpload($file,  'files');
 
                 OrderFile::create([
                     'order_id' => $orderId,
@@ -185,7 +185,7 @@ class OrderService
                 '<div class="d-flex justify-content-left align-items-center">' .
                 '    <div class="avatar-wrapper">' .
                 '        <div class="avatar avatar-xl mr-1">' .
-                '            <img src="' . asset("upload/photos/".$action->user->photo) . '" alt="Avatar" height="32" width="32">' .
+                '            <img src="' . asset("storage/upload/photos/".$action->user->photo) . '" alt="Avatar" height="32" width="32">' .
                 '        </div>' .
                 '    </div>' .
                 '    <div class="d-flex flex-column"><a href="#" class="user_name text-truncate">' .
@@ -208,7 +208,7 @@ class OrderService
         $userPlan = UserPlan::where([
             'user_id' => $order->user_id,
             'user_instance_id' => $order->instance_id
-        ])->with(['instance', 'userInstance.user'])->get();
+        ])->with(['instance', 'userInstance', 'userInstance.user'])->get();
 
         return UserPlanResource::collection($userPlan);
     }

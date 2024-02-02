@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\LocaleController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\InstanceController;
@@ -15,4 +15,4 @@ Route::resource('instance', InstanceController::class)->except(['create', 'edit'
 Route::get('/instances', [InstanceController::class, 'getInstances'])->name('getInstances');
 Route::get('/instance/one/{id}', [InstanceController::class, 'getOne'])->name('instance.getOne');
 
-Route::get('/orders', [OrderController::class, 'getOrders'])->name('admin.orders');
+Route::get('/orders', [OrderController::class, 'getOrders'])->name('orders');

@@ -93,3 +93,22 @@
     padding-top:  5px;
     padding-bottom:  5px;
 }
+
+.link-td {
+    position: relative;
+}
+
+.custom-show {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 60%;
+}
+
+.link-td:hover .custom-show, .custom-show:hover {
+    display: block;
+}
+
+.custom-show .fa-copy:hover {
+    color: lightgreen;
+}

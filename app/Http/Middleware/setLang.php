@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class LangMiddleware
+class setLang
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,6 @@ class LangMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = "ru";
         if (Auth::check()) {
             $locale = User::findOrfail(Auth::id())->locale;
             App::setLocale($locale);

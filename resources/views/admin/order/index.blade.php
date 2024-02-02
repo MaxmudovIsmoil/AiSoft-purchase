@@ -10,16 +10,20 @@
 
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#orderAll" aria-controls="orderAll" role="tab" aria-selected="true">{{__("admin.All")}}</a>
+                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#orderAll" aria-controls="orderAll"
+                       role="tab" aria-selected="true">{{__("admin.All")}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="accepted-tab" data-toggle="tab" href="#orderAccepted" aria-controls="orderAccepted" role="tab" aria-selected="false">{{__("admin.Accepted")}}</a>
+                    <a class="nav-link" id="accepted-tab" data-toggle="tab" href="#orderAccepted"
+                       aria-controls="orderAccepted" role="tab" aria-selected="false">{{__("admin.Accepted")}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="GoBack-tab" data-toggle="tab" href="#orderGoBack" aria-controls="orderGoBack" role="tab" aria-selected="true">{{__("admin.Declined")}}</a>
+                    <a class="nav-link" id="GoBack-tab" data-toggle="tab" href="#orderGoBack"
+                       aria-controls="orderGoBack" role="tab" aria-selected="true">{{__("admin.Declined")}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#orderCompleted" aria-controls="orderCompleted" role="tab" aria-selected="false">{{__("admin.Completed")}}</a>
+                    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#orderCompleted"
+                       aria-controls="orderCompleted" role="tab" aria-selected="false">{{__("admin.Completed")}}</a>
                 </li>
             </ul>
 
@@ -34,18 +38,18 @@
                             <div class="card-datatable table-responsive">
                                 <table class="table order-table">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th width="2%">№</th>
-                                            <th>{{__("admin.Author")}}</th>
-                                            <th>{{__("admin.Theme")}}</th>
-                                            <th>{{__("admin.Current Instance")}}</th>
-                                            <th>{{__("admin.Process")}}</th>
-                                            <th>{{__("admin.Status")}}</th>
-                                            <th class="text-center" width="10%">{{__("admin.Action")}}</th>
-                                        </tr>
+                                    <tr>
+                                        <th width="2%">№</th>
+                                        <th>{{__("admin.Author")}}</th>
+                                        <th>{{__("admin.Theme")}}</th>
+                                        <th>{{__("admin.Current Instance")}}</th>
+                                        <th>{{__("admin.Process")}}</th>
+                                        <th>{{__("admin.Status")}}</th>
+                                        <th class="text-center" width="10%">{{__("admin.Action")}}</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($orderAll as $order)
+                                    @foreach($orderAll as $order)
                                         <tr class="js_this_tr
                                         @if(($order->current_stage == $order->up_stage && $order->status->isAccepted()))
                                             bg-light-danger
@@ -56,13 +60,17 @@
                                                 <div class="d-flex justify-content-left align-items-center">
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar avatar-xl mr-1">
-                                                            <img src="{{ asset("upload/photos/".$order->user->photo)}}"
+                                                            <img src="{{ asset("storage/upload/photos/".$order->user->photo)}}"
                                                                  alt="Avatar" height="32" width="32">
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><a href="#" class="user_name text-truncate">
-                                                            <span class="font-weight-bold">{{ $order->user->name }}</span></a>
-                                                        <small class="emp_post text-muted">{{$order->instance->name_ru}}</small></div>
+                                                    <div class="d-flex flex-column"><a href="#"
+                                                                                       class="user_name text-truncate">
+                                                            <span
+                                                                class="font-weight-bold">{{ $order->user->name }}</span></a>
+                                                        <small
+                                                            class="emp_post text-muted">{{$order->instance->name_ru}}</small>
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>{{ $order->theme }}</td>
@@ -70,8 +78,10 @@
                                             <td class="text-center pt-0 pb-0">
                                                 <div class="card mb-0 order-action-process">
                                                     <div class="card-header">
-                                                        <div class="avatar bg-light-success avatar-lg js_accordion_btn" data-url="{{ route('order.getOrderActionComments', [$order->order_id]) }}">
-                                                            <span class="avatar-content">{{ $order->current_stage }}/{{ $order->stage_count }}</span>
+                                                        <div class="avatar bg-light-success avatar-lg js_accordion_btn"
+                                                             data-url="{{ route('order.getOrderActionComments', [$order->order_id]) }}">
+                                                            <span
+                                                                class="avatar-content">{{ $order->current_stage }}/{{ $order->stage_count }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -89,10 +99,10 @@
                                             </td>
                                             <td class="text-center">
                                                 <a href="#" class="show-btn js_show_btn"
-                                                data-detail-url="{{ route('order_detail.getOne', [$order->order_id]) }}"
-                                                data-file-url="{{ route('order_files', [$order->order_id]) }}"
-                                                data-action-url="{{ route('order_action', [$order->order_id]) }}"
-                                                data-plan-url="{{ route('order_plan', [$order->order_id]) }}"
+                                                   data-detail-url="{{ route('order_detail.getOne', [$order->order_id]) }}"
+                                                   data-file-url="{{ route('order_files', [$order->order_id]) }}"
+                                                   data-action-url="{{ route('order_action', [$order->order_id]) }}"
+                                                   data-plan-url="{{ route('order_plan', [$order->order_id]) }}"
                                                 ><i class="fas fa-eye"></i></a>
                                             </td>
                                         </tr>
@@ -140,13 +150,17 @@
                                                 <div class="d-flex justify-content-left align-items-center">
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar avatar-xl mr-1">
-                                                            <img src="{{ asset("upload/photos/".$order->user->photo)}}"
+                                                            <img src="{{ asset("storage/upload/photos/".$order->user->photo)}}"
                                                                  alt="Avatar" height="32" width="32">
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><a href="#" class="user_name text-truncate">
-                                                            <span class="font-weight-bold">{{ $order->user->name }}</span></a>
-                                                        <small class="emp_post text-muted">{{$order->instance->name_ru}}</small></div>
+                                                    <div class="d-flex flex-column"><a href="#"
+                                                                                       class="user_name text-truncate">
+                                                            <span
+                                                                class="font-weight-bold">{{ $order->user->name }}</span></a>
+                                                        <small
+                                                            class="emp_post text-muted">{{$order->instance->name_ru}}</small>
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>{{ $order->theme }}</td>
@@ -154,8 +168,10 @@
                                             <td class="text-center pt-0 pb-0">
                                                 <div class="card mb-0 order-action-process">
                                                     <div class="card-header">
-                                                        <div class="avatar bg-light-success avatar-lg js_accordion_btn" data-url="{{ route('order.getOrderActionComments', [$order->order_id]) }}">
-                                                            <span class="avatar-content">{{ $order->current_stage }}/{{ $order->stage_count }}</span>
+                                                        <div class="avatar bg-light-success avatar-lg js_accordion_btn"
+                                                             data-url="{{ route('order.getOrderActionComments', [$order->order_id]) }}">
+                                                            <span
+                                                                class="avatar-content">{{ $order->current_stage }}/{{ $order->stage_count }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,13 +240,17 @@
                                                 <div class="d-flex justify-content-left align-items-center">
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar avatar-xl mr-1">
-                                                            <img src="{{ asset("upload/photos/".$order->user->photo)}}"
+                                                            <img src="{{ asset("storage/upload/photos/".$order->user->photo)}}"
                                                                  alt="Avatar" height="32" width="32">
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><a href="#" class="user_name text-truncate">
-                                                            <span class="font-weight-bold">{{ $order->user->name }}</span></a>
-                                                        <small class="emp_post text-muted">{{$order->instance->name_ru}}</small></div>
+                                                    <div class="d-flex flex-column"><a href="#"
+                                                                                       class="user_name text-truncate">
+                                                            <span
+                                                                class="font-weight-bold">{{ $order->user->name }}</span></a>
+                                                        <small
+                                                            class="emp_post text-muted">{{$order->instance->name_ru}}</small>
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>{{ $order->theme }}</td>
@@ -238,8 +258,10 @@
                                             <td class="text-center pt-0 pb-0">
                                                 <div class="card mb-0 order-action-process">
                                                     <div class="card-header">
-                                                        <div class="avatar bg-light-success avatar-lg js_accordion_btn" data-url="{{ route('order.getOrderActionComments', [$order->order_id]) }}">
-                                                            <span class="avatar-content">{{ $order->current_stage }}/{{ $order->stage_count }}</span>
+                                                        <div class="avatar bg-light-success avatar-lg js_accordion_btn"
+                                                             data-url="{{ route('order.getOrderActionComments', [$order->order_id]) }}">
+                                                            <span
+                                                                class="avatar-content">{{ $order->current_stage }}/{{ $order->stage_count }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -307,13 +329,17 @@
                                                 <div class="d-flex justify-content-left align-items-center">
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar avatar-xl mr-1">
-                                                            <img src="{{ asset("upload/photos/".$order->user->photo)}}"
+                                                            <img src="{{ asset("storage/upload/photos/".$order->user->photo)}}"
                                                                  alt="Avatar" height="32" width="32">
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><a href="#" class="user_name text-truncate">
-                                                            <span class="font-weight-bold">{{ $order->user->name }}</span></a>
-                                                        <small class="emp_post text-muted">{{$order->instance->name_ru}}</small></div>
+                                                    <div class="d-flex flex-column"><a href="#"
+                                                                                       class="user_name text-truncate">
+                                                            <span
+                                                                class="font-weight-bold">{{ $order->user->name }}</span></a>
+                                                        <small
+                                                            class="emp_post text-muted">{{$order->instance->name_ru}}</small>
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td>{{ $order->theme }}</td>
@@ -321,8 +347,10 @@
                                             <td class="text-center pt-0 pb-0">
                                                 <div class="card mb-0 order-action-process">
                                                     <div class="card-header">
-                                                        <div class="avatar bg-light-success avatar-lg js_accordion_btn" data-url="{{ route('order.getOrderActionComments', [$order->order_id]) }}">
-                                                            <span class="avatar-content">{{ $order->current_stage }}/{{ $order->stage_count }}</span>
+                                                        <div class="avatar bg-light-success avatar-lg js_accordion_btn"
+                                                             data-url="{{ route('order.getOrderActionComments', [$order->order_id]) }}">
+                                                            <span
+                                                                class="avatar-content">{{ $order->current_stage }}/{{ $order->stage_count }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -367,7 +395,7 @@
                 </div>
             </div>
 
-            @include('admin_order.show_modal')
+            @include('admin.order.show_modal')
             <!-- users list ends -->
         </div>
     </div>
@@ -375,10 +403,10 @@
 
 
 @section('script')
-{{--    <script src="{{ asset('assets/js/order-add.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/order-action.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/js/order-add.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/js/order-action.js') }}"></script>--}}
     <script src="{{ asset('assets/js/order-show.js') }}"></script>
-{{--    <script src="{{ asset('assets/js/order-reply.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/order-detail.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/order-file.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/js/order-reply.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/js/order-detail.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/js/order-file.js') }}"></script>--}}
 @stop

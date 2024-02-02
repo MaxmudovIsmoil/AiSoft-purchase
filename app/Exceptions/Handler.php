@@ -2,11 +2,8 @@
 
 namespace App\Exceptions;
 
-use http\Env\Response;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-use Exception;
-
 
 class Handler extends ExceptionHandler
 {
@@ -24,16 +21,10 @@ class Handler extends ExceptionHandler
     /**
      * Register the exception handling callbacks for the application.
      */
-    public function render($request, Throwable $e)
+    public function register(): void
     {
-        if ($e instanceof NotFoundException) {
-            return response()->error($e->getMessage(), $e->getCode());
-        }
-
-        if ($e instanceof UnauthorizedException) {
-            return response()->error($e->getMessage(), $e->getCode());
-        }
-
-        return parent::render($request, $e);
+        $this->reportable(function (Throwable $e) {
+            //
+        });
     }
 }

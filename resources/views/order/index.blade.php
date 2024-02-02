@@ -412,6 +412,7 @@
 
 
 @section('script')
+    <script src="{{ asset('assets/js/scripts/components/components-popovers.js') }}"></script>
     <script src="{{ asset('assets/js/order-add.js') }}"></script>
     <script src="{{ asset('assets/js/order-action.js') }}"></script>
     <script src="{{ asset('assets/js/order-show.js') }}"></script>

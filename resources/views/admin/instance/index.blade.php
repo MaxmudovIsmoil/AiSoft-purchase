@@ -8,7 +8,8 @@
         <div class="content-body position-relative">
             <div class="form-modal-ex add-bnt">
                 <!-- add btn click show modal -->
-                <a href="javascript:void(0);" data-store_url="{{ route('instance.store') }}" class="btn btn-outline-primary js_add_btn">
+                <a href="javascript:void(0);" data-store_url="{{ route('admin.instance.store') }}"
+                   class="btn btn-outline-primary js_add_btn">
                     <i data-feather="plus"></i>&nbsp; {{__("admin.Add")}}
                 </a>
             </div>
@@ -20,12 +21,12 @@
                             <div class="card-datatable">
                                 <table class="table" id="datatable">
                                     <thead>
-                                        <tr>
-                                            <th>№</th>
-                                            <th>{{__("admin.Name")}}</th>
-                                            <th>{{__("admin.Status")}}</th>
-                                            <th class="text-right">{{__("admin.Action")}}</th>
-                                        </tr>
+                                    <tr>
+                                        <th>№</th>
+                                        <th>{{__("admin.Name")}}</th>
+                                        <th>{{__("admin.Status")}}</th>
+                                        <th class="text-right">{{__("admin.Action")}}</th>
+                                    </tr>
                                     </thead>
                                     <tbody></tbody>
                                 </table>
@@ -35,7 +36,7 @@
                 </div>
             </section>
             <!--/ Multilingual -->
-            @include('instance.add_edit_modal')
+            @include('admin.instance.add_edit_modal')
         </div>
     </div>
 @endsection
@@ -45,11 +46,12 @@
         function form_clear(form) {
             form.find('.js_name_ru').val('')
             let status = form.find('.js_status option');
-            $.each(status, function(i, item) {
+            $.each(status, function (i, item) {
                 $(item).removeAttr('selected');
             });
         }
-        $(document).ready(function() {
+
+        $(document).ready(function () {
             var modal = $(document).find('#add_edit_modal');
             var deleteModal = $('#deleteModal')
             var form = modal.find('.js_add_edit_form');
@@ -78,7 +80,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    "url": '{{ route("getInstances") }}',
+                    "url": '{{ route("admin.getInstances") }}',
                 },
                 columns: [
                     {data: 'DT_RowIndex'},
@@ -96,7 +98,7 @@
                 modal.modal('show');
             });
 
-            $(document).on('click', '.js_edit_btn', function(e) {
+            $(document).on('click', '.js_edit_btn', function (e) {
                 e.preventDefault();
                 modal.find('.modal-title').html('{{__("admin.Edit Instance")}}')
                 let status = form.find('.js_status option')
@@ -111,10 +113,10 @@
                     dataType: "json",
                     success: (response) => {
                         form.append("<input type='hidden' name='_method' value='PUT'>");
-                        if(response.success) {
+                        if (response.success) {
                             form.find('.js_name_ru').val(response.data.name_ru)
-                            $.each(status, function(i, item) {
-                                if(response.data.status === $(item).val()) {
+                            $.each(status, function (i, item) {
+                                if (response.data.status === $(item).val()) {
                                     $(item).attr('selected', true);
                                 }
                             })
@@ -122,12 +124,12 @@
                         }
                     },
                     error: (response) => {
-                        console.log('error: ',response)
+                        console.log('error: ', response)
                     }
                 });
             })
 
-            $(document).on('submit', '.js_add_edit_form', function(e) {
+            $(document).on('submit', '.js_add_edit_form', function (e) {
                 e.preventDefault();
 
                 $.ajax({
@@ -136,14 +138,14 @@
                     dataType: "json",
                     data: $(this).serialize(),
                     success: (response) => {
-                        if(response.success) {
+                        if (response.success) {
                             modal.modal('hide')
                             form_clear(form)
                             table.draw();
                         }
                     },
                     error: (response) => {
-                        if(typeof response.responseJSON.errors !== 'undefined') {
+                        if (typeof response.responseJSON.errors !== 'undefined') {
                             form.find('.js_name_ru').addClass('is-invalid')
                         }
                         console.log('error: ', response)

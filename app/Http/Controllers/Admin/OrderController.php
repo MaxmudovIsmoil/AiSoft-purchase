@@ -14,13 +14,12 @@ class OrderController extends Controller
 
     public function getOrders()
     {
-
         $orderAll = $this->service->getOrder();
         $orderAccepted = $this->service->getOrder(2);
         $orderGoBack = $this->service->getOrder(3);
         $orderCompleted = $this->service->getOrder(5);
 
-        return view('admin_order.index',
+        return view('admin.order.index',
             compact(
                 'orderAll',
                 'orderAccepted',

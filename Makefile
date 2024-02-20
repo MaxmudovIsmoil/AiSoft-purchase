@@ -32,7 +32,7 @@ mysql:
 	docker-compose exec mysql bash
 
 laravel-env:
-	cp ./laravel/.env.example ./laravel/.env
+	cp .env.example .env
 
 laravel-composer-install:
 	docker-compose exec php-fpm composer install

@@ -413,6 +413,50 @@
 
 @section('script')
     <script src="{{ asset('assets/js/scripts/components/components-popovers.js') }}"></script>
+    <script>
+        // order add
+        var addModal = $(document).find('#order_add_modal');
+        var addForm = addModal.find('.js_add_form');
+
+        $(document).on('click', '.js_add_btn', function (e) {
+            e.preventDefault();
+            addModal.find('.modal-title').html('@lang("admin.Create Order")');
+            addModal.modal('show');
+        });
+
+
+        $(document).on('submit', addForm, function (e) {
+            e.preventDefault();
+            let theme = $(this).find('.js_theme')
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: new FormData(this),
+                dataType: "JSON",
+                contentType: false,
+                processData: false,
+                success: (response) => {
+                    console.log('res: ', response)
+                    if (response.success === true)
+                        window.location.reload();
+                },
+                error: (response) => {
+                    console.log('order-add-error: ', response)
+                    if(typeof response.responseJSON !== 'undefined') {
+                        if (response.responseJSON.error === "requiredTheme") {
+                            theme.addClass('is-invalid')
+                            theme.siblings('.invalid-feedback').html('theme required')
+                        }
+
+                        if (response.responseJSON.error === "userPlanEmpty") {
+                            $('#warning').modal('show');
+                        }
+                    }
+                }
+            })
+        });
+
+    </script>
     <script src="{{ asset('assets/js/order-add.js') }}"></script>
     <script src="{{ asset('assets/js/order-action.js') }}"></script>
     <script src="{{ asset('assets/js/order-show.js') }}"></script>

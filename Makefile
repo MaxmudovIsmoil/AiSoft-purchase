@@ -44,4 +44,7 @@ laravel-migrate:
 	docker-compose exec php-fpm php artisan migrate --seed
 
 laravel-optimize:
+	docker-compose exec php-fpm php artisan storage:link
+
+laravel-optimize:
 	docker-compose exec php-fpm php artisan optimize:clear

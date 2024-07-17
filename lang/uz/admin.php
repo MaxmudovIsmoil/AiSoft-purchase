@@ -3,7 +3,7 @@
 // lang/uz/messages.php
 
 return [
-    "Create Order" => "Buyurtma qo'shish",
+    "Create Order" => "Buyurtma qo\'shish",
     "Instance" => "Bo'lim",
     "Active" => "Faol",
     "No active" => "No faol",
@@ -48,7 +48,7 @@ return [
     "Unit" => "Birlik",
     "Order files" => "Fayllarni buyurtma qilish",
     "add file" => "fayl qo'shing",
-    "Actions under order" => "Buyurtma bo'yicha harakatlar",
+    "Actions under order" => "Buyurtma bo\'yicha harakatlar",
     "Time" => "Vaqt",
     "User" => "Foydalanuvchi",
     "Instance reply" => "Misol javob",

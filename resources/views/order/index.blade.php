@@ -425,9 +425,9 @@
         });
 
 
-        $(document).on('submit', addForm, function (e) {
+        $(document).on('submit', '.js_add_form', function (e) {
             e.preventDefault();
-            let theme = $(this).find('.js_theme')
+            let theme = $(this).find('.js_theme');
             $.ajax({
                 type: "POST",
                 url: $(this).attr('action'),
